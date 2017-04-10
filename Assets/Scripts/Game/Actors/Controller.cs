@@ -12,7 +12,7 @@ public class Controller : MonoBehaviour {
     private void Update()
     {
         m_Joystick.x = Input.GetAxis(m_HorizontalInputName);
-        m_Joystick.y = Input.GetAxis(m_VerticalInputName);
+        m_Joystick.z = Input.GetAxis(m_VerticalInputName);
         Fire         = Input.GetButton(m_FireInputName);
     }
 }
