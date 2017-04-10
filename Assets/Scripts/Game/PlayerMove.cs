@@ -31,20 +31,16 @@ namespace Assets.Scripts.Game {
 
         protected void Start () {
             rb = GetComponent<Rigidbody2D>();
-
-            Debug.Log("fdsfds");
-            //Debug.Log(Input.GetAxis("Horizontal_P1"));
         }
 
         protected void Update () {
-            //Debug.Log(Input.GetAxis("Vertical_P1"));
         }
 
         protected void FixedUpdate () {
-            // "doom" speed, i know
+            // player can go two time faster if pressing two axis at same time on PC, i know
             rb.velocity = new Vector2(
-                Input.GetAxis("Horizontal") * SPEED,
-                Input.GetAxis("Vertical") * SPEED
+                Input.GetAxis("Horizontal_P1") * SPEED,
+                Input.GetAxis("Vertical_P1") * SPEED
             );
         }
 
