@@ -7,7 +7,7 @@ public class FireWatches : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerWatches playerWatches = collision.gameObject.GetComponent<PlayerWatches>();
+        Watches playerWatches = collision.gameObject.GetComponent<Watches>();
         if (playerWatches != null && !playerWatches.OnFire)
         {
             playerWatches.Alight();

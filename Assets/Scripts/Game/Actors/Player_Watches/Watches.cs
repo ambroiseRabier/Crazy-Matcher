@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerWatches : MonoBehaviour {
+public class Watches : MonoBehaviour {
 
     // In editor for debug
     [SerializeField] 
