@@ -3,20 +3,14 @@
 public class Matches : MonoBehaviour {
 
     // In editor for debug
-    [SerializeField] private bool m_OnFire = true; 
-    [SerializeField] private GameObject m_Gfx;
-    [SerializeField] private GameObject m_Fire;
+    [SerializeField] private bool m_IsOnFire = true; 
+    [SerializeField] private MeshRenderer m_Gfx;
+    [SerializeField] private GameObject m_FirePrefab;
 
     [Header("To debug")]
     [SerializeField] private Material m_materialOnFire;
 
-    public bool OnFire
-    {
-        get
-        {
-            return m_OnFire;
-        }
-    }
+    public bool IsOnFire { get { return m_IsOnFire; } }
 
     private void Start () {
         CheckIsOnFire();
@@ -24,7 +18,7 @@ public class Matches : MonoBehaviour {
 
     private void CheckIsOnFire()
     {
-        if (m_OnFire)
+        if (m_IsOnFire)
         {
             SetMaterialOnFire();
             InstantiateFire();
@@ -33,7 +27,7 @@ public class Matches : MonoBehaviour {
 
     private void InstantiateFire()
     {
-        GameObject fire = Instantiate(m_Fire);
+        GameObject fire = Instantiate(m_FirePrefab);
         fire.transform.parent = transform;
         fire.transform.localPosition = Vector2.zero;
     }
@@ -45,7 +39,7 @@ public class Matches : MonoBehaviour {
 
     public void Alight()
     {
-        m_OnFire = true;
+        m_IsOnFire = true;
         CheckIsOnFire();
     }
 }
