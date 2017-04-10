@@ -1,32 +1,51 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(NavMeshAgent), typeof(VelocityFromController))]
 public class Matches : MonoBehaviour {
 
     #region Members
-    [SerializeField] private float m_Speed;
-    [SerializeField] private Controller m_Controller;
-    [SerializeField] private NavMeshAgent m_NavMeshAgent;
-
     [SerializeField] private bool m_IsOnFire = true;
     [SerializeField] private MeshRenderer m_Gfx;
     [SerializeField] private GameObject m_FirePrefab;
 
     [Header("To debug")]
     [SerializeField] private Material m_materialOnFire;
+
+    private NavMeshAgent m_NavMeshAgent;
+    private VelocityFromController m_VelocityFromController;
     #endregion
 
     #region Properties
+    public float Speed
+    {
+        get
+        {
+            return m_VelocityFromController.Speed;
+        }
+        set
+        {
+            m_VelocityFromController.Speed = value;
+        }
+    }
+
     public Controller Controller
     {
         get
         {
-            return m_Controller;
+            return m_VelocityFromController.Controller;
         }
         set
         {
-            m_Controller = value;
+            m_VelocityFromController.Controller = value;
+        }
+    }
+
+    public bool HasController
+    {
+        get
+        {
+            return m_VelocityFromController.HasController;
         }
     }
 
@@ -36,8 +55,9 @@ public class Matches : MonoBehaviour {
     #region Fire
     private void Start () {
         CheckIsOnFire();
-        m_NavMeshAgent = GetComponent<NavMeshAgent>();
-        m_NavMeshAgent.speed = m_Speed;
+        m_NavMeshAgent                 = GetComponent<NavMeshAgent>();
+        m_VelocityFromController       = GetComponent<VelocityFromController>();
+        m_NavMeshAgent.speed           = Speed;
     }
 
     private void CheckIsOnFire()
@@ -71,14 +91,9 @@ public class Matches : MonoBehaviour {
     #region Movement
     private void Update()
     {
-        if (m_Controller)
-        {
-            transform.position += m_Controller.Joystick * m_Speed * Time.deltaTime;
-        } else
-        {
+        if (!HasController)
             if (m_NavMeshAgent.remainingDistance < 0.3f)
                 m_NavMeshAgent.SetDestination(new Vector3(Random.Range(-4, 4), 0f, Random.Range(-4, 4)));
-        }
     }
     #endregion
 }

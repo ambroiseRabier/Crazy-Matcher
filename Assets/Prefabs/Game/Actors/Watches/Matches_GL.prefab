@@ -36,10 +36,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4048689670626546}
-  - component: {fileID: 50063302631842292}
   - component: {fileID: 114690099225377488}
-  - component: {fileID: 61394100077530400}
   - component: {fileID: 195946328072786694}
+  - component: {fileID: 54043675170006134}
+  - component: {fileID: 65776705992154680}
+  - component: {fileID: 114321018728697362}
   m_Layer: 0
   m_Name: Matches_GL
   m_TagString: Untagged
@@ -142,51 +143,46 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1164754556167156}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!50 &50063302631842292
-Rigidbody2D:
-  serializedVersion: 4
+--- !u!54 &54043675170006134
+Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1214032507161422}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
+  serializedVersion: 2
   m_Mass: 1
-  m_LinearDrag: 0
+  m_Drag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_UseGravity: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_Constraints: 116
   m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!61 &61394100077530400
-BoxCollider2D:
+--- !u!65 &65776705992154680
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1214032507161422}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114321018728697362
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1214032507161422}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5}
-  m_EdgeRadius: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd1761d6de996f24e8b5e9f3b9348bc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Speed: 30
+  m_Controller: {fileID: 0}
 --- !u!114 &114690099225377488
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -198,9 +194,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e05fce470fd4d9644b204d35201a222d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Speed: 1
-  m_Controller: {fileID: 0}
-  m_NavMeshAgent: {fileID: 0}
   m_IsOnFire: 1
   m_Gfx: {fileID: 23540100621357226}
   m_FirePrefab: {fileID: 1383991217307100, guid: b4922f0480e3fa945aaf4cf45989c719,
