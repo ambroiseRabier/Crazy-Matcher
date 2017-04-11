@@ -28,10 +28,10 @@ namespace Assets.Scripts.Game.Actors.Water {
         }
 
         private void OnTriggerEnter (Collider collision) {
-            Matches watches = collision.gameObject.GetComponent<Matches>();
+            Burnable burnable = collision.gameObject.GetComponent<Burnable>();
 
-            if (watches != null && watches.IsOnFire)
-                watches.Extinct();
+            if (burnable)
+                burnable.TryExtinguish();
         }
 
 

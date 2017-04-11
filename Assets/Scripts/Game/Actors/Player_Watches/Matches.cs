@@ -2,10 +2,9 @@
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent), typeof(VelocityFromController))]
-public class Matches : MonoBehaviour {
-
+public class Matches : Burnable
+{
     #region Members
-    [SerializeField] private bool m_IsOnFire = true;
     [SerializeField] private MeshRenderer m_Gfx;
     [SerializeField] private GameObject m_FirePrefab;
 
@@ -57,26 +56,15 @@ public class Matches : MonoBehaviour {
         }
     }
 
-    public bool IsOnFire { get { return m_IsOnFire; } }
     #endregion
 
     #region Fire
     private void Start () {
-        CheckIsOnFire();
         m_NavMeshAgent                 = GetComponent<NavMeshAgent>();
         m_VelocityFromController       = GetComponent<VelocityFromController>();
         m_NavMeshAgent.speed           = Speed;
 
         Controller = Controller;
-    }
-
-    private void CheckIsOnFire()
-    {
-        if (m_IsOnFire)
-        {
-            SetMaterialOnFire();
-            InstantiateFire();
-        } // todo: else ...
     }
 
     private void InstantiateFire()
@@ -91,17 +79,24 @@ public class Matches : MonoBehaviour {
         m_Gfx.GetComponent<MeshRenderer>().material = m_materialOnFire;
     }
 
-    public void Alight()
+    /// <summary>
+    /// If burned or already burning, don't start burn again and return false
+    /// else return true
+    /// </summary>
+    /// <returns></returns>
+    public override bool TryStartBurn()
     {
-        m_IsOnFire = true;
-        CheckIsOnFire();
+        if (base.TryStartBurn())
+        {
+            SetMaterialOnFire();
+            InstantiateFire();
+
+            return true;
+        }
+
+        return false;
     }
 
-    public void Extinct() 
-    {
-        m_IsOnFire = false;
-        CheckIsOnFire();
-    }
     #endregion
 
     #region Movement
