@@ -20,6 +20,9 @@ namespace Assets.Scripts.Game.Actors.Player_Firefighter {
         [SerializeField] private GameObject m_WaterPrefab;
         private VelocityFromController m_VelocityFromController;
 
+        [SerializeField] private float m_waterResourceMAX = 200f;
+        [SerializeField] private float m_waterResource = 100f;
+
         public Controller Controller {
             get {
                 return m_VelocityFromController.Controller;
@@ -47,12 +50,21 @@ namespace Assets.Scripts.Game.Actors.Player_Firefighter {
 
         protected void Start () {
             m_VelocityFromController = GetComponent<VelocityFromController>();
+            UpdateWaterResource();
         }
 
         protected void Update () {
-            if (m_VelocityFromController.Controller.Fire) {
+            if (m_VelocityFromController.Controller.Fire && m_waterResource > 0) {
+                m_waterResource -= 1;
+                UpdateWaterResource();
                 InstantiateWater();
-            }
+            } // else feedback plus d'eau !
+
+
+        }
+
+        protected void UpdateWaterResource () {
+            Events.GlobalEventBus.onWaterChange.Invoke(m_waterResource / m_waterResourceMAX);
         }
 
         private void InstantiateWater () {
