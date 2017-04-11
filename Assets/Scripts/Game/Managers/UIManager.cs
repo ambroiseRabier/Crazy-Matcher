@@ -32,6 +32,10 @@ public class UIManager : MultiScreenManager<UIManager>
     [SerializeField]
     private Text m_teamWinText;
 
+    [Header("HUD")]
+    [SerializeField]
+    private Slider m_waterBar;
+
     #endregion
 
 
@@ -72,6 +76,7 @@ public class UIManager : MultiScreenManager<UIManager>
         GlobalEventBus.onResume.AddListener(OnResume);
         GlobalEventBus.onPause.AddListener(OnPause);
         GlobalEventBus.onTeamWin.AddListener(OnTeamWin);
+        GlobalEventBus.onWaterChange.AddListener(OnWaterChange);
     }
 
     private void InitPauseButton()
@@ -123,6 +128,11 @@ public class UIManager : MultiScreenManager<UIManager>
     private void OnResume()
     {
         EnableOnlyScreen(m_HUD);
+    }
+
+    private void OnWaterChange(float newValue) 
+    {
+        m_waterBar.value = newValue;
     }
 
 

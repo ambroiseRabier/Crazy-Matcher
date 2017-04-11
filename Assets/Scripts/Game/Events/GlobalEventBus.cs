@@ -20,6 +20,8 @@ namespace Events
 
         public static GlobalEvents.InitLevelEvent onInitLevel   = new GlobalEvents.InitLevelEvent();
         
+        public static GlobalEvents.WaterBar onWaterChange = new GlobalEvents.WaterBar();
+        
     }
 
 }
