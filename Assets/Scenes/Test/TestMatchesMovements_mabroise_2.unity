@@ -147,6 +147,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 1742610466909826, guid: 814c76e032065a94da5b2ea0e99457c5, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 814c76e032065a94da5b2ea0e99457c5, type: 2}
   m_IsPrefabParent: 0
@@ -536,6 +540,55 @@ Prefab:
       propertyPath: m_ground
       value: 
       objectReference: {fileID: 1578026661}
+    - target: {fileID: 1085542151676000, guid: 0aed26aae035cd54ab1f4af9f51a1dc1, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114661117373064936, guid: 0aed26aae035cd54ab1f4af9f51a1dc1,
+        type: 2}
+      propertyPath: alphaByHeight.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114661117373064936, guid: 0aed26aae035cd54ab1f4af9f51a1dc1,
+        type: 2}
+      propertyPath: alphaByHeight.m_Curve.Array.data[0].inSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114661117373064936, guid: 0aed26aae035cd54ab1f4af9f51a1dc1,
+        type: 2}
+      propertyPath: alphaByHeight.m_Curve.Array.data[0].outSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114661117373064936, guid: 0aed26aae035cd54ab1f4af9f51a1dc1,
+        type: 2}
+      propertyPath: alphaByHeight.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 114661117373064936, guid: 0aed26aae035cd54ab1f4af9f51a1dc1,
+        type: 2}
+      propertyPath: alphaByHeight.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114661117373064936, guid: 0aed26aae035cd54ab1f4af9f51a1dc1,
+        type: 2}
+      propertyPath: alphaByHeight.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114661117373064936, guid: 0aed26aae035cd54ab1f4af9f51a1dc1,
+        type: 2}
+      propertyPath: alphaByHeight.m_Curve.Array.data[1].inSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114661117373064936, guid: 0aed26aae035cd54ab1f4af9f51a1dc1,
+        type: 2}
+      propertyPath: alphaByHeight.m_Curve.Array.data[1].outSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114661117373064936, guid: 0aed26aae035cd54ab1f4af9f51a1dc1,
+        type: 2}
+      propertyPath: alphaByHeight.m_Curve.Array.data[1].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0aed26aae035cd54ab1f4af9f51a1dc1, type: 2}
   m_IsPrefabParent: 0
@@ -623,7 +676,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2017602511}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -640,7 +693,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd1761d6de996f24e8b5e9f3b9348bc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Speed: 0
+  m_Speed: 6
   m_Controller: {fileID: 908975606}
 --- !u!54 &2017602517
 Rigidbody:
@@ -669,5 +722,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SHOOT_POWER: 1
+  CONTROL_ROTATION_FACTOR: 0.15
+  DISPERSION_FACTOR: 0.1
   m_WaterPrefab: {fileID: 1085542151676000, guid: 0aed26aae035cd54ab1f4af9f51a1dc1,
     type: 2}

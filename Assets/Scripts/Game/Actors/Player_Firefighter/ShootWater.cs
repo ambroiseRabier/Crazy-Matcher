@@ -12,6 +12,9 @@ namespace Assets.Scripts.Game.Actors.Player_Firefighter {
 
         [SerializeField] float m_SHOOT_POWER = 2f;
 
+        [SerializeField] private float CONTROL_ROTATION_FACTOR = 0.05f;
+        [SerializeField] private float DISPERSION_FACTOR = 0.1f;
+
         private static ShootWater _instance;
 
         [SerializeField] private GameObject m_WaterPrefab;
@@ -58,8 +61,8 @@ namespace Assets.Scripts.Game.Actors.Player_Firefighter {
             water.transform.position = transform.position;
             water.GetComponent<Rigidbody>().AddForce(
                 new Vector3(
-                    Controller.Joystick.x,
-                    Controller.Joystick.y,
+                    Controller.Joystick.x * CONTROL_ROTATION_FACTOR + UnityEngine.Random.Range(-DISPERSION_FACTOR, DISPERSION_FACTOR),
+                    Controller.Joystick.y * CONTROL_ROTATION_FACTOR + UnityEngine.Random.Range(-DISPERSION_FACTOR, DISPERSION_FACTOR),
                     m_SHOOT_POWER
                 ) * 500
             ); //Controller.Joystick
