@@ -36,6 +36,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4670346564777978}
   - component: {fileID: 65226067661751702}
+  - component: {fileID: 54539992688172558}
+  - component: {fileID: 114661117373064936}
   m_Layer: 0
   m_Name: Water
   m_TagString: Untagged
@@ -64,13 +66,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1071634170305960}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.26343143, y: 0.26343143, z: 0.26343143}
   m_Children: []
   m_Father: {fileID: 4866665062204896}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4670346564777978
 Transform:
   m_ObjectHideFlags: 1
@@ -78,7 +80,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1085542151676000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.02, y: 0.5, z: 1.18}
+  m_LocalPosition: {x: 5.89, y: 1.68, z: -0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4866665062204896}
@@ -99,6 +101,21 @@ Transform:
   m_Father: {fileID: 4670346564777978}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &54539992688172558
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1085542151676000}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!65 &65226067661751702
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -111,6 +128,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114661117373064936
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1085542151676000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28c2666bf54dc134aacae60a2709f971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Z_INDEX_SNAP: -0.5
+  m_ground: {fileID: 0}
+  reduceSpeed: 0.003
 --- !u!212 &212349375318597998
 SpriteRenderer:
   m_ObjectHideFlags: 1
