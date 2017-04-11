@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent), typeof(VelocityFromController))]
+[RequireComponent(typeof(VelocityFromController))]
 public class Matches : Burnable
 {
     #region Members
@@ -10,8 +10,11 @@ public class Matches : Burnable
     [SerializeField] private float m_normalSpeed;
 
     private float m_speed;
-    private NavMeshAgent m_NavMeshAgent;
+    //private NavMeshAgent m_NavMeshAgent;
     private VelocityFromController m_VelocityFromController;
+
+
+    private Vector2 m_currentDirection;
     #endregion
 
     #region Properties
@@ -24,7 +27,7 @@ public class Matches : Burnable
         set
         {
             m_speed              = value;
-            m_NavMeshAgent.speed = value;
+            //m_NavMeshAgent.speed = value;
             m_VelocityFromController.Speed = value;
         }
     }
@@ -41,7 +44,7 @@ public class Matches : Burnable
 
             if (value)
             {
-                m_NavMeshAgent.enabled = false;
+                //m_NavMeshAgent.enabled = false;
                 Vector3 position = transform.position;
                 position.z = 0;
                 transform.position = position;
@@ -61,7 +64,9 @@ public class Matches : Burnable
 
     #region Fire
     private void Awake () {
-        m_NavMeshAgent                 = GetComponent<NavMeshAgent>();
+
+        m_currentDirection = RandomDirection();
+        //m_NavMeshAgent                 = GetComponent<NavMeshAgent>();
         m_VelocityFromController       = GetComponent<VelocityFromController>();
 
         Speed                          = m_normalSpeed;
@@ -96,8 +101,32 @@ public class Matches : Burnable
     private void Update()
     {
         if (!HasController)
-            if (m_NavMeshAgent.remainingDistance < 0.3f)
-                m_NavMeshAgent.SetDestination(new Vector3(Random.Range(-4, 4), 0f, Random.Range(-4, 4)));
+        {
+            RandomMovement();
+        }
+            //if (m_NavMeshAgent.remainingDistance < 0.3f)
+            //    m_NavMeshAgent.SetDestination(new Vector3(Random.Range(-4, 4), 0f, Random.Range(-4, 4)));
+    }
+
+    public float randomlol;
+
+    private void RandomMovement()
+    {
+        float randomAngle = Random.Range(-randomlol, randomlol);
+
+        float angleRad = Vector2.Angle(Vector2.zero, m_currentDirection);
+        angleRad += randomAngle;
+
+        print(angleRad);
+        m_currentDirection = new Vector2(Mathf.Cos(angleRad), Mathf.Sin(angleRad));
+        
+        GetComponent<Rigidbody2D>().velocity = m_currentDirection * m_speed;
+
+    }
+
+    private Vector2 RandomDirection()
+    {
+        return (new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f))).normalized;
     }
     #endregion
 }

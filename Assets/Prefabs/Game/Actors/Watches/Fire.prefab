@@ -20,8 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4822596372574540}
   - component: {fileID: 114280569609623360}
-  - component: {fileID: 136876989994420014}
-  m_Layer: 0
+  - component: {fileID: 58362941457031054}
+  m_Layer: 9
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,6 +41,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &58362941457031054
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1383991217307100}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!114 &114280569609623360
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -52,16 +67,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac26b6564ee30b641b89108854d770dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!136 &136876989994420014
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1383991217307100}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 5.678026
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 1.3072815}

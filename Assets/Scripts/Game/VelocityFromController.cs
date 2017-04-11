@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class VelocityFromController : MonoBehaviour {
 
     [SerializeField] private float m_Speed = 10;
     [SerializeField] private Controller m_Controller;
 
-    private Rigidbody m_Rigidbody;
+    private Rigidbody2D m_Rigidbody;
 
     public Controller Controller
     {
@@ -41,11 +41,13 @@ public class VelocityFromController : MonoBehaviour {
     }
 
     protected void Awake () {
-        m_Rigidbody = GetComponent<Rigidbody>();
+        m_Rigidbody = GetComponent<Rigidbody2D>();
     }
 
     protected void FixedUpdate () {
-        if (m_Controller)   
+        if (m_Controller)
+        {
             m_Rigidbody.velocity = m_Controller.Joystick.normalized * m_Speed;
+        } 
     }
 }
