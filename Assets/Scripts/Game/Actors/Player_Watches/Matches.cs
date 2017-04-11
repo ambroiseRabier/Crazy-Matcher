@@ -66,7 +66,7 @@ public class Matches : MonoBehaviour {
         {
             SetMaterialOnFire();
             InstantiateFire();
-        }
+        } // todo: else ...
     }
 
     private void InstantiateFire()
@@ -84,6 +84,12 @@ public class Matches : MonoBehaviour {
     public void Alight()
     {
         m_IsOnFire = true;
+        CheckIsOnFire();
+    }
+
+    public void Extinct() 
+    {
+        m_IsOnFire = false;
         CheckIsOnFire();
     }
     #endregion
