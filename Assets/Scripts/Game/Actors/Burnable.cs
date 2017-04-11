@@ -5,9 +5,19 @@ public delegate void BurnableEventHandler(Burnable burnable);
 
 public abstract class Burnable : MonoBehaviour
 {
+    [SerializeField] private GameObject m_FirePrefab;
+
     public event BurnableEventHandler OnStartBurn;
     public event BurnableEventHandler OnBurned;
     public event BurnableEventHandler OnExtinguished;
+    
+    [SerializeField] private MeshRenderer m_Gfx;
+
+    [Header("To debug")]
+    [SerializeField]
+    private Material m_materialOnFire;
+
+
 
     public bool IsBurning { get; private set; }
     public bool IsBurned { get; private set; }
@@ -49,6 +59,10 @@ public abstract class Burnable : MonoBehaviour
         if (OnStartBurn != null)
             OnStartBurn(this);
 
+
+        SetMaterialOnFire();
+        InstantiateFire();
+
         m_StartedBurnCoroutine = StartCoroutine(BurnCoroutine());
         return true;
     }
@@ -88,6 +102,20 @@ public abstract class Burnable : MonoBehaviour
         IsBurning = false;
         OnExtinguished(this);
         return true;
+    }
+
+
+    private void InstantiateFire()
+    {
+        GameObject fire = Instantiate(m_FirePrefab);
+        fire.transform.parent = transform;
+        fire.transform.localPosition = Vector2.zero;
+    }
+
+
+    private void SetMaterialOnFire()
+    {
+        m_Gfx.GetComponent<MeshRenderer>().material = m_materialOnFire;
     }
 
     protected virtual void OnBurnRatioProgress(float burnRatioProgress){}

@@ -5,14 +5,9 @@ using UnityEngine.AI;
 public class Matches : Burnable
 {
     #region Members
-    [SerializeField] private MeshRenderer m_Gfx;
-    [SerializeField] private GameObject m_FirePrefab;
 
     [SerializeField] private float m_burnSpeed;
     [SerializeField] private float m_normalSpeed;
-
-    [Header("To debug")]
-    [SerializeField] private Material m_materialOnFire;
 
     private float m_speed;
     private NavMeshAgent m_NavMeshAgent;
@@ -76,18 +71,7 @@ public class Matches : Burnable
     {
         Controller = Controller;
     }
-
-    private void InstantiateFire()
-    {
-        GameObject fire = Instantiate(m_FirePrefab);
-        fire.transform.parent = transform;
-        fire.transform.localPosition = Vector2.zero;
-    }
-
-    private void SetMaterialOnFire()
-    {
-        m_Gfx.GetComponent<MeshRenderer>().material = m_materialOnFire;
-    }
+    
 
     /// <summary>
     /// If burned or already burning, don't start burn again and return false
@@ -98,8 +82,6 @@ public class Matches : Burnable
     {
         if (base.TryStartBurn())
         {
-            SetMaterialOnFire();
-            InstantiateFire();
             Speed = m_burnSpeed;
 
             return true;
