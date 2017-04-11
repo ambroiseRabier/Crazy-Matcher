@@ -13,5 +13,8 @@ namespace Events
         [System.Serializable]
         public class InitLevelEvent : UnityEvent<string> { }
 
+        [System.Serializable]
+        public class TeamEvent : UnityEvent<GameManager.Team> { }
+
     }
 }

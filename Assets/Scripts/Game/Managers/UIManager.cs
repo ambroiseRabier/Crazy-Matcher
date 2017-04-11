@@ -19,11 +19,18 @@ public class UIManager : MultiScreenManager<UIManager>
     private GameObject m_pauseMenu;
     [SerializeField]
     private GameObject m_HUD;
+    [SerializeField]
+    private GameObject m_winScreen;
 
 
     [Header("Menu In Game")]
     [SerializeField]
     private GameObject m_btnPause;
+
+
+    [Header("Win Screen")]
+    [SerializeField]
+    private Text m_teamWinText;
 
     #endregion
 
@@ -36,7 +43,8 @@ public class UIManager : MultiScreenManager<UIManager>
             m_titleScreen,
             m_menu,
             m_pauseMenu,
-            m_HUD
+            m_HUD,
+            m_winScreen
         }));
 
         InitPauseMenu();
@@ -63,6 +71,7 @@ public class UIManager : MultiScreenManager<UIManager>
         GlobalEventBus.onTitleScreen.AddListener(OnTittleScreen);
         GlobalEventBus.onResume.AddListener(OnResume);
         GlobalEventBus.onPause.AddListener(OnPause);
+        GlobalEventBus.onTeamWin.AddListener(OnTeamWin);
     }
 
     private void InitPauseButton()
@@ -103,6 +112,12 @@ public class UIManager : MultiScreenManager<UIManager>
     private void OnPause()
     {
         EnableOnlyScreen(m_pauseMenu);
+    }
+
+    private void OnTeamWin(GameManager.Team team)
+    {
+        EnableOnlyScreen(m_winScreen);
+        m_teamWinText.text = team.ToString();
     }
 
     private void OnResume()
