@@ -38,6 +38,14 @@ public class Matches : MonoBehaviour {
         set
         {
             m_VelocityFromController.Controller = value;
+
+            if (value)
+            {
+                m_NavMeshAgent.enabled = false;
+                Vector3 position = transform.position;
+                position.z = 0;
+                transform.position = position;
+            }
         }
     }
 
@@ -58,6 +66,8 @@ public class Matches : MonoBehaviour {
         m_NavMeshAgent                 = GetComponent<NavMeshAgent>();
         m_VelocityFromController       = GetComponent<VelocityFromController>();
         m_NavMeshAgent.speed           = Speed;
+
+        Controller = Controller;
     }
 
     private void CheckIsOnFire()
