@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4509963639290258}
   - component: {fileID: 33616177045947184}
   - component: {fileID: 23571224279381074}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 114909521521557704}
   - component: {fileID: 54119930618172214}
   - component: {fileID: 65041472769454222}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Objectif
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4278860811145358}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5, z: 0.5}
+  m_Size: {x: 0.5, y: 0.5, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114909521521557704
 MonoBehaviour:

@@ -63,7 +63,7 @@ public class Matches : Burnable
     private void Awake () {
         m_NavMeshAgent                 = GetComponent<NavMeshAgent>();
         m_VelocityFromController       = GetComponent<VelocityFromController>();
-
+        m_NavMeshAgent.updateRotation = false; 
         Speed                          = m_normalSpeed;
     }
 
@@ -97,7 +97,7 @@ public class Matches : Burnable
     {
         if (!HasController)
             if (m_NavMeshAgent.remainingDistance < 0.3f)
-                m_NavMeshAgent.SetDestination(new Vector3(Random.Range(-4, 4), 0f, Random.Range(-4, 4)));
+                m_NavMeshAgent.SetDestination(new Vector3(Random.Range(-10f, 10f), Random.Range(-10f, 10f), 0f));
     }
     #endregion
 }
