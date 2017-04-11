@@ -46,7 +46,7 @@ namespace Assets.Scripts.Game.Actors.Water {
             lScale.x = Mathf.Max(0, lScale.x - reduceSpeed);
 
             if (lScale.y == 0) {
-                DestroyImmediate(this);
+                DestroyImmediate(gameObject);
                 return;
             }
 
