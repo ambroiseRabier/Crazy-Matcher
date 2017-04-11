@@ -16,7 +16,11 @@ namespace Events
         public static GlobalEvents.BaseGameEvent onResume      = new GlobalEvents.BaseGameEvent();
         public static GlobalEvents.BaseGameEvent onStartLevel  = new GlobalEvents.BaseGameEvent();
 
+        public static GlobalEvents.TeamEvent onTeamWin = new GlobalEvents.TeamEvent();
+
         public static GlobalEvents.InitLevelEvent onInitLevel   = new GlobalEvents.InitLevelEvent();
+        
+        public static GlobalEvents.WaterBar onWaterChange = new GlobalEvents.WaterBar();
         
     }
 
