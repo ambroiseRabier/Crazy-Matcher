@@ -2,6 +2,7 @@
 using UnityEngine;
 
 public delegate void BurnableEventHandler(Burnable burnable);
+public delegate void BurnableBurnProgressEventHandler(Burnable burnable, float newBurnRatio);
 
 public abstract class Burnable : MonoBehaviour
 {
@@ -10,14 +11,13 @@ public abstract class Burnable : MonoBehaviour
     public event BurnableEventHandler OnStartBurn;
     public event BurnableEventHandler OnBurned;
     public event BurnableEventHandler OnExtinguished;
+    public event BurnableBurnProgressEventHandler OnBurnRatioProgress;
     
     [SerializeField] private MeshRenderer m_Gfx;
 
     [Header("To debug")]
     [SerializeField]
     private Material m_materialOnFire;
-
-
 
     public bool IsBurning { get; private set; }
     public bool IsBurned { get; private set; }
@@ -75,7 +75,9 @@ public abstract class Burnable : MonoBehaviour
 
         while (burnTimer < m_BurnTime)
         {
-            OnBurnRatioProgress(BurnRatio = burnTimer / m_BurnTime);
+            if (OnBurnRatioProgress != null)
+                OnBurnRatioProgress(this, BurnRatio = burnTimer / m_BurnTime);
+
             yield return null;
             burnTimer += Time.deltaTime;
         }
@@ -117,6 +119,4 @@ public abstract class Burnable : MonoBehaviour
     {
         m_Gfx.GetComponent<MeshRenderer>().material = m_materialOnFire;
     }
-
-    protected virtual void OnBurnRatioProgress(float burnRatioProgress){}
 }
