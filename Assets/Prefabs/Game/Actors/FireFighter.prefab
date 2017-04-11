@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4692321244024240}
   - component: {fileID: 33181242877279100}
-  - component: {fileID: 135380764599036712}
   - component: {fileID: 23506823144834390}
   - component: {fileID: 54864929355183102}
   - component: {fileID: 114142870643497246}
@@ -58,7 +57,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 55777f7cba388114c87bd71c06e98f47, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -128,15 +127,6 @@ MonoBehaviour:
   DISPERSION_FACTOR: 0.1
   m_WaterPrefab: {fileID: 1085542151676000, guid: 0aed26aae035cd54ab1f4af9f51a1dc1,
     type: 2}
---- !u!135 &135380764599036712
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1364742906984592}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_waterResourceMAX: 200
+  m_waterResource: 0
+  WATER_GAIN_FACTOR: 5
