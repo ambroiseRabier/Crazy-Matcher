@@ -18,7 +18,16 @@ public class Controller : MonoBehaviour {
         m_Joystick.x    = Input.GetAxis(m_HorizontalInputName);
         m_Joystick.y    = Input.GetAxis(m_VerticalInputName);
         Fire            = Input.GetButton(m_FireInputName);
-        m_triggerLeft   = Input.GetAxis(m_triggerLeftName);
-        m_triggerRight  = Input.GetAxis(m_triggerRightName);
+        
+        if (m_triggerLeftName != "")
+        {
+            m_triggerLeft   = Input.GetAxis(m_triggerLeftName);
+        }
+
+        if (m_triggerRightName != "")
+        {
+            m_triggerRight  = Input.GetAxis(m_triggerRightName);
+        }
+
     }
 }

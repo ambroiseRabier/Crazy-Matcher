@@ -592,13 +592,17 @@ Prefab:
       propertyPath: m_RootOrder
       value: 13
       objectReference: {fileID: 0}
-    - target: {fileID: 23506823144834390, guid: cd5f5f2df19efa54b8c387538b0c2dab,
+    - target: {fileID: 114142870643497246, guid: cd5f5f2df19efa54b8c387538b0c2dab,
         type: 2}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 2100000, guid: 55777f7cba388114c87bd71c06e98f47, type: 2}
-    m_RemovedComponents:
-    - {fileID: 135380764599036712, guid: cd5f5f2df19efa54b8c387538b0c2dab, type: 2}
+      objectReference: {fileID: 908975606}
+    - target: {fileID: 114488819972318814, guid: cd5f5f2df19efa54b8c387538b0c2dab,
+        type: 2}
+      propertyPath: m_waterResource
+      value: 200
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cd5f5f2df19efa54b8c387538b0c2dab, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &789594679
