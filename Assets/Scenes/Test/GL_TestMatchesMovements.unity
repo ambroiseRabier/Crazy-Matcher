@@ -1008,6 +1008,16 @@ Prefab:
       propertyPath: m_startPlayerMatches
       value: 
       objectReference: {fileID: 887136428}
+    - target: {fileID: 114000010867629504, guid: 838d19f09e4e5ba448873aa5be5e3bb1,
+        type: 2}
+      propertyPath: m_controllerP1
+      value: 
+      objectReference: {fileID: 908975606}
+    - target: {fileID: 114000010867629504, guid: 838d19f09e4e5ba448873aa5be5e3bb1,
+        type: 2}
+      propertyPath: m_controllerP2
+      value: 
+      objectReference: {fileID: 1512343107}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 838d19f09e4e5ba448873aa5be5e3bb1, type: 2}
   m_IsPrefabParent: 0
@@ -1182,6 +1192,12 @@ GameObject:
   m_PrefabParentObject: {fileID: 1000011825151410, guid: 767a83152b9501d44862d3e5321eb3c7,
     type: 2}
   m_PrefabInternal: {fileID: 1359470944}
+--- !u!114 &1512343107 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114922415192621986, guid: 3f897ac77da7edf469b649cccc2472ad,
+    type: 2}
+  m_PrefabInternal: {fileID: 566376778}
+  m_Script: {fileID: 11500000, guid: 34030774860f18441ac3c63251f5a8ae, type: 3}
 --- !u!1001 &1561682101
 Prefab:
   m_ObjectHideFlags: 0
