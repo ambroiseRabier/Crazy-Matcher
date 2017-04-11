@@ -10,9 +10,9 @@ namespace Assets.Scripts.Game.Actors.Player_Firefighter {
     [RequireComponent(typeof(VelocityFromController))]
     public class ShootWater : MonoBehaviour {
 
-        [SerializeField] float m_SHOOT_POWER = 2f;
+        [SerializeField] float m_SHOOT_POWER = 1f;
 
-        [SerializeField] private float CONTROL_ROTATION_FACTOR = 0.05f;
+        [SerializeField] private float CONTROL_ROTATION_FACTOR = 0.15f;
         [SerializeField] private float DISPERSION_FACTOR = 0.1f;
 
         private static ShootWater _instance;
@@ -21,7 +21,13 @@ namespace Assets.Scripts.Game.Actors.Player_Firefighter {
         private VelocityFromController m_VelocityFromController;
 
         [SerializeField] private float m_waterResourceMAX = 200f;
-        [SerializeField] private float m_waterResource = 100f;
+        [SerializeField] private float m_waterResource = 0f;
+
+        [SerializeField] private float WATER_GAIN_FACTOR = 5f; // * (0 to 1) (per trigger pressed and released)
+        private float previousTriggerLeftValue = 0;
+        private float previousTriggerRightValue = 0;
+        private float totalTriggerLeftValue = 0;
+        private float totalTriggerRightValue = 0;
 
         public Controller Controller {
             get {
@@ -59,8 +65,45 @@ namespace Assets.Scripts.Game.Actors.Player_Firefighter {
                 UpdateWaterResource();
                 InstantiateWater();
             } // else feedback plus d'eau !
+            waterGain();
+        }
 
+        protected void waterGain () {
+            // only take a positiv value when pressing (trigger distance in this frame)
+            float triggerLeftDiff = m_VelocityFromController.Controller.m_triggerLeft - previousTriggerLeftValue;
+            float triggerRightDiff = m_VelocityFromController.Controller.m_triggerRight - previousTriggerRightValue;
 
+            // check if relaesed
+            bool isRealeasingLeft = m_VelocityFromController.Controller.m_triggerLeft < previousTriggerLeftValue;
+            bool isRealeasingRight = m_VelocityFromController.Controller.m_triggerRight < previousTriggerRightValue;
+
+            // add to total value (trigger distance)
+            totalTriggerLeftValue += Mathf.Max(0, triggerLeftDiff);
+            totalTriggerRightValue += Mathf.Max(0, triggerRightDiff);
+
+            // push value in waterbar
+            if (isRealeasingLeft && totalTriggerLeftValue > 0) {
+                addWater(totalTriggerLeftValue * WATER_GAIN_FACTOR);
+                //Debug.Log(totalTriggerLeftValue * WATER_GAIN_FACTOR); to see the gain for one trigger
+                totalTriggerLeftValue = 0;
+            }
+            if (isRealeasingRight && totalTriggerRightValue > 0) {
+                addWater(totalTriggerRightValue * WATER_GAIN_FACTOR);
+                totalTriggerRightValue = 0;
+            }
+            if (isRealeasingLeft || isRealeasingRight)
+                UpdateWaterResource();
+
+            // remember previous trigger value
+            previousTriggerLeftValue = m_VelocityFromController.Controller.m_triggerLeft;
+            previousTriggerRightValue = m_VelocityFromController.Controller.m_triggerRight;
+        }
+
+        protected void addWater (float quantity) {
+            m_waterResource = Mathf.Min(
+                m_waterResource + quantity,
+                m_waterResourceMAX
+            );
         }
 
         protected void UpdateWaterResource () {
