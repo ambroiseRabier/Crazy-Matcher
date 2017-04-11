@@ -8,9 +8,13 @@ public class Matches : Burnable
     [SerializeField] private MeshRenderer m_Gfx;
     [SerializeField] private GameObject m_FirePrefab;
 
+    [SerializeField] private float m_burnSpeed;
+    [SerializeField] private float m_normalSpeed;
+
     [Header("To debug")]
     [SerializeField] private Material m_materialOnFire;
 
+    private float m_speed;
     private NavMeshAgent m_NavMeshAgent;
     private VelocityFromController m_VelocityFromController;
     #endregion
@@ -20,10 +24,12 @@ public class Matches : Burnable
     {
         get
         {
-            return m_VelocityFromController.Speed;
+            return m_speed;
         }
         set
         {
+            m_speed              = value;
+            m_NavMeshAgent.speed = value;
             m_VelocityFromController.Speed = value;
         }
     }
@@ -59,11 +65,15 @@ public class Matches : Burnable
     #endregion
 
     #region Fire
-    private void Start () {
+    private void Awake () {
         m_NavMeshAgent                 = GetComponent<NavMeshAgent>();
         m_VelocityFromController       = GetComponent<VelocityFromController>();
-        m_NavMeshAgent.speed           = Speed;
 
+        Speed                          = m_normalSpeed;
+    }
+
+    private void Start()
+    {
         Controller = Controller;
     }
 
@@ -90,6 +100,7 @@ public class Matches : Burnable
         {
             SetMaterialOnFire();
             InstantiateFire();
+            Speed = m_burnSpeed;
 
             return true;
         }

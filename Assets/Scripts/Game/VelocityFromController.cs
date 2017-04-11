@@ -17,6 +17,8 @@ public class VelocityFromController : MonoBehaviour {
         set
         {
             m_Controller = value;
+
+            m_Rigidbody.isKinematic = !value;
         }
     }
     public bool HasController
@@ -38,12 +40,12 @@ public class VelocityFromController : MonoBehaviour {
         }
     }
 
-    protected void Start () {
+    protected void Awake () {
         m_Rigidbody = GetComponent<Rigidbody>();
     }
 
     protected void FixedUpdate () {
-        if (m_Controller)
+        if (m_Controller)   
             m_Rigidbody.velocity = m_Controller.Joystick.normalized * m_Speed;
     }
 }
