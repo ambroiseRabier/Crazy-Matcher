@@ -124,6 +124,7 @@ public class GameManager : Singleton<GameManager>
         foreach (Matches matches in matchesList)
         {
             matches.OnStartBurn += OnMatchesBurn;
+            matches.OnExtinguished += OnMatchesExtinguished;
         }
 
     }
@@ -131,7 +132,6 @@ public class GameManager : Singleton<GameManager>
     private void OnObjectifBurn(Burnable burnable)
     {
         m_burnObjectifsCount++;
-        print(burnable is Matches);
         if (m_burnObjectifsCount >= m_objectifs.Length)
             GlobalEventBus.onTeamWin.Invoke(Team.MATCHES);
     }
@@ -139,11 +139,41 @@ public class GameManager : Singleton<GameManager>
     private void OnMatchesBurn(Burnable burnable)
     {
         Matches matches = (Matches)burnable;
-        print(matches.matchesBurnMe.IsControlByPlayer);
         if (matches.matchesBurnMe.IsControlByPlayer)
         {
             AddPotentialPlayers(matches);
         }
+    }
+
+    private void OnMatchesExtinguished(Burnable burnable)
+    {
+        Matches matches = (Matches)burnable;
+        RemovePotentialPlayers(matches);
+        CheckWinFireFighter();
+    }
+
+    private void CheckWinFireFighter()
+    {
+        if (!MatchesInFire())
+        {
+            GlobalEventBus.onTeamWin.Invoke(Team.FIRE_FIGHTER);
+        }
+    }
+
+    private bool MatchesInFire()
+    {
+        Matches[] matchesList = FindObjectsOfType<Matches>();
+
+        foreach (Matches matches in matchesList)
+        {
+            if (matches.IsBurning)
+            {
+                return true;
+            }
+        }
+
+        return false;
+
     }
 
     private void AddPotentialPlayers(Matches matches)
@@ -154,6 +184,11 @@ public class GameManager : Singleton<GameManager>
         {
             StartCoroutine(StartTimerPotentialPlayers());
         }
+    }
+
+    private void RemovePotentialPlayers(Matches matches)
+    {
+        m_potentialPlayers.Remove(matches);
     }
 
     private IEnumerator StartTimerPotentialPlayers()
@@ -171,8 +206,12 @@ public class GameManager : Singleton<GameManager>
     private void ChangeRandomPlayer()
     {
         print("CHANGE PLAYER");
-        int randomIndex = Random.Range(0, m_potentialPlayers.Count - 1);
-        ChangePlayer(m_potentialPlayers[randomIndex]);
+        if (m_potentialPlayers.Count != 0)
+        {
+            int randomIndex = Random.Range(0, m_potentialPlayers.Count - 1);
+            print(randomIndex);
+            ChangePlayer(m_potentialPlayers[randomIndex]);
+        }
         m_potentialPlayers.Clear();
     }
     

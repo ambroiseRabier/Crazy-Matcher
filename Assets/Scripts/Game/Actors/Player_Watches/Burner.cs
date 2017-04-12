@@ -7,7 +7,6 @@ public class Burner : MonoBehaviour {
 
     private void OnTriggerEnter(Collider collision)
     {
-        print(collision.name);
         Burnable burnable = collision.gameObject.GetComponent<Burnable>();
 
         if (burnable)
@@ -15,8 +14,6 @@ public class Burner : MonoBehaviour {
             if (fireOwner != null)
             {
                 burnable.matchesBurnMe = fireOwner;
-
-                print(fireOwner.name);
             }
 
             burnable.TryStartBurn();
