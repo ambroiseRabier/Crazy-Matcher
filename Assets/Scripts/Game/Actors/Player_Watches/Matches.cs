@@ -6,6 +6,8 @@ public class Matches : Burnable
 {
     #region Members
 
+    [SerializeField] private bool m_startPlayer = false;
+
     [SerializeField] private float m_burnSpeed;
     [SerializeField] private float m_normalSpeed;
 
@@ -18,6 +20,14 @@ public class Matches : Burnable
     #endregion
 
     #region Properties
+    public bool StartPlayer
+    {
+        get
+        {
+            return m_startPlayer;
+        }
+    }
+
     public float Speed
     {
         get

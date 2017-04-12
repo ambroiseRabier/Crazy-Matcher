@@ -16,7 +16,7 @@ public class GameManager : Singleton<GameManager>
     private int m_currentLevel;
 
     [SerializeField] private float m_timeBeforePlayerChange = 3f;
-    [SerializeField] private Matches m_currentPlayerMatches;
+    private Matches m_currentPlayerMatches;
     
     [SerializeField] private Controller m_controllerP1; 
     [SerializeField] private Controller m_controllerP2; 
@@ -109,9 +109,9 @@ public class GameManager : Singleton<GameManager>
     private void StartLevel()
     {
         m_burnObjectifsCount = 0;
+        FindMatches();
         InitPlayerMatches();
         FindObjectifs();
-        FindMatches();
     }
 
     private void InitPlayerMatches()
@@ -144,6 +144,11 @@ public class GameManager : Singleton<GameManager>
 
         foreach (Matches matches in matchesList)
         {
+            if (matches.StartPlayer)
+            {
+                m_currentPlayerMatches = matches;
+            }
+
             matches.OnStartBurn += OnMatchesBurn;
             matches.OnExtinguished += OnMatchesExtinguished;
         }
@@ -160,7 +165,7 @@ public class GameManager : Singleton<GameManager>
     private void OnMatchesBurn(Burnable burnable)
     {
         Matches matches = (Matches)burnable;
-        if (matches.matchesBurnMe.IsControlByPlayer)
+        if (matches != m_currentPlayerMatches && matches.matchesBurnMe.IsControlByPlayer)
         {
             AddPotentialPlayers(matches);
         }
@@ -226,11 +231,9 @@ public class GameManager : Singleton<GameManager>
 
     private void ChangeRandomPlayer()
     {
-        print("CHANGE PLAYER");
         if (m_potentialPlayers.Count != 0)
         {
             int randomIndex = Random.Range(0, m_potentialPlayers.Count - 1);
-            print(randomIndex);
             ChangePlayer(m_potentialPlayers[randomIndex]);
         }
         m_potentialPlayers.Clear();
@@ -277,7 +280,6 @@ public class GameManager : Singleton<GameManager>
         {
             m_currentLevel = m_sceneName.IndexOf(SceneManager.GetActiveScene().name);
         }
-        print(m_currentLevel);
         StartCoroutine(StartLoadingScene(m_sceneName[m_currentLevel]));
     }
 
