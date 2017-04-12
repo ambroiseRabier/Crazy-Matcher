@@ -10,6 +10,11 @@ public class GameManager : Singleton<GameManager>
 
     #region Variables
 
+
+    [SerializeField] private List<string> m_sceneName;
+
+    private int m_currentLevel;
+
     [SerializeField] private float m_timeBeforePlayerChange = 3f;
     [SerializeField] private Matches m_currentPlayerMatches;
     
@@ -65,6 +70,8 @@ public class GameManager : Singleton<GameManager>
 
         GlobalEventBus.onStartLevel.AddListener(OnStartLevel);
         GlobalEventBus.onTeamWin.AddListener(OnTeamWin);
+
+        GlobalEventBus.onLoadingScene.AddListener(OnLoadingScene);
     }
 
 
@@ -73,6 +80,20 @@ public class GameManager : Singleton<GameManager>
 
         m_potentialPlayers = new List<Matches>();
         m_gameTimeScale = DEFAULT_GAME_TIME_SCALE;
+    }
+
+
+    private void InitCurrentScene()
+    {
+        m_currentLevel = m_sceneName.IndexOf(SceneManager.GetActiveScene().name);
+        if (m_currentLevel == 0)
+        {
+            GlobalEventBus.onTitleScreen.Invoke();
+        }
+        else
+        {
+            GlobalEventBus.onInitLevel.Invoke();
+        }
     }
 
     #endregion
@@ -240,11 +261,25 @@ public class GameManager : Singleton<GameManager>
         Unpause();
     }
 
-    private void OnInitLevel(string levelName)
+    private void OnInitLevel()
     {
         //TODO 
         GlobalEventBus.onStartLevel.Invoke();
-    } 
+    }
+
+    private void OnLoadingScene(int sceneNumber = -1)
+    {
+        if (sceneNumber != -1)
+        {
+            m_currentLevel = sceneNumber;
+        }
+        else
+        {
+            m_currentLevel = m_sceneName.IndexOf(SceneManager.GetActiveScene().name);
+        }
+        print(m_currentLevel);
+        StartCoroutine(StartLoadingScene(m_sceneName[m_currentLevel]));
+    }
 
     private void OnStartLevel()
     {
@@ -254,6 +289,30 @@ public class GameManager : Singleton<GameManager>
     private void OnTeamWin(Team teamWin)
     {
         print(teamWin);
+    }
+
+    #endregion
+
+
+    #region Loading Scene
+
+    IEnumerator StartLoadingScene(string nameScene)
+    {
+        AsyncOperation async = SceneManager.LoadSceneAsync(nameScene);
+        yield return async;
+        OnSceneReady();
+    }
+
+    private void OnSceneReady()
+    {
+        if (m_currentLevel == 0)
+        {
+            GlobalEventBus.onMenu.Invoke();
+        }
+        else
+        {
+            GlobalEventBus.onInitLevel.Invoke();
+        }
     }
 
     #endregion

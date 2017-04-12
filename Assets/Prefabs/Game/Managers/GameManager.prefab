@@ -52,9 +52,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SingletonMode: 1
+  m_sceneName:
+  - GL_Main
+  - GL_Level01
   m_timeBeforePlayerChange: 1
-  m_startPlayerMatches: {fileID: 0}
-  m_controllerP1: {fileID: 114844429189948410, guid: e15ea865797aa844f814fb5f48ade62c,
-    type: 2}
-  m_controllerP2: {fileID: 114922415192621986, guid: 3f897ac77da7edf469b649cccc2472ad,
-    type: 2}
+  m_currentPlayerMatches: {fileID: 0}
+  m_controllerP1: {fileID: 0}
+  m_controllerP2: {fileID: 0}

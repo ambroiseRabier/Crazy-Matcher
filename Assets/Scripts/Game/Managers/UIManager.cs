@@ -103,7 +103,7 @@ public class UIManager : MultiScreenManager<UIManager>
         EnableOnlyScreen(m_menu);
     }
 
-    private void OnInitLevel(string levelName)
+    private void OnInitLevel()
     {
         EnableOnlyScreen(m_HUD);
         InitPauseButton();
@@ -158,9 +158,9 @@ public class UIManager : MultiScreenManager<UIManager>
 
     #region Button Callback
 
-    public void PlayClick(string levelName)
+    public void PlayClick(int level)
     {
-        GlobalEventBus.onInitLevel.Invoke(levelName);
+        GlobalEventBus.onLoadingScene.Invoke(level);
     }
 
     public void ResumeClick()
@@ -170,7 +170,7 @@ public class UIManager : MultiScreenManager<UIManager>
 
     public void MenuClick()
     {
-        GlobalEventBus.onMenu.Invoke();
+        GlobalEventBus.onLoadingScene.Invoke(0);
     }
 
     public void PauseClick()
