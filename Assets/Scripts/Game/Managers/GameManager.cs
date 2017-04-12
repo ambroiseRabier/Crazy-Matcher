@@ -26,7 +26,14 @@ public class GameManager : Singleton<GameManager>
 
     private float m_gameTimeScale;
 
+    public enum GameState
+    {
+        TITLE_SCREEN,
+        MENU,
+        IN_GAME
+    }
 
+    private GameState m_currentGameState;
 
     public enum Team
     {
@@ -73,6 +80,8 @@ public class GameManager : Singleton<GameManager>
         GlobalEventBus.onTeamWin.AddListener(OnTeamWin);
 
         GlobalEventBus.onLoadingScene.AddListener(OnLoadingScene);
+        GlobalEventBus.onTitleScreen.AddListener(OnTitleScreen);
+        GlobalEventBus.onMenu.AddListener(OnMenu);
     }
 
 
@@ -104,6 +113,31 @@ public class GameManager : Singleton<GameManager>
 
     void Update()
     {
+        // DEGUEULASSE NE PAS REPRODUIRE
+        if (m_currentGameState == GameState.TITLE_SCREEN)
+        {
+            CheckPressStart();
+        }
+        else if (m_currentGameState == GameState.MENU)
+        {
+            CheckMenuButtonPress();
+        }
+    }
+
+    private void CheckPressStart()
+    {
+        if (Input.GetButtonDown("Submit"))
+        {
+            GlobalEventBus.onMenu.Invoke();
+        }
+    }
+
+    private void CheckMenuButtonPress()
+    {
+        if (Input.GetButtonDown("Fire1_P1"))
+        {
+            GlobalEventBus.onLoadingScene.Invoke(1);
+        }
 
     }
 
@@ -291,6 +325,16 @@ public class GameManager : Singleton<GameManager>
             m_currentLevel = m_sceneName.IndexOf(SceneManager.GetActiveScene().name);
         }
         StartCoroutine(StartLoadingScene(m_sceneName[m_currentLevel]));
+    }
+
+    private void OnTitleScreen()
+    {
+        m_currentGameState = GameState.TITLE_SCREEN;
+    }
+
+    private void OnMenu()
+    {
+        m_currentGameState = GameState.MENU;
     }
 
     private void OnStartLevel()
