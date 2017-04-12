@@ -10,9 +10,17 @@ public class GameManager : Singleton<GameManager>
 
     #region Variables
 
+    [SerializeField] private float m_timeBeforePlayerChange = 3f;
+    [SerializeField] private Matches m_currentPlayerMatches;
+    
+    [SerializeField] private Controller m_controllerP1; 
+    [SerializeField] private Controller m_controllerP2; 
+
     private const float DEFAULT_GAME_TIME_SCALE = 1;
 
     private float m_gameTimeScale;
+
+
 
     public enum Team
     {
@@ -23,6 +31,8 @@ public class GameManager : Singleton<GameManager>
     //private List<Objectif> m_objectifs;
     private int m_burnObjectifsCount;
     private Objectif[] m_objectifs;
+
+    private List<Matches> m_potentialPlayers;
 
     #endregion
 
@@ -60,6 +70,8 @@ public class GameManager : Singleton<GameManager>
 
     private void InitVariables()
     {
+
+        m_potentialPlayers = new List<Matches>();
         m_gameTimeScale = DEFAULT_GAME_TIME_SCALE;
     }
 
@@ -76,16 +88,26 @@ public class GameManager : Singleton<GameManager>
     private void StartLevel()
     {
         m_burnObjectifsCount = 0;
+        InitPlayerMatches();
         FindObjectifs();
+        FindMatches();
+    }
+
+    private void InitPlayerMatches()
+    {
+        m_currentPlayerMatches.Controller = m_controllerP1;
+        m_currentPlayerMatches.TryStartBurn();
+    }
+
+    private void ChangePlayer(Matches matches)
+    {
+        m_currentPlayerMatches.Controller = null;
+        m_currentPlayerMatches = matches;
+        InitPlayerMatches();
     }
 
     private void FindObjectifs()
     {
-        //if (m_objectifs != null)
-        //    m_objectifs = new List<Objectif>();
-        //else
-        //    m_objectifs.Clear();
-
         m_objectifs = FindObjectsOfType<Objectif>();
         
         foreach (Objectif objectif in m_objectifs)
@@ -95,12 +117,63 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    private void FindMatches()
+    {
+        Matches[] matchesList = FindObjectsOfType<Matches>();
+
+        foreach (Matches matches in matchesList)
+        {
+            matches.OnStartBurn += OnMatchesBurn;
+        }
+
+    }
+
     private void OnObjectifBurn(Burnable burnable)
     {
-        print("OnObjectifBurn");
         m_burnObjectifsCount++;
+        print(burnable is Matches);
         if (m_burnObjectifsCount >= m_objectifs.Length)
             GlobalEventBus.onTeamWin.Invoke(Team.MATCHES);
+    }
+
+    private void OnMatchesBurn(Burnable burnable)
+    {
+        Matches matches = (Matches)burnable;
+        print(matches.matchesBurnMe.IsControlByPlayer);
+        if (matches.matchesBurnMe.IsControlByPlayer)
+        {
+            AddPotentialPlayers(matches);
+        }
+    }
+
+    private void AddPotentialPlayers(Matches matches)
+    {
+        m_potentialPlayers.Add(matches);
+        print(m_potentialPlayers.Count);
+        if (m_potentialPlayers.Count == 1)
+        {
+            StartCoroutine(StartTimerPotentialPlayers());
+        }
+    }
+
+    private IEnumerator StartTimerPotentialPlayers()
+    {
+        float time = 0f;
+        while (time < m_timeBeforePlayerChange)
+        {
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        ChangeRandomPlayer();
+    }
+
+    private void ChangeRandomPlayer()
+    {
+        print("CHANGE PLAYER");
+        int randomIndex = Random.Range(0, m_potentialPlayers.Count - 1);
+        ChangePlayer(m_potentialPlayers[randomIndex]);
+        m_potentialPlayers.Clear();
     }
     
     private void Menu()

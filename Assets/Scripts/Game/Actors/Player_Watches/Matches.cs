@@ -9,6 +9,9 @@ public class Matches : Burnable
     [SerializeField] private float m_burnSpeed;
     [SerializeField] private float m_normalSpeed;
 
+    [SerializeField] private float m_rangeX;
+    [SerializeField] private float m_rangeY;
+
     private float m_speed;
     private NavMeshAgent m_NavMeshAgent;
     private VelocityFromController m_VelocityFromController;
@@ -25,6 +28,7 @@ public class Matches : Burnable
         {
             m_speed              = value;
             m_NavMeshAgent.speed = value;
+            m_NavMeshAgent.acceleration = value;
             m_VelocityFromController.Speed = value;
         }
     }
@@ -46,6 +50,19 @@ public class Matches : Burnable
                 position.z = 0;
                 transform.position = position;
             }
+            else
+            {
+                m_NavMeshAgent.enabled = true;
+            }
+        }
+    }
+
+
+    public bool IsControlByPlayer
+    {
+        get
+        {
+            return Controller != null;
         }
     }
 
@@ -65,6 +82,7 @@ public class Matches : Burnable
         m_VelocityFromController       = GetComponent<VelocityFromController>();
         m_NavMeshAgent.updateRotation = false; 
         Speed                          = m_normalSpeed;
+        AwakeMovement();
     }
 
     private void Start()
@@ -90,6 +108,12 @@ public class Matches : Burnable
         return false;
     }
 
+    protected override void InstantiateFire()
+    {
+        base.InstantiateFire();
+        m_fire.GetComponent<Burner>().fireOwner = this;
+    }
+
     #endregion
 
     #region Movement
@@ -97,7 +121,55 @@ public class Matches : Burnable
     {
         if (!HasController)
             if (m_NavMeshAgent.remainingDistance < 0.3f)
-                m_NavMeshAgent.SetDestination(new Vector3(Random.Range(-10f, 10f), Random.Range(-10f, 10f), 0f));
+            {
+                // isBurned et isBurning inversé.
+                //Debug.Log(IsBurning);
+                //Debug.Log(IsBurned);
+                if (IsBurned) {
+                    MoveDefault(); 
+                } else {
+                    MoveDefaultWhitPause();
+                }
+            }
     }
+
+    [SerializeField] private float PAUSE_TIME_RANDOM_RANGE_MIN = 1000f;
+    [SerializeField] private float PAUSE_TIME_RANDOM_RANGE_MAX = 1500f;
+    [SerializeField] private float PAUSE_SKIP_PROBABILITY = 0.5f; // probabilité d'une pause après avoir atteint sa destination.
+    private float waitCount = 0f;
+    private float currentPauseTime;
+    private float currentPauseProb;
+
+    private void AwakeMovement() 
+    {
+        currentPauseTime = Random.Range(PAUSE_TIME_RANDOM_RANGE_MIN, PAUSE_TIME_RANDOM_RANGE_MAX);
+        currentPauseProb = PAUSE_SKIP_PROBABILITY;
+    }
+
+    private void MoveDefaultWhitPause() 
+    {
+        bool lSkip = Random.Range(0, 1) < currentPauseProb;
+        // only one chance per destination reached
+        if (!lSkip)
+            currentPauseProb = 0;
+
+        m_NavMeshAgent.isStopped = true;
+        if (waitCount >= currentPauseTime || lSkip) {
+            m_NavMeshAgent.isStopped = false;
+            MoveDefault();
+            waitCount = 0f;
+            AwakeMovement();
+        }
+
+        waitCount += Time.deltaTime * 1000;
+    }
+
+    private void MoveDefault() 
+    {
+        Vector3 position = transform.position;
+        Vector3 destination = new Vector3(Random.Range(position.x - m_rangeX, position.x + m_rangeX), Random.Range(position.y - m_rangeY, position.y + m_rangeY), 0f);
+        m_NavMeshAgent.SetDestination(destination);
+    }
+
     #endregion
 }

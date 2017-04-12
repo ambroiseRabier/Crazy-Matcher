@@ -54,3 +54,5 @@ MonoBehaviour:
   m_HorizontalInputName: Horizontal_P1
   m_VerticalInputName: Vertical_P1
   m_FireInputName: Fire1_P1
+  m_triggerLeftName: TriggerLeft_P2
+  m_triggerRightName: TriggerRight_P2
