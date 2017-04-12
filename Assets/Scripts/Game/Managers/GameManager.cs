@@ -130,7 +130,6 @@ public class GameManager : Singleton<GameManager>
 
     private void OnObjectifBurn(Burnable burnable)
     {
-        print("OnObjectifBurn");
         m_burnObjectifsCount++;
         print(burnable is Matches);
         if (m_burnObjectifsCount >= m_objectifs.Length)
@@ -139,9 +138,12 @@ public class GameManager : Singleton<GameManager>
 
     private void OnMatchesBurn(Burnable burnable)
     {
-        print("Matche");
         Matches matches = (Matches)burnable;
-        AddPotentialPlayers(matches);
+        print(matches.matchesBurnMe.IsControlByPlayer);
+        if (matches.matchesBurnMe.IsControlByPlayer)
+        {
+            AddPotentialPlayers(matches);
+        }
     }
 
     private void AddPotentialPlayers(Matches matches)

@@ -56,6 +56,15 @@ public class Matches : Burnable
         }
     }
 
+
+    public bool IsControlByPlayer
+    {
+        get
+        {
+            return Controller != null;
+        }
+    }
+
     public bool HasController
     {
         get
@@ -95,6 +104,12 @@ public class Matches : Burnable
         }
 
         return false;
+    }
+
+    protected override void InstantiateFire()
+    {
+        base.InstantiateFire();
+        m_fire.GetComponent<Burner>().fireOwner = this;
     }
 
     #endregion

@@ -70,7 +70,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1214032507161422}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalPosition: {x: 248, y: 3, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4276840574208612}
@@ -85,7 +85,7 @@ Transform:
   m_GameObject: {fileID: 1164754556167156}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 50, y: 50, z: 50}
   m_Children: []
   m_Father: {fileID: 4276840574208612}
   m_RootOrder: 0
@@ -168,7 +168,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 10, z: 0.5}
+  m_Size: {x: 50, y: 50, z: 50}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114321018728697362
 MonoBehaviour:
@@ -196,13 +196,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_FirePrefab: {fileID: 1383991217307100, guid: b4922f0480e3fa945aaf4cf45989c719,
     type: 2}
+  matchesBurnMe: {fileID: 0}
   m_Gfx: {fileID: 23540100621357226}
   m_materialOnFire: {fileID: 2100000, guid: bda68c0a325c0a14e895b00dd236d363, type: 2}
   m_BurnTime: 0
-  m_burnSpeed: 5
-  m_normalSpeed: 0.5
-  m_rangeX: 2
-  m_rangeY: 2
+  m_burnSpeed: 1000
+  m_normalSpeed: 250
+  m_rangeX: 750
+  m_rangeY: 750
 --- !u!195 &195946328072786694
 NavMeshAgent:
   m_ObjectHideFlags: 1

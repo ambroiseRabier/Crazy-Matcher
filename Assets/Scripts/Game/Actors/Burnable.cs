@@ -13,11 +13,17 @@ public abstract class Burnable : MonoBehaviour
     public event BurnableEventHandler OnExtinguished;
     public event BurnableBurnProgressEventHandler OnBurnRatioProgress;
     
+
+    public Matches matchesBurnMe;
+
     [SerializeField] private MeshRenderer m_Gfx;
 
     [Header("To debug")]
     [SerializeField]
     private Material m_materialOnFire;
+
+    protected GameObject m_fire;
+
 
     public bool IsBurning { get; private set; }
     public bool IsBurned { get; private set; }
@@ -107,11 +113,11 @@ public abstract class Burnable : MonoBehaviour
     }
 
 
-    private void InstantiateFire()
+    protected virtual void InstantiateFire()
     {
-        GameObject fire = Instantiate(m_FirePrefab);
-        fire.transform.parent = transform;
-        fire.transform.localPosition = Vector2.zero;
+        m_fire = Instantiate(m_FirePrefab);
+        m_fire.transform.parent = transform;
+        m_fire.transform.localPosition = Vector2.zero;
     }
 
 
