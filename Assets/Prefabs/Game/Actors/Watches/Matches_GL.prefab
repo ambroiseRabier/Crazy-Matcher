@@ -199,11 +199,13 @@ MonoBehaviour:
   matchesBurnMe: {fileID: 0}
   m_Gfx: {fileID: 23540100621357226}
   m_materialOnFire: {fileID: 2100000, guid: bda68c0a325c0a14e895b00dd236d363, type: 2}
-  m_BurnTime: 20
+  m_BurnTime: 5
+  m_startPlayer: 0
   m_burnSpeed: 500
   m_normalSpeed: 100
   m_rangeX: 200
   m_rangeY: 200
+  m_minDistToNavMeshDestination: 30
   PAUSE_TIME_RANDOM_RANGE_MIN: 1000
   PAUSE_TIME_RANDOM_RANGE_MAX: 1500
   PAUSE_SKIP_PROBABILITY: 0.5
