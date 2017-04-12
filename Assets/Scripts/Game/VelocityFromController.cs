@@ -45,7 +45,11 @@ public class VelocityFromController : MonoBehaviour {
     }
 
     protected void FixedUpdate () {
-        if (m_Controller)   
+        if (m_Controller)
+        {
+            print(m_Controller.Joystick.normalized * m_Speed);
             m_Rigidbody.velocity = m_Controller.Joystick.normalized * m_Speed;
+
+        }
     }
 }
