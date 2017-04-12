@@ -10,10 +10,10 @@ namespace Assets.Scripts.Game.Actors.Player_Firefighter {
     [RequireComponent(typeof(VelocityFromController))]
     public class ShootWater : MonoBehaviour {
 
-        [SerializeField] float m_SHOOT_POWER = 1f;
+        [SerializeField] float m_SHOOT_POWER = 30f;
 
-        [SerializeField] private float CONTROL_ROTATION_FACTOR = 0.15f;
-        [SerializeField] private float DISPERSION_FACTOR = 0.1f;
+        [SerializeField] private float CONTROL_ROTATION_FACTOR = 4.5f;
+        [SerializeField] private float DISPERSION_FACTOR = 3f;
 
         private static ShootWater _instance;
 

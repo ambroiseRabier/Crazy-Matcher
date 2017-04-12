@@ -31,12 +31,12 @@ namespace Assets.Scripts.Game.Actors.Water {
             m_renderers = gameObject.transform.Find("GFX").GetComponentsInChildren<SpriteRenderer>();
             m_waterSplashSprite.GetComponent<Renderer>().enabled = false;
             m_waterSprite.GetComponent<Renderer>().enabled = true;
-            m_startZDistance = transform.position.z;
         }
 
         protected void Start () {
             // cannot add the ground by link in editor :/
             m_ground = GameObject.Find("Level").transform;
+            m_startZDistance = transform.position.z;
         }
 
         protected void Update () {
@@ -77,7 +77,8 @@ namespace Assets.Scripts.Game.Actors.Water {
 
         private void UpdateHeightFeedBack () {
             // this calcul seem a bit wrong, but in global it work.
-            SetAlphas(alphaByHeight.Evaluate(Mathf.Clamp(m_startZDistance / transform.position.z, 0, 1)));
+            //Debug.Log("("+m_startZDistance+" - "+transform.position.z+") / "+m_startZDistance);
+            SetAlphas(alphaByHeight.Evaluate(Mathf.Clamp((m_startZDistance - transform.position.z) / m_startZDistance, 0, 1))); // ((-400) - (-380))/(-400) // ((-total) - (-current))/(-total) // m_startZDistance / transform.position.z
         }
 
         public void SetAlphas (float newAlpha) {
