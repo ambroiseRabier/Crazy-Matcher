@@ -124,14 +124,49 @@ public abstract class CanvasScreen<T> : Singleton<T> where T : Component
         }
     }
 
-    public void Open()
+    /// <summary>
+    /// Start transition opening if not opened.
+    /// Invoke actionOnOpened when opening transition is ended or invoke actionOnClosed directely if the state is already opened
+    /// </summary>
+    /// <param name="actionOnOpened"></param>
+    public void Open(Action actionOnOpened = null)
     {
-        DesiredState = CanvasScreenState.OPENED;
+        ChangeStateThenPerformCallBackOnCompleted(CanvasScreenState.OPENED, OnOpened, actionOnOpened);
     }
 
-    public void Close()
+    /// <summary>
+    /// Start transition closing if not closed.
+    /// Invoke actionOnClosed when closing transition is ended or invoke actionOnClosed directely if the state is already closed
+    /// </summary>
+    /// <param name="actionOnClosed"></param>
+    public void Close(Action actionOnClosed = null)
     {
-        DesiredState = CanvasScreenState.CLOSED;
+        ChangeStateThenPerformCallBackOnCompleted(CanvasScreenState.CLOSED, OnClosed, actionOnClosed);
+    }
+
+    private void ChangeStateThenPerformCallBackOnCompleted(CanvasScreenState targetedState, CanvasScreenEventHandler eventHandler, Action callBack)
+    {
+        if (callBack != null)
+        {
+            if (State == targetedState)
+            {
+                callBack();
+                return;
+            }
+            else
+            {
+                CanvasScreenEventHandler onStatedCompletedCallback = null;
+
+                onStatedCompletedCallback = (T canvasScreen) => {
+                    callBack();
+                    eventHandler -= onStatedCompletedCallback;
+                };
+
+                eventHandler += onStatedCompletedCallback;
+            }
+        }
+
+        DesiredState = targetedState;
     }
 
     private void OnDestroy()
