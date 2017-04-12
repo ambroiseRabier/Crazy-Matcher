@@ -693,7 +693,7 @@ MonoBehaviour:
   m_SingletonMode: 1
   m_p1ScoreComp: {fileID: 114004448935911174}
   m_p2ScoreComp: {fileID: 114763099565248246}
-  m_waterTankSlider: {fileID: 0}
+  m_waterTankSlider: {fileID: 114838202285601770}
 --- !u!114 &114264554085105412
 MonoBehaviour:
   m_ObjectHideFlags: 1
