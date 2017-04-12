@@ -10,6 +10,7 @@
 /[Bb]uilds/
 
 /Assets/AssetStoreTools*
+/Assets/GAF/Resources/Cache/
 
 
 
@@ -62,8 +63,6 @@ Assets/StreamingAssets*
 # Unity3D Generated File On Crash Reports
 
 sysinfo.txt
-
-
 
 # Builds
 
