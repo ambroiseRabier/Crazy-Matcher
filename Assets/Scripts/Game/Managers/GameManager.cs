@@ -394,6 +394,7 @@ public class GameManager : Singleton<GameManager>
 
     private void OnStartLevel()
     {
+        Time.timeScale = 1;
         StartLevel();
     }
 
@@ -415,6 +416,8 @@ public class GameManager : Singleton<GameManager>
         }
 
         m_currentGameState = GameState.WIN_SCREEN;
+
+        Time.timeScale = 0;
 
         print("Score P1 : " + m_scoreP1);
         print("Score P2 : " + m_scoreP2);

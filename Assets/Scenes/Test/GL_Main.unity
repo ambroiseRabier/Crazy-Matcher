@@ -108,6 +108,12 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &279006553 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114838202285601770, guid: 767a83152b9501d44862d3e5321eb3c7,
+    type: 2}
+  m_PrefabInternal: {fileID: 1359470944}
+  m_Script: {fileID: -113659843, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &304190428
 Prefab:
   m_ObjectHideFlags: 0
@@ -303,10 +309,6 @@ Prefab:
     - target: {fileID: 4259780804144308, guid: 3f897ac77da7edf469b649cccc2472ad, type: 2}
       propertyPath: m_RootOrder
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1034606309228548, guid: 3f897ac77da7edf469b649cccc2472ad, type: 2}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3f897ac77da7edf469b649cccc2472ad, type: 2}
@@ -504,7 +506,7 @@ Prefab:
         type: 2}
       propertyPath: m_waterBar
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 279006553}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9c7661745d572ea4e812d5304d070eb7, type: 2}
   m_IsPrefabParent: 0
