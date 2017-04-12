@@ -562,11 +562,6 @@ Prefab:
       objectReference: {fileID: 408906076}
     - target: {fileID: 114000014276909266, guid: 9c7661745d572ea4e812d5304d070eb7,
         type: 2}
-      propertyPath: m_pauseMenu
-      value: 
-      objectReference: {fileID: 1908002523}
-    - target: {fileID: 114000014276909266, guid: 9c7661745d572ea4e812d5304d070eb7,
-        type: 2}
       propertyPath: m_HUD
       value: 
       objectReference: {fileID: 1359470947}
@@ -574,7 +569,7 @@ Prefab:
         type: 2}
       propertyPath: m_btnPause
       value: 
-      objectReference: {fileID: 1359470946}
+      objectReference: {fileID: 0}
     - target: {fileID: 114000014276909266, guid: 9c7661745d572ea4e812d5304d070eb7,
         type: 2}
       propertyPath: m_winScreen
@@ -584,12 +579,17 @@ Prefab:
         type: 2}
       propertyPath: m_teamWinText
       value: 
-      objectReference: {fileID: 2139595071}
+      objectReference: {fileID: 0}
     - target: {fileID: 114000014276909266, guid: 9c7661745d572ea4e812d5304d070eb7,
         type: 2}
       propertyPath: m_waterBar
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 114000014276909266, guid: 9c7661745d572ea4e812d5304d070eb7,
+        type: 2}
+      propertyPath: m_pauseMenu
+      value: 
+      objectReference: {fileID: 1908002523}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9c7661745d572ea4e812d5304d070eb7, type: 2}
   m_IsPrefabParent: 0
@@ -1326,11 +1326,6 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224000013386576464, guid: 767a83152b9501d44862d3e5321eb3c7,
     type: 2}
   m_PrefabInternal: {fileID: 1359470944}
---- !u!1 &1359470946 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000013189881078, guid: 767a83152b9501d44862d3e5321eb3c7,
-    type: 2}
-  m_PrefabInternal: {fileID: 1359470944}
 --- !u!1 &1359470947 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1000011825151410, guid: 767a83152b9501d44862d3e5321eb3c7,
@@ -1769,9 +1764,3 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 43888e2afad0ddc43bf6411eceef94d4, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &2139595071 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114428183712509364, guid: 055b9be370f9e994c8a95b88666f6c17,
-    type: 2}
-  m_PrefabInternal: {fileID: 1050772987}
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
