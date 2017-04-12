@@ -12,8 +12,8 @@ namespace Assets.Scripts.Game.Actors.Player_Firefighter {
 
         [SerializeField] float m_SHOOT_POWER = 30f;
 
-        [SerializeField] private float CONTROL_ROTATION_FACTOR = 4.5f;
-        [SerializeField] private float DISPERSION_FACTOR = 3f;
+        [SerializeField] private float CONTROL_ROTATION_FACTOR = 6f; // 4.5
+        [SerializeField] private float DISPERSION_FACTOR = 4f; //3
 
         private static ShootWater _instance;
 

@@ -57,6 +57,4 @@ MonoBehaviour:
   m_pauseMenu: {fileID: 0}
   m_HUD: {fileID: 0}
   m_winScreen: {fileID: 0}
-  m_btnPause: {fileID: 0}
-  m_teamWinText: {fileID: 0}
   m_waterBar: {fileID: 0}
