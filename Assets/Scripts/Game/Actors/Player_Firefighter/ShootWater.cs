@@ -58,6 +58,7 @@ namespace Assets.Scripts.Game.Actors.Player_Firefighter {
         protected void Start () {
             m_VelocityFromController = GetComponent<VelocityFromController>();
             UpdateWaterResource();
+            transform.position = new Vector3(transform.position.x, transform.position.y, -400);
         }
 
         protected void Update () {
