@@ -108,6 +108,19 @@ public class Matches : Burnable
         return false;
     }
 
+
+    public override bool TryExtinguish()
+    {
+        if (base.TryExtinguish())
+        {
+            print("EXTINGUISH");
+            Destroy(gameObject);
+            return true;
+        }
+
+        return false;
+    }
+
     protected override void InstantiateFire()
     {
         base.InstantiateFire();

@@ -88,12 +88,13 @@ public abstract class Burnable : MonoBehaviour
             burnTimer += Time.deltaTime;
         }
 
+        TryExtinguish();
         IsBurning = false;
         IsBurned  = true;
         BurnRatio = 1f;
 
-        if (OnBurned != null)
-            OnBurned(this);
+        //if (OnBurned != null)
+        //    OnBurned(this);
     }
 
     /// <summary>
@@ -106,9 +107,12 @@ public abstract class Burnable : MonoBehaviour
         if (!IsBurning || IsBurned)
             return false;
 
-        StopCoroutine(m_StartedBurnCoroutine);
+        //StopCoroutine(m_StartedBurnCoroutine);
         IsBurning = false;
-        OnExtinguished(this);
+
+        if (OnExtinguished != null)
+            OnExtinguished(this);
+
         return true;
     }
 
