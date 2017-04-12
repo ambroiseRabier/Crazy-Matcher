@@ -28,6 +28,7 @@ public class Matches : Burnable
         {
             m_speed              = value;
             m_NavMeshAgent.speed = value;
+            m_NavMeshAgent.acceleration = value;
             m_VelocityFromController.Speed = value;
         }
     }
@@ -121,7 +122,7 @@ public class Matches : Burnable
             if (m_NavMeshAgent.remainingDistance < 0.3f)
             {
                 Vector3 position = transform.position;
-                Vector3 destination = new Vector3(Random.Range(position.x - m_rangeX, position.x + m_rangeX), Random.Range(position.y - m_rangeY, position.y + m_rangeY), 0f);
+                Vector3 destination = new Vector3(Random.Range((position.x - m_rangeX) * 1f, (position.x + m_rangeX) * 1f), Random.Range((position.y - m_rangeY) * 1f, (position.y + m_rangeY) * 1f), 0f);
                 m_NavMeshAgent.SetDestination(destination);
 
             }
