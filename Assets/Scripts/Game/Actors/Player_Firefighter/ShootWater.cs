@@ -10,10 +10,10 @@ namespace Assets.Scripts.Game.Actors.Player_Firefighter {
     [RequireComponent(typeof(VelocityFromController))]
     public class ShootWater : MonoBehaviour {
 
-        [SerializeField] float m_SHOOT_POWER = 1f;
+        [SerializeField] float m_SHOOT_POWER = 30f;
 
-        [SerializeField] private float CONTROL_ROTATION_FACTOR = 0.15f;
-        [SerializeField] private float DISPERSION_FACTOR = 0.1f;
+        [SerializeField] private float CONTROL_ROTATION_FACTOR = 6f; // 4.5
+        [SerializeField] private float DISPERSION_FACTOR = 4f; //3
 
         private static ShootWater _instance;
 
@@ -53,11 +53,12 @@ namespace Assets.Scripts.Game.Actors.Player_Firefighter {
                 throw new Exception("Tentative de création d'une autre instance de ShootWater alors que c'est un singleton.");
             }
             _instance = this;
+            m_VelocityFromController = GetComponent<VelocityFromController>();
         }
 
         protected void Start () {
-            m_VelocityFromController = GetComponent<VelocityFromController>();
             UpdateWaterResource();
+            transform.position = new Vector3(transform.position.x, transform.position.y, -400);
         }
 
         protected void Update () {

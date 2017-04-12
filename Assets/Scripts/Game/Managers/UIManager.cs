@@ -21,16 +21,8 @@ public class UIManager : MultiScreenManager<UIManager>
     private GameObject m_HUD;
     [SerializeField]
     private GameObject m_winScreen;
-
-
-    [Header("Menu In Game")]
-    [SerializeField]
-    private GameObject m_btnPause;
-
-
-    [Header("Win Screen")]
-    [SerializeField]
-    private Text m_teamWinText;
+    
+    
 
     [Header("HUD")]
     [SerializeField]
@@ -52,7 +44,6 @@ public class UIManager : MultiScreenManager<UIManager>
         }));
 
         InitPauseMenu();
-        InitPauseButton();
 
         IsReady = true;
         yield return null;
@@ -78,11 +69,7 @@ public class UIManager : MultiScreenManager<UIManager>
         GlobalEventBus.onTeamWin.AddListener(OnTeamWin);
         GlobalEventBus.onWaterChange.AddListener(OnWaterChange);
     }
-
-    private void InitPauseButton()
-    {
-        m_btnPause.SetActive(true);
-    }
+    
 
     #endregion
 
@@ -103,15 +90,16 @@ public class UIManager : MultiScreenManager<UIManager>
         EnableOnlyScreen(m_menu);
     }
 
-    private void OnInitLevel(string levelName)
+    private void OnInitLevel()
     {
         EnableOnlyScreen(m_HUD);
-        InitPauseButton();
+        CloseWinScreen();
     }
 
     private void OnTittleScreen()
     {
         EnableOnlyScreen(m_titleScreen);
+        CloseWinScreen();
     }
 
     private void OnPause()
@@ -122,7 +110,7 @@ public class UIManager : MultiScreenManager<UIManager>
     private void OnTeamWin(GameManager.Team team)
     {
         EnableOnlyScreen(m_winScreen);
-        m_teamWinText.text = team.ToString();
+        OpenWinScreen();
     }
 
     private void OnResume()
@@ -139,6 +127,22 @@ public class UIManager : MultiScreenManager<UIManager>
 
     #endregion
 
+
+    private void OpenWinScreen()
+    {
+        if (!WinScreen.instance.IsOpened)
+        {
+            WinScreen.instance.Open();
+        }
+    }
+
+    private void CloseWinScreen()
+    {
+        if (WinScreen.instance.IsOpened)
+        {
+            WinScreen.instance.Close();
+        }
+    }
 
     #region Pause Manager
 
@@ -158,9 +162,9 @@ public class UIManager : MultiScreenManager<UIManager>
 
     #region Button Callback
 
-    public void PlayClick(string levelName)
+    public void PlayClick(int level)
     {
-        GlobalEventBus.onInitLevel.Invoke(levelName);
+        GlobalEventBus.onLoadingScene.Invoke(level);
     }
 
     public void ResumeClick()
@@ -170,7 +174,7 @@ public class UIManager : MultiScreenManager<UIManager>
 
     public void MenuClick()
     {
-        GlobalEventBus.onMenu.Invoke();
+        GlobalEventBus.onLoadingScene.Invoke(0);
     }
 
     public void PauseClick()

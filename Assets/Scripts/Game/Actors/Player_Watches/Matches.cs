@@ -6,11 +6,14 @@ public class Matches : Burnable
 {
     #region Members
 
+    [SerializeField] private bool m_startPlayer = false;
+
     [SerializeField] private float m_burnSpeed;
     [SerializeField] private float m_normalSpeed;
 
     [SerializeField] private float m_rangeX;
     [SerializeField] private float m_rangeY;
+    [SerializeField] private float m_minDistToNavMeshDestination = 30f; // la distance à laquelle le navMesAgent décide qu'il a atteint sa destination
 
     private float m_speed;
     private NavMeshAgent m_NavMeshAgent;
@@ -18,6 +21,14 @@ public class Matches : Burnable
     #endregion
 
     #region Properties
+    public bool StartPlayer
+    {
+        get
+        {
+            return m_startPlayer;
+        }
+    }
+
     public float Speed
     {
         get
@@ -133,7 +144,7 @@ public class Matches : Burnable
     private void Update()
     {
         if (!HasController)
-            if (m_NavMeshAgent.remainingDistance < 0.3f)
+            if (m_NavMeshAgent.remainingDistance < m_minDistToNavMeshDestination)
             {
                 // isBurned et isBurning inversé.
                 //Debug.Log(IsBurning);
