@@ -49,7 +49,7 @@ public class GameManager : Singleton<GameManager>
     {
         InitVariables();
 
-        while (!(UIManager.instance.isReady))
+        while (!(UIManager.instance.IsReady))
             yield return null;
 
         InitEvent();

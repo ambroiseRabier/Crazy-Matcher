@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1364742906984592}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -138, z: -9}
+  m_LocalPosition: {x: 0, y: -138, z: -400}
   m_LocalScale: {x: 50, y: 50, z: 50}
   m_Children: []
   m_Father: {fileID: 0}
@@ -122,9 +122,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90702eb1a99968f47ac5f1dd90f150ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SHOOT_POWER: 1
-  CONTROL_ROTATION_FACTOR: 0.15
-  DISPERSION_FACTOR: 0.1
+  m_SHOOT_POWER: 30
+  CONTROL_ROTATION_FACTOR: 4.5
+  DISPERSION_FACTOR: 30
   m_WaterPrefab: {fileID: 1085542151676000, guid: 0aed26aae035cd54ab1f4af9f51a1dc1,
     type: 2}
   m_waterResourceMAX: 200
