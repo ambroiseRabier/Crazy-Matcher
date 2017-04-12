@@ -24,6 +24,7 @@ namespace Assets.Scripts.Game.Actors.Player_Firefighter {
         [SerializeField] private float m_waterResource = 0f;
 
         [SerializeField] private float WATER_GAIN_FACTOR = 5f; // * (0 to 1) (per trigger pressed and released)
+        [SerializeField] private bool WATER_GAIN_INSTANT = false; // different algorythme, instant is more opti.
         private float previousTriggerLeftValue = 0;
         private float previousTriggerRightValue = 0;
         private float totalTriggerLeftValue = 0;
@@ -65,10 +66,33 @@ namespace Assets.Scripts.Game.Actors.Player_Firefighter {
                 UpdateWaterResource();
                 InstantiateWater();
             } // else feedback plus d'eau !
-            waterGain();
+            if (WATER_GAIN_INSTANT)
+                waterGainInstant();
+            else
+                waterGain();
         }
 
         protected void waterGain () {
+            // only take a positiv value when pressing (trigger distance in this frame)
+            float triggerLeftDiff = m_VelocityFromController.Controller.m_triggerLeft - previousTriggerLeftValue;
+            float triggerRightDiff = m_VelocityFromController.Controller.m_triggerRight - previousTriggerRightValue;
+
+            // push value in waterbar
+            if (triggerLeftDiff < 0) {
+                addWater(-triggerLeftDiff * WATER_GAIN_FACTOR);
+            }
+            if (triggerRightDiff < 0) {
+                addWater(-triggerRightDiff * WATER_GAIN_FACTOR);
+            }
+            if (triggerLeftDiff < 0 || triggerRightDiff < 0)
+                UpdateWaterResource();
+
+            // remember previous trigger value
+            previousTriggerLeftValue = m_VelocityFromController.Controller.m_triggerLeft;
+            previousTriggerRightValue = m_VelocityFromController.Controller.m_triggerRight;
+        }
+
+        protected void waterGainInstant () {
             // only take a positiv value when pressing (trigger distance in this frame)
             float triggerLeftDiff = m_VelocityFromController.Controller.m_triggerLeft - previousTriggerLeftValue;
             float triggerRightDiff = m_VelocityFromController.Controller.m_triggerRight - previousTriggerRightValue;
