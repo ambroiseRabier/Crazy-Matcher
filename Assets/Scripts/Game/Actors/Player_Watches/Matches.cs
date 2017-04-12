@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Game;
+using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent), typeof(VelocityFromController))]
+[RequireComponent(typeof(NavMeshAgent), typeof(VelocityFromControllerMatche))]
 public class Matches : Burnable
 {
     #region Members
@@ -17,7 +18,7 @@ public class Matches : Burnable
 
     private float m_speed;
     private NavMeshAgent m_NavMeshAgent;
-    private VelocityFromController m_VelocityFromController;
+    private VelocityFromControllerMatche m_VelocityFromController;
     #endregion
 
     #region Properties
@@ -53,6 +54,7 @@ public class Matches : Burnable
         set
         {
             m_VelocityFromController.Controller = value;
+
 
             if (value)
             {
@@ -90,7 +92,7 @@ public class Matches : Burnable
     #region Fire
     private void Awake () {
         m_NavMeshAgent                 = GetComponent<NavMeshAgent>();
-        m_VelocityFromController       = GetComponent<VelocityFromController>();
+        m_VelocityFromController       = GetComponent<VelocityFromControllerMatche>();
         m_NavMeshAgent.updateRotation = false; 
         Speed                          = m_normalSpeed;
         AwakeMovement();
