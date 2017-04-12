@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -572,14 +572,14 @@ Prefab:
       objectReference: {fileID: 1359470947}
     - target: {fileID: 114000014276909266, guid: 9c7661745d572ea4e812d5304d070eb7,
         type: 2}
-      propertyPath: m_btnPause
-      value: 
-      objectReference: {fileID: 1359470946}
-    - target: {fileID: 114000014276909266, guid: 9c7661745d572ea4e812d5304d070eb7,
-        type: 2}
       propertyPath: m_winScreen
       value: 
       objectReference: {fileID: 623939973}
+    - target: {fileID: 114000014276909266, guid: 9c7661745d572ea4e812d5304d070eb7,
+        type: 2}
+      propertyPath: m_btnPause
+      value: 
+      objectReference: {fileID: 1359470946}
     - target: {fileID: 114000014276909266, guid: 9c7661745d572ea4e812d5304d070eb7,
         type: 2}
       propertyPath: m_teamWinText
@@ -589,7 +589,7 @@ Prefab:
         type: 2}
       propertyPath: m_waterBar
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1778934256}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9c7661745d572ea4e812d5304d070eb7, type: 2}
   m_IsPrefabParent: 0
@@ -697,7 +697,7 @@ Prefab:
     - target: {fileID: 114488819972318814, guid: cd5f5f2df19efa54b8c387538b0c2dab,
         type: 2}
       propertyPath: m_waterResource
-      value: 200
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cd5f5f2df19efa54b8c387538b0c2dab, type: 2}
@@ -1267,10 +1267,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1000011825151410, guid: 767a83152b9501d44862d3e5321eb3c7, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 767a83152b9501d44862d3e5321eb3c7, type: 2}
   m_IsPrefabParent: 0
@@ -1460,6 +1456,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 43888e2afad0ddc43bf6411eceef94d4, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1778934256 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114015294545701446, guid: 767a83152b9501d44862d3e5321eb3c7,
+    type: 2}
+  m_PrefabInternal: {fileID: 1359470944}
+  m_Script: {fileID: -113659843, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &1781726214
 Prefab:
   m_ObjectHideFlags: 0
