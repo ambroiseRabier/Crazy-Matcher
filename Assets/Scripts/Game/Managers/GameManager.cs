@@ -11,7 +11,7 @@ public class GameManager : Singleton<GameManager>
     #region Variables
 
     [SerializeField] private float m_timeBeforePlayerChange = 3f;
-    [SerializeField] private Matches m_startPlayerMatches;
+    [SerializeField] private Matches m_currentPlayerMatches;
     
     [SerializeField] private Controller m_controllerP1; 
     [SerializeField] private Controller m_controllerP2; 
@@ -88,15 +88,22 @@ public class GameManager : Singleton<GameManager>
     private void StartLevel()
     {
         m_burnObjectifsCount = 0;
-        InitPlayerMatches(m_startPlayerMatches);
+        InitPlayerMatches();
         FindObjectifs();
         FindMatches();
     }
 
-    private void InitPlayerMatches(Matches matches)
+    private void InitPlayerMatches()
     {
-        matches.Controller = m_controllerP1;
-        matches.TryStartBurn();
+        m_currentPlayerMatches.Controller = m_controllerP1;
+        m_currentPlayerMatches.TryStartBurn();
+    }
+
+    private void ChangePlayer(Matches matches)
+    {
+        m_currentPlayerMatches.Controller = null;
+        m_currentPlayerMatches = matches;
+        InitPlayerMatches();
     }
 
     private void FindObjectifs()
@@ -163,6 +170,7 @@ public class GameManager : Singleton<GameManager>
     {
         print("CHANGE PLAYER");
         int randomIndex = Random.Range(0, m_potentialPlayers.Count - 1);
+        ChangePlayer(m_potentialPlayers[randomIndex]);
         m_potentialPlayers.Clear();
     }
     

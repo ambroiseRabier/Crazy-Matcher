@@ -9,6 +9,9 @@ public class Matches : Burnable
     [SerializeField] private float m_burnSpeed;
     [SerializeField] private float m_normalSpeed;
 
+    [SerializeField] private float m_rangeX;
+    [SerializeField] private float m_rangeY;
+
     private float m_speed;
     private NavMeshAgent m_NavMeshAgent;
     private VelocityFromController m_VelocityFromController;
@@ -45,6 +48,10 @@ public class Matches : Burnable
                 Vector3 position = transform.position;
                 position.z = 0;
                 transform.position = position;
+            }
+            else
+            {
+                m_NavMeshAgent.enabled = true;
             }
         }
     }
@@ -97,7 +104,12 @@ public class Matches : Burnable
     {
         if (!HasController)
             if (m_NavMeshAgent.remainingDistance < 0.3f)
-                m_NavMeshAgent.SetDestination(new Vector3(Random.Range(-10f, 10f), Random.Range(-10f, 10f), 0f));
+            {
+                Vector3 position = transform.position;
+                Vector3 destination = new Vector3(Random.Range(position.x - m_rangeX, position.x + m_rangeX), Random.Range(position.y - m_rangeY, position.y + m_rangeY), 0f);
+                m_NavMeshAgent.SetDestination(destination);
+
+            }
     }
     #endregion
 }
