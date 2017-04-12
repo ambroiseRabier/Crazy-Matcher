@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
-public class WinScreen : CanvasScreen {
+public class WinScreen : CanvasScreen<WinScreen> {
     [SerializeField] private GameObject m_mamyPanel;
     [SerializeField] private GameObject m_matchesPanel;
 

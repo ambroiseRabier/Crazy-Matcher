@@ -3,7 +3,7 @@ using System.Collections;
 using Utils;
 
 
-public abstract class BaseManager<T> : Singleton<BaseManager<T>>
+public abstract class BaseManager<T> : Singleton<T> where T: Component
 {
 
     #region Variables

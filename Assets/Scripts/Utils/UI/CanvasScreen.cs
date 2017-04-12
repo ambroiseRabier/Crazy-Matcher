@@ -2,7 +2,7 @@
 using Utils;
 
 [RequireComponent(typeof(Animator))]
-public class CanvasScreen : Singleton<CanvasScreen> {
+public class CanvasScreen<T> : Singleton<T> where T : Component {
     private Animator m_animator;
 
     private static readonly int IS_OPENED_PARAM = Animator.StringToHash("IsOpened");
