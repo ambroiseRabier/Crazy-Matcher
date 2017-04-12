@@ -132,7 +132,7 @@ public class UIManager : MultiScreenManager<UIManager>
 
     private void OnWaterChange(float newValue) 
     {
-        m_waterBar.value = newValue;
+        //m_waterBar.value = newValue;
     }
 
 
