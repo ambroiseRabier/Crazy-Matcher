@@ -53,10 +53,10 @@ namespace Assets.Scripts.Game.Actors.Player_Firefighter {
                 throw new Exception("Tentative de création d'une autre instance de ShootWater alors que c'est un singleton.");
             }
             _instance = this;
+            m_VelocityFromController = GetComponent<VelocityFromController>();
         }
 
         protected void Start () {
-            m_VelocityFromController = GetComponent<VelocityFromController>();
             UpdateWaterResource();
         }
 

@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using Events;
 using Utils;
 using System.Collections.Generic;
+using Assets.Scripts.Game.Actors.Player_Firefighter;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -109,15 +110,25 @@ public class GameManager : Singleton<GameManager>
     private void StartLevel()
     {
         m_burnObjectifsCount = 0;
+
         FindMatches();
-        InitPlayerMatches();
         FindObjectifs();
+
+        InitPlayerMatches();
+        InitPlayerFireFight();
     }
 
     private void InitPlayerMatches()
     {
         m_currentPlayerMatches.Controller = m_controllerP1;
         m_currentPlayerMatches.TryStartBurn();
+    }
+
+    private void InitPlayerFireFight()
+    {
+        ShootWater fireFight = FindObjectOfType<ShootWater>();
+        //fireFight.Controller = m_controllerP2;
+        fireFight.Controller = m_controllerP1; // TO DEBUG
     }
 
     private void ChangePlayer(Matches matches)
@@ -133,7 +144,6 @@ public class GameManager : Singleton<GameManager>
         
         foreach (Objectif objectif in m_objectifs)
         {
-            print(objectif.name);
             objectif.OnStartBurn += OnObjectifBurn;
         }
     }
