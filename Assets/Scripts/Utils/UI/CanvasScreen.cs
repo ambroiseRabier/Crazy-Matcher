@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
+using Utils;
 
 [RequireComponent(typeof(Animator))]
-public class CanvasScreen : MonoBehaviour {
+public class CanvasScreen : Singleton<CanvasScreen> {
     private Animator m_animator;
 
     private static readonly int IS_OPENED_PARAM = Animator.StringToHash("IsOpened");
@@ -17,8 +18,9 @@ public class CanvasScreen : MonoBehaviour {
         }
     }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         m_animator = GetComponent<Animator>();
         m_animator.Play("Close", 0, 1f);
     }

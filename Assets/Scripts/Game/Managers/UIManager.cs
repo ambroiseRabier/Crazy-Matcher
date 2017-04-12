@@ -54,7 +54,7 @@ public class UIManager : MultiScreenManager<UIManager>
         InitPauseMenu();
         InitPauseButton();
 
-        isReady = true;
+        IsReady = true;
         yield return null;
     }
 

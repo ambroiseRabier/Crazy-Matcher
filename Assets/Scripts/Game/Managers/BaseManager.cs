@@ -3,13 +3,13 @@ using System.Collections;
 using Utils;
 
 
-public abstract class BaseManager<T> : Singleton<T> where T : Component
+public abstract class BaseManager<T> : Singleton<BaseManager<T>>
 {
 
     #region Variables
 
     [HideInInspector]
-    public bool isReady { get; protected set; }
+    public bool IsReady { get; protected set; }
 
     #endregion
 
@@ -18,7 +18,7 @@ public abstract class BaseManager<T> : Singleton<T> where T : Component
     protected override void Awake()
     {
         base.Awake();
-        isReady = false;
+        IsReady = false;
     }
 
     void Start()
