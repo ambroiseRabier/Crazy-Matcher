@@ -186,6 +186,7 @@ public class GameManager : Singleton<GameManager>
 
     private void InitPlayerMatches()
     {
+        
         if (m_p1IsMatches)
         {
             m_currentPlayerMatches.Controller = m_controllerP1;

@@ -9,18 +9,18 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1680830099187386}
+  m_RootGameObject: {fileID: 1552555709081278}
   m_IsPrefabParent: 1
---- !u!1 &1680830099187386
+--- !u!1 &1552555709081278
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4495256932643322}
-  - component: {fileID: 198003309533371366}
-  - component: {fileID: 199287883587480616}
+  - component: {fileID: 4032514761017772}
+  - component: {fileID: 198629960823485652}
+  - component: {fileID: 199190345449230668}
   m_Layer: 0
   m_Name: Flames
   m_TagString: Untagged
@@ -28,12 +28,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4495256932643322
+--- !u!4 &4032514761017772
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1680830099187386}
+  m_GameObject: {fileID: 1552555709081278}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.2, y: 0.3, z: 1}
@@ -41,12 +41,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!198 &198003309533371366
+--- !u!198 &198629960823485652
 ParticleSystem:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1680830099187386}
+  m_GameObject: {fileID: 1552555709081278}
   serializedVersion: 5
   lengthInSec: 50
   simulationSpeed: 1
@@ -618,7 +618,7 @@ ParticleSystem:
     serializedVersion: 4
     rateOverTime:
       minMaxState: 0
-      scalar: 10
+      scalar: 15
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -3027,13 +3027,13 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
---- !u!199 &199287883587480616
+--- !u!199 &199190345449230668
 ParticleSystemRenderer:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1680830099187386}
+  m_GameObject: {fileID: 1552555709081278}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0

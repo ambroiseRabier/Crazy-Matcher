@@ -3,10 +3,10 @@
 [RequireComponent(typeof(Rigidbody))]
 public class VelocityFromController : MonoBehaviour {
 
-    [SerializeField] private float m_Speed = 10;
-    [SerializeField] private Controller m_Controller;
+    [SerializeField] protected float m_Speed = 10;
+    [SerializeField] protected Controller m_Controller;
 
-    private Rigidbody m_Rigidbody;
+    protected Rigidbody m_Rigidbody;
 
     public Controller Controller
     {
@@ -44,7 +44,7 @@ public class VelocityFromController : MonoBehaviour {
         m_Rigidbody = GetComponent<Rigidbody>();
     }
 
-    protected void FixedUpdate () {
+    protected virtual void FixedUpdate () {
         if (m_Controller)
         {
             m_Rigidbody.velocity = m_Controller.Joystick.normalized * m_Speed;

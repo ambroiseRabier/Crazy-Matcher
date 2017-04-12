@@ -110,6 +110,7 @@ public class UIManager : MultiScreenManager<UIManager>
     private void OnTeamWin(GameManager.Team team)
     {
         EnableOnlyScreen(m_winScreen);
+        WinScreen.instance.SetWinnerTeam(team);
         OpenWinScreen();
     }
 
