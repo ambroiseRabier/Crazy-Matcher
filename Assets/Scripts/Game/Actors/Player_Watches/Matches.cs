@@ -100,7 +100,7 @@ public class Matches : Burnable
 
     private void Start()
     {
-        Controller = Controller;
+        Controller = Controller; // (wtf), to call the setter one time
     }
     
 
