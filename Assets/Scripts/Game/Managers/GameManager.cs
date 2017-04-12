@@ -417,7 +417,7 @@ public class GameManager : Singleton<GameManager>
 
         m_currentGameState = GameState.WIN_SCREEN;
 
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
 
         print("Score P1 : " + m_scoreP1);
         print("Score P2 : " + m_scoreP2);

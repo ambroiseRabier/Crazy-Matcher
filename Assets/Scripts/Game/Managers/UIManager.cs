@@ -93,11 +93,13 @@ public class UIManager : MultiScreenManager<UIManager>
     private void OnInitLevel()
     {
         EnableOnlyScreen(m_HUD);
+        CloseWinScreen();
     }
 
     private void OnTittleScreen()
     {
         EnableOnlyScreen(m_titleScreen);
+        CloseWinScreen();
     }
 
     private void OnPause()
@@ -108,6 +110,7 @@ public class UIManager : MultiScreenManager<UIManager>
     private void OnTeamWin(GameManager.Team team)
     {
         EnableOnlyScreen(m_winScreen);
+        OpenWinScreen();
     }
 
     private void OnResume()
@@ -124,6 +127,22 @@ public class UIManager : MultiScreenManager<UIManager>
 
     #endregion
 
+
+    private void OpenWinScreen()
+    {
+        if (!WinScreen.instance.IsOpened)
+        {
+            WinScreen.instance.Open();
+        }
+    }
+
+    private void CloseWinScreen()
+    {
+        if (WinScreen.instance.IsOpened)
+        {
+            WinScreen.instance.Close();
+        }
+    }
 
     #region Pause Manager
 
