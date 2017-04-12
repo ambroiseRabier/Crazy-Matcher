@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -108,6 +108,12 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &211581528 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114838202285601770, guid: 767a83152b9501d44862d3e5321eb3c7,
+    type: 2}
+  m_PrefabInternal: {fileID: 1359470944}
+  m_Script: {fileID: -113659843, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &304190428
 Prefab:
   m_ObjectHideFlags: 0
@@ -387,24 +393,14 @@ Prefab:
       objectReference: {fileID: 1359470947}
     - target: {fileID: 114000014276909266, guid: 9c7661745d572ea4e812d5304d070eb7,
         type: 2}
-      propertyPath: m_btnPause
-      value: 
-      objectReference: {fileID: 1359470946}
-    - target: {fileID: 114000014276909266, guid: 9c7661745d572ea4e812d5304d070eb7,
-        type: 2}
       propertyPath: m_winScreen
       value: 
       objectReference: {fileID: 623939973}
     - target: {fileID: 114000014276909266, guid: 9c7661745d572ea4e812d5304d070eb7,
         type: 2}
-      propertyPath: m_teamWinText
-      value: 
-      objectReference: {fileID: 2139595071}
-    - target: {fileID: 114000014276909266, guid: 9c7661745d572ea4e812d5304d070eb7,
-        type: 2}
       propertyPath: m_waterBar
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 211581528}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9c7661745d572ea4e812d5304d070eb7, type: 2}
   m_IsPrefabParent: 0
@@ -928,6 +924,16 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 224029997635816802, guid: 767a83152b9501d44862d3e5321eb3c7,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224422287999136866, guid: 767a83152b9501d44862d3e5321eb3c7,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1000011825151410, guid: 767a83152b9501d44862d3e5321eb3c7, type: 2}
       propertyPath: m_IsActive
       value: 0
@@ -938,11 +944,6 @@ Prefab:
 --- !u!224 &1359470945 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224000013386576464, guid: 767a83152b9501d44862d3e5321eb3c7,
-    type: 2}
-  m_PrefabInternal: {fileID: 1359470944}
---- !u!1 &1359470946 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000013189881078, guid: 767a83152b9501d44862d3e5321eb3c7,
     type: 2}
   m_PrefabInternal: {fileID: 1359470944}
 --- !u!1 &1359470947 stripped
@@ -1245,9 +1246,3 @@ GameObject:
   m_PrefabParentObject: {fileID: 1000011342643796, guid: 83e3f0741a7ee054e82e93e3b711a587,
     type: 2}
   m_PrefabInternal: {fileID: 1908002521}
---- !u!114 &2139595071 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114428183712509364, guid: 055b9be370f9e994c8a95b88666f6c17,
-    type: 2}
-  m_PrefabInternal: {fileID: 1050772987}
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}

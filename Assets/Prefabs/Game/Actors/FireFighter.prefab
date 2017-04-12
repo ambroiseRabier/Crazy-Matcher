@@ -128,6 +128,6 @@ MonoBehaviour:
   m_WaterPrefab: {fileID: 1085542151676000, guid: 0aed26aae035cd54ab1f4af9f51a1dc1,
     type: 2}
   m_waterResourceMAX: 200
-  m_waterResource: 200
+  m_waterResource: 0
   WATER_GAIN_FACTOR: 5
   WATER_GAIN_INSTANT: 0
