@@ -15,6 +15,7 @@ namespace Events
         public static GlobalEvents.BaseGameEvent onPause       = new GlobalEvents.BaseGameEvent();
         public static GlobalEvents.BaseGameEvent onResume      = new GlobalEvents.BaseGameEvent();
         public static GlobalEvents.BaseGameEvent onStartLevel  = new GlobalEvents.BaseGameEvent();
+        public static GlobalEvents.BaseGameEvent onRestartGame = new GlobalEvents.BaseGameEvent();
 
         public static GlobalEvents.TeamEvent onTeamWin = new GlobalEvents.TeamEvent();
 

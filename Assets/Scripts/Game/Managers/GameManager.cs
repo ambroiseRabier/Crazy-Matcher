@@ -26,11 +26,18 @@ public class GameManager : Singleton<GameManager>
 
     private float m_gameTimeScale;
 
+    private int m_gameCount;
+    private int m_scoreP1;
+    private int m_scoreP2;
+    private bool m_p1IsMatches;
+
+
     public enum GameState
     {
         TITLE_SCREEN,
         MENU,
-        IN_GAME
+        IN_GAME,
+        WIN_SCREEN
     }
 
     private GameState m_currentGameState;
@@ -82,6 +89,7 @@ public class GameManager : Singleton<GameManager>
         GlobalEventBus.onLoadingScene.AddListener(OnLoadingScene);
         GlobalEventBus.onTitleScreen.AddListener(OnTitleScreen);
         GlobalEventBus.onMenu.AddListener(OnMenu);
+        GlobalEventBus.onRestartGame.AddListener(OnRestartGame);
     }
 
 
@@ -106,6 +114,14 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    private void InitGame()
+    {
+        m_gameCount = 0;
+        m_scoreP1 = 0;
+        m_scoreP2 = 0;
+        m_p1IsMatches = true;
+    }
+
     #endregion
 
 
@@ -122,11 +138,14 @@ public class GameManager : Singleton<GameManager>
         {
             CheckMenuButtonPress();
         }
+        else if (m_currentGameState == GameState.WIN_SCREEN)
+        {
+            CheckWinScreenButtonPress();
+        }
     }
 
     private void CheckPressStart()
     {
-        print(Input.GetButtonDown("Submit"));
         if (Input.GetButtonDown("Submit"))
         {
             GlobalEventBus.onMenu.Invoke();
@@ -142,6 +161,18 @@ public class GameManager : Singleton<GameManager>
 
     }
 
+    private void CheckWinScreenButtonPress()
+    {
+        if (Input.GetButtonDown("Fire1_P1"))
+        {
+            GlobalEventBus.onRestartGame.Invoke();
+        }
+        else if (Input.GetButtonDown("Fire2_P1"))
+        {
+            GlobalEventBus.onLoadingScene.Invoke(0);
+        }
+    }
+
     private void StartLevel()
     {
         m_burnObjectifsCount = 0;
@@ -155,15 +186,30 @@ public class GameManager : Singleton<GameManager>
 
     private void InitPlayerMatches()
     {
-        m_currentPlayerMatches.Controller = m_controllerP1;
+        if (m_p1IsMatches)
+        {
+            m_currentPlayerMatches.Controller = m_controllerP1;
+        }
+        else
+        {
+            m_currentPlayerMatches.Controller = m_controllerP2;
+        }
+
         m_currentPlayerMatches.TryStartBurn();
     }
 
     private void InitPlayerFireFight()
     {
         ShootWater fireFight = FindObjectOfType<ShootWater>();
-        //fireFight.Controller = m_controllerP2;
-        fireFight.Controller = m_controllerP1; // TO DEBUG
+
+        if (m_p1IsMatches)
+        {
+            fireFight.Controller = m_controllerP2;
+        }
+        else
+        {
+            fireFight.Controller = m_controllerP1;
+        }
     }
 
     private void ChangePlayer(Matches matches)
@@ -312,6 +358,7 @@ public class GameManager : Singleton<GameManager>
     private void OnInitLevel()
     {
         //TODO 
+        m_currentGameState = GameState.IN_GAME;
         GlobalEventBus.onStartLevel.Invoke();
     }
 
@@ -335,7 +382,14 @@ public class GameManager : Singleton<GameManager>
 
     private void OnMenu()
     {
+        InitGame();
         m_currentGameState = GameState.MENU;
+    }
+
+    private void OnRestartGame()
+    {
+        m_p1IsMatches = !m_p1IsMatches;
+        GlobalEventBus.onLoadingScene.Invoke(1);
     }
 
     private void OnStartLevel()
@@ -345,7 +399,25 @@ public class GameManager : Singleton<GameManager>
 
     private void OnTeamWin(Team teamWin)
     {
-        print(teamWin);
+        if (teamWin == Team.FIRE_FIGHTER)
+        {
+            if (m_p1IsMatches)
+                m_scoreP2++;
+            else
+                m_scoreP1++;
+        }
+        else
+        {
+            if (m_p1IsMatches)
+                m_scoreP1++;
+            else
+                m_scoreP2++;
+        }
+
+        m_currentGameState = GameState.WIN_SCREEN;
+
+        print("Score P1 : " + m_scoreP1);
+        print("Score P2 : " + m_scoreP2);
     }
 
     #endregion
