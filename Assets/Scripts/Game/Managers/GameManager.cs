@@ -61,7 +61,7 @@ public class GameManager : Singleton<GameManager>
 
         InitEvent();
 
-        TitleScreen();
+        InitCurrentScene();
 
     }
 
@@ -126,6 +126,7 @@ public class GameManager : Singleton<GameManager>
 
     private void CheckPressStart()
     {
+        print(Input.GetButtonDown("Submit"));
         if (Input.GetButtonDown("Submit"))
         {
             GlobalEventBus.onMenu.Invoke();
