@@ -33,8 +33,8 @@ MonoBehaviour:
     - 
     m_AnimationFolder: E:/Docs/Etude/Isart/GDP4/Crazy-Matcher/Assets/
     m_DontShowWindowOnImport: 0
-    m_DontShowOnUpload: 0
-    m_DontShowOnUploadTemp: 0
+    m_DontShowOnUpload: 1
+    m_DontShowOnUploadTemp: 1
     m_DontShowOnReportIssue: 0
     m_SaveAsZip: 0
     m_SaveAsZipTo: 

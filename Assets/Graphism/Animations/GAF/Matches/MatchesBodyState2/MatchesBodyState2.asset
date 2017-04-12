@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1730d0b8751ac9e44b6303c6b7703fa7, type: 3}
+  m_Name: MatchesBodyState2
+  m_EditorClassIdentifier: 
+  m_EnableSequenceCaching: 0
+  m_AssetVersion: 4
+  m_AudioResourcesDirectory: 
+  m_AssetData: 4341470005080801000078da63640081067b4628cdc9c009a4e5fe0381034316032fc35d20971988210a320f31349c05e206278686ab4e403e903eebc428c8e09b58929c915aec949f52195c9258926ac4c1e007331aa495511453895e415e3ac26e860608767080e0067b068626a015d79c1861d67331f041994c7017f1309842d9100c358c89010640e68030321fea0d240000a5572a87
+  m_GUID: 3d8ee64be668d894b97d60f08bd0eda4
+  m_Path: 
+  m_IsExternalDataCollected: 1
+  m_ExternalData:
+  - m_TimelineID: 3
+    m_ObjectTypeFlags: 00000000
+  m_HasNesting: 0
+  m_KeyFrames: []
+  m_AudioResources: []
