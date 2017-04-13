@@ -7,7 +7,7 @@ namespace Assets.Scripts.Game.Actors.Player_Firefighter {
     /// <summary>
     /// 
     /// </summary>
-    [RequireComponent(typeof(VelocityFromController))]
+    [RequireComponent(typeof(VelocityFromController), typeof(AudioSource))]
     public class ShootWater : MonoBehaviour {
 
         [SerializeField] float m_SHOOT_POWER = 30f;
@@ -25,6 +25,7 @@ namespace Assets.Scripts.Game.Actors.Player_Firefighter {
 
         [SerializeField] private float WATER_GAIN_FACTOR = 5f; // * (0 to 1) (per trigger pressed and released)
         [SerializeField] private bool WATER_GAIN_INSTANT = false; // different algorythme, instant is more opti.
+        private AudioSource pshitAudioSource;
         private float previousTriggerLeftValue = 0;
         private float previousTriggerRightValue = 0;
         private float totalTriggerLeftValue = 0;
@@ -54,6 +55,8 @@ namespace Assets.Scripts.Game.Actors.Player_Firefighter {
             }
             _instance = this;
             m_VelocityFromController = GetComponent<VelocityFromController>();
+            pshitAudioSource = GetComponent<AudioSource>();
+            pshitAudioSource.loop = true;
         }
 
         protected void Start () {
@@ -67,6 +70,12 @@ namespace Assets.Scripts.Game.Actors.Player_Firefighter {
         protected void Update () {
             // is firing and has water
             if (m_VelocityFromController.Controller.Fire && m_waterResource > 0) {
+                if (!pshitAudioSource.loop)
+                    pshitAudioSource.loop = true;
+
+                if (!pshitAudioSource.isPlaying)
+                    pshitAudioSource.Play();
+
                 // shoot cadency control
                 if (m_timeSinceLastShoot > m_shootCadencyMS) {
                     int numberShoot = (int) Mathf.Floor(m_timeSinceLastShoot / m_shootCadencyMS);
@@ -77,7 +86,10 @@ namespace Assets.Scripts.Game.Actors.Player_Firefighter {
                     m_timeSinceLastShoot -= m_shootCadencyMS * numberShoot; // not =0 or it won't be able to catch up
                 }
                 m_timeSinceLastShoot += Time.deltaTime * 1000;
-            } 
+            } else
+            {
+                pshitAudioSource.loop = false;
+            }
             // else feedback plus d'eau !
 
             if (WATER_GAIN_INSTANT && !m_VelocityFromController.Controller.Fire) // config bool

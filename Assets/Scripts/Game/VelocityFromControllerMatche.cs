@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using GAF.Core;
 
 namespace Assets.Scripts.Game {
 
@@ -16,11 +17,24 @@ namespace Assets.Scripts.Game {
         private Vector3 previousDirection = Vector3.zero;
         private bool firstInputSet = false;
 
+        [SerializeField] private string m_gafHeadName = "Matches_head_baked";
+        [SerializeField] private Color m_ImLostColor = Color.blue;
+        [SerializeField] private GAFBakedMovieClip m_gafHead;
+
+
         protected void Start () {
-        }
+            //print(m_gafHead);
+            //print(m_gafHead.settings.animationColorMultiplier);
+        }                
 
         protected void Update () {
-                
+
+            if (m_Controller) {
+                m_gafHead.setColorAndOffset(
+                    m_Controller.Fire ? m_ImLostColor : Color.white, // bad for performance ? should i check the color before applying filter ?
+                    new Vector4(0, 0, 0, 0)
+                );
+            }
         }
 
         override protected void FixedUpdate () {
