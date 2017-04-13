@@ -257,7 +257,10 @@ public class Matches : Burnable
 
     private void Wait () {        
         if (waitCount >= currentPauseTime) {
-            EnableGfx(m_walkGFX);
+
+            if (!IsBurning)
+                EnableGfx(m_walkGFX);
+
             SetNextDesination();
             waitCount = 0f;
             AwakeMovement();
