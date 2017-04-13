@@ -6,7 +6,7 @@ public delegate void BurnableBurnProgressEventHandler(Burnable burnable, float n
 
 public abstract class Burnable : MonoBehaviour
 {
-    //[SerializeField] private GameObject m_FirePrefab;
+    [SerializeField] private GameObject m_FirePrefab;
 
     public event BurnableEventHandler OnStartBurn;
     public event BurnableEventHandler OnBurned;
@@ -69,7 +69,7 @@ public abstract class Burnable : MonoBehaviour
 
         GameManager.instance.PlaySound(m_startFireSoundClip);
         //SetMaterialOnFire();
-        //InstantiateFire();
+        InstantiateFire();
 
         m_StartedBurnCoroutine = StartCoroutine(BurnCoroutine());
         return true;
@@ -119,10 +119,10 @@ public abstract class Burnable : MonoBehaviour
     }
 
 
-    //protected virtual void InstantiateFire()
-    //{
-    //    m_fire = Instantiate(m_FirePrefab);
-    //    m_fire.transform.parent = transform;
-    //    m_fire.transform.localPosition = Vector2.zero;
-    //}
+    protected virtual void InstantiateFire()
+    {
+        m_fire = Instantiate(m_FirePrefab);
+        m_fire.transform.parent = transform;
+        m_fire.transform.localPosition = Vector2.zero;
+    }
 }
