@@ -39,8 +39,7 @@ public class UIManager : MultiScreenManager<UIManager>
             m_titleScreen,
             m_menu,
             m_pauseMenu,
-            m_HUD,
-            m_winScreen
+            m_HUD
         }));
 
         InitPauseMenu();
@@ -109,7 +108,7 @@ public class UIManager : MultiScreenManager<UIManager>
 
     private void OnTeamWin(GameManager.Team team)
     {
-        EnableOnlyScreen(m_winScreen);
+        //EnableOnlyScreen(m_winScreen);
         WinScreen.instance.SetWinnerTeam(team);
         OpenWinScreen();
     }
