@@ -151,7 +151,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: e817bcedd5f834f47a2ad26a7c1b790f, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 720a7ba1fbd0ed14585685f17174ec18, type: 2}
 --- !u!212 &212933122957174588
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -183,7 +183,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: d71df6b8e496cbd419557bc74b1e44dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
