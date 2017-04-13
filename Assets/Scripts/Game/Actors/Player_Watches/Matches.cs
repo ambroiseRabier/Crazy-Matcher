@@ -222,7 +222,7 @@ public class Matches : Burnable
     }
 
     private void checkFlipX () {
-        bool goingRight = m_NavMeshAgent.velocity.x > 0;
+        bool goingRight = HasController ? gameObject.GetComponent<VelocityFromControllerMatche>().Controller.Joystick.x > 0 : m_NavMeshAgent.velocity.x > 0;
         Transform animContainer = transform.Find("GFX").transform;
         float newScale = goingRight ? 1 : -1;
 
