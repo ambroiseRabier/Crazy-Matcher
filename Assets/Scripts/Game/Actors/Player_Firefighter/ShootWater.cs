@@ -80,9 +80,9 @@ namespace Assets.Scripts.Game.Actors.Player_Firefighter {
             } 
             // else feedback plus d'eau !
 
-            if (WATER_GAIN_INSTANT) // config bool
+            if (WATER_GAIN_INSTANT && !m_VelocityFromController.Controller.Fire) // config bool
                 waterGainInstant();
-            else
+            else if (!m_VelocityFromController.Controller.Fire) // cannot fire and gain water at same time. Priority on fire.
                 waterGain();
         }
 
