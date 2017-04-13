@@ -8,9 +8,11 @@ namespace Assets.Scripts.Game {
     [RequireComponent(typeof(Rigidbody))]
     public class VelocityFromControllerMatche : VelocityFromController {
 
-        [SerializeField] private float m_maxTurnAnglePerFrame = 3f;
-        private Vector3 previousPosition = Vector3.zero; // don't use transform.rotation dummy, get the direction from last position
+        [SerializeField] private float m_turnSpeed = 0.1f; // 0 to 1;
+        /*[SerializeField] */private float m_maxTurnAnglePerFrame = 15f;
+        //private Vector3 previousPosition = Vector3.zero; // don't use transform.rotation dummy, get the direction from last position
         private float previousInputAngle; // don't use transform.rotation dummy, get the direction from last position
+        private Vector3 previousDirection = Vector3.zero;
         private bool firstInputSet = false;
 
         protected void Update () {
@@ -21,39 +23,79 @@ namespace Assets.Scripts.Game {
 
             if (m_Controller) {
                 if (firstInputSet && m_Controller.Joystick.normalized != Vector3.zero) {
-                    //print(transform.position);
-                    // take a little time to have a controller. (don't know why)
 
-                    Vector3 newDirection = Vector3.zero;
-                    //Vector3 currentDirection = previousPosition - transform.position;
-                    //float currentDirectionAngle = Mathf.Atan2(currentDirection.y, currentDirection.x);
-                    float inputDirectionAngle = Mathf.Atan2(m_Controller.Joystick.normalized.y, m_Controller.Joystick.normalized.x);
-                    //float newDirectionAngle = currentDirectionAngle + Mathf.Clamp(inputDirectionAngle, -m_maxTurnAnglePerFrame, m_maxTurnAnglePerFrame);
-
-                    //print(inputDirectionAngle);
-                    //print("angle " + currentDirectionAngle);
-
-                    newDirection = new Vector3(
-                        Mathf.Cos(inputDirectionAngle),
-                        Mathf.Sin(inputDirectionAngle),
-                        0
-                    );
-                    //print("old" + previousPosition);
-                    m_Rigidbody.velocity = newDirection * m_Speed;
-                    //previousPosition = transform.position;
-                    //print("new" + previousPosition);
-                    previousInputAngle = inputDirectionAngle;
-
+                    ThirdTest();
                 } else {
-                    if (m_Controller.Joystick.normalized != Vector3.zero) {
+                    if (!firstInputSet && m_Controller.Joystick.normalized != Vector3.zero) {
                         firstInputSet = true;
-                        previousInputAngle = Mathf.Atan2(m_Controller.Joystick.normalized.y, m_Controller.Joystick.normalized.x);
+                        //previousInputAngle = Mathf.Atan2(m_Controller.Joystick.normalized.y, m_Controller.Joystick.normalized.x);
+                        previousDirection = m_Controller.Joystick.normalized;
+                        m_currentDirection = m_Controller.Joystick.normalized;
                     }
                         
                 }
                 
             }
             
+        }
+
+        void ThirdTest() {
+            m_Rigidbody.AddForce(m_Controller.Joystick.normalized * m_Speed);
+            m_Rigidbody.velocity = Vector3.Lerp(m_Rigidbody.velocity, m_Controller.Joystick.normalized * m_Speed, m_turnSpeed);
+        }
+
+        void FirstTest () {
+            //Vector3 newDirection = Vector3.zero;
+            //float maxTurnPerFrameRad = m_maxTurnAnglePerFrame * Mathf.PI / 180;
+            //float inputDirectionAngle = Mathf.Atan2(m_Controller.Joystick.normalized.y, m_Controller.Joystick.normalized.x);
+            //float limitedDirectionAngle = Mathf.Lerp(previousInputAngle, inputDirectionAngle, 0.5f);//Mathf.Clamp(previousInputAngle - inputDirectionAngle, -maxTurnPerFrameRad, maxTurnPerFrameRad);
+            float angleDiff = Vector3.Angle(previousDirection, m_Controller.Joystick.normalized); // can be a mess if z is different
+            Debug.Log(angleDiff);
+            angleDiff = Mathf.Clamp(angleDiff, -m_maxTurnAnglePerFrame, m_maxTurnAnglePerFrame);
+            Debug.Log("after " + angleDiff);
+            Vector3 newDirection = Quaternion.Euler(0, 0, -angleDiff) * previousDirection;
+            float newAngleDiff = Vector3.Angle(newDirection, m_Controller.Joystick.normalized);
+            Debug.Log("new " + newAngleDiff);
+
+            /*newDirection = new Vector3(
+                Mathf.Cos(limitedDirectionAngle),
+                Mathf.Sin(limitedDirectionAngle),
+                0
+            );*/
+
+            m_Rigidbody.velocity = newDirection.normalized * m_Speed;
+            //previousInputAngle = limitedDirectionAngle;
+            previousDirection = newDirection.normalized;
+        }
+
+        float m_maxAngleRotation = 15f;   // Défini comme membre sérializé
+        Vector3 m_currentDirection; // Actuelle direction, défini comme membre
+
+        void SecondTest () {
+
+            float currentRadian = Mathf.Atan2(m_currentDirection.y, m_currentDirection.x);
+            float wantedRadian = Mathf.Atan2(m_Controller.Joystick.y, m_Controller.Joystick.x);
+            float currentToWantedRadian = wantedRadian - currentRadian;
+            float maxRadianRotation = m_maxAngleRotation * Mathf.Deg2Rad;
+            float newRadian = currentRadian + Mathf.Clamp(currentToWantedRadian, maxRadianRotation, -maxRadianRotation);
+
+            Vector3 newDirection = new Vector3(
+              Mathf.Cos(newRadian),
+              Mathf.Sin(newRadian)
+            );
+
+            m_Rigidbody.velocity = newDirection * m_Speed;
+        }
+
+        Vector2 rotateVector (Vector2 pVec, float pRad) {
+            Vector2 copyTransform = pVec;//transform.rotation.eulerAngles;
+            //Vector2 unitVector = Vector3.Normalize(copyTransform);
+           /* Debug.Log("rotation: ");
+            Debug.Log(Math.Atan2(unitVector.y, unitVector.x) / Mathf.PI * 180);*/
+            Vector2 unitVectorRotated = Quaternion.Euler(0, 0, pRad *180/Mathf.PI) * copyTransform;
+            return unitVectorRotated;
+            /*Debug.Log("rotation -45: ");
+            Debug.Log(Math.Atan2(unitVectorRotated.y, unitVectorRotated.x) / Mathf.PI * 180);*/
         }
     }
 }
