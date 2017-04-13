@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System;
-using UnityEditor;
 
 namespace Assets.Scripts.Game.Actors.Player_Firefighter {
 

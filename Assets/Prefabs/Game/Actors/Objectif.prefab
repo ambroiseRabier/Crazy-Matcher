@@ -1290,7 +1290,8 @@ MonoBehaviour:
   matchesBurnMe: {fileID: 0}
   m_materialOnFire: {fileID: 2100000, guid: bda68c0a325c0a14e895b00dd236d363, type: 2}
   m_BurnTime: 0
-  m_startFireSoundClip: {fileID: 0}
+  m_startFireSoundClip: {fileID: 8300000, guid: 0f4bf33b49d82e3419d1241fa27dbdc3,
+    type: 3}
   m_gfxFlame1: {fileID: 1791454985839912}
   m_gfxFlame2: {fileID: 1810330407281254}
   m_gfxFlame3: {fileID: 1196621604907994}
