@@ -103,7 +103,7 @@ public abstract class CanvasScreen<T> : Singleton<T> where T : Component
 
     private void CanvasScreenMachineStates_OnEnter(CanvasScreenState state)
     {
-        Debug.Log("Enter state " + state + " on " + GetType().Name);
+        //Debug.Log("Enter state " + state + " on " + GetType().Name);
 
         switch (state)
         {
