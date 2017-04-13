@@ -183,24 +183,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Speed: 0
   m_Controller: {fileID: 0}
-  speedBurnCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
 --- !u!114 &114690099225377488
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -218,13 +200,33 @@ MonoBehaviour:
   m_Gfx: {fileID: 23540100621357226}
   m_materialOnFire: {fileID: 2100000, guid: bda68c0a325c0a14e895b00dd236d363, type: 2}
   m_BurnTime: 10
-  m_startPlayer: 0
+  m_startFireSoundClip: {fileID: 8300000, guid: 0f4bf33b49d82e3419d1241fa27dbdc3,
+    type: 3}
+  m_startPlayer: 1
   m_burnSpeed: 500
   m_normalSpeed: 100
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: f619066f7efb6bf45afdd5cdb1326671, type: 3}
   m_rangeNormal: {x: 50, y: 50}
   m_rangeBurning: {x: 100, y: 100}
   m_minDistToNavMeshDestination: 30
+  speedBurnCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0.00077438354
+      value: 0.49920654
+      inSlope: 0.50118154
+      outSlope: 0.50118154
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0.50118154
+      outSlope: 0.50118154
+      tangentMode: 34
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
   PAUSE_TIME_RANDOM_RANGE_MIN: 1500
   PAUSE_TIME_RANDOM_RANGE_MAX: 2500
   PAUSE_WAIT_PROBABILITY: 0.75
