@@ -49,6 +49,7 @@ public abstract class Burnable : MonoBehaviour
     public float BurnRatio { get; private set; }
 
     [SerializeField] private float m_BurnTime;
+    [SerializeField] private AudioClip m_startFireSoundClip;
 
     private Coroutine m_StartedBurnCoroutine;
 
@@ -65,7 +66,7 @@ public abstract class Burnable : MonoBehaviour
         if (OnStartBurn != null)
             OnStartBurn(this);
 
-
+        GameManager.instance.PlaySound(m_startFireSoundClip);
         SetMaterialOnFire();
         InstantiateFire();
 

@@ -187,6 +187,8 @@ MonoBehaviour:
   m_Gfx: {fileID: 23011269993304998}
   m_materialOnFire: {fileID: 2100000, guid: bda68c0a325c0a14e895b00dd236d363, type: 2}
   m_BurnTime: 10
+  m_startFireSoundClip: {fileID: 8300000, guid: 0f4bf33b49d82e3419d1241fa27dbdc3,
+    type: 3}
   m_startPlayer: 0
   m_burnSpeed: 500
   m_normalSpeed: 100

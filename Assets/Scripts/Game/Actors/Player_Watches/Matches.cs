@@ -20,7 +20,6 @@ public class Matches : Burnable
     private float m_speed;
     private NavMeshAgent m_NavMeshAgent;
     private VelocityFromControllerMatche m_VelocityFromController;
-    private AudioSource m_DeathFX;
     #endregion
 
     #region Properties
@@ -93,7 +92,6 @@ public class Matches : Burnable
 
     #region Fire
     private void Awake () {
-        m_DeathFX = GetComponent<AudioSource>();
         m_NavMeshAgent                 = GetComponent<NavMeshAgent>();
         m_VelocityFromController       = GetComponent<VelocityFromControllerMatche>();
         m_NavMeshAgent.updateRotation = false; 
