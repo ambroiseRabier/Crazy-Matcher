@@ -39,8 +39,7 @@ public class UIManager : MultiScreenManager<UIManager>
             m_titleScreen,
             m_menu,
             m_pauseMenu,
-            m_HUD,
-            m_winScreen
+            m_HUD
         }));
 
         InitPauseMenu();
@@ -63,6 +62,7 @@ public class UIManager : MultiScreenManager<UIManager>
     {
         GlobalEventBus.onMenu.AddListener(OnMenu);
         GlobalEventBus.onInitLevel.AddListener(OnInitLevel);
+        GlobalEventBus.onStartLevel.AddListener(OnStartLevel);
         GlobalEventBus.onTitleScreen.AddListener(OnTittleScreen);
         GlobalEventBus.onResume.AddListener(OnResume);
         GlobalEventBus.onPause.AddListener(OnPause);
@@ -92,8 +92,13 @@ public class UIManager : MultiScreenManager<UIManager>
 
     private void OnInitLevel()
     {
+        VSIntroductionScreen.instance.Open();
         EnableOnlyScreen(m_HUD);
-        CloseWinScreen();
+    }
+
+    private void OnStartLevel()
+    {
+        HUD.instance.Open();
     }
 
     private void OnTittleScreen()
@@ -109,7 +114,8 @@ public class UIManager : MultiScreenManager<UIManager>
 
     private void OnTeamWin(GameManager.Team team)
     {
-        EnableOnlyScreen(m_winScreen);
+        //EnableOnlyScreen(m_winScreen);
+        HUD.instance.Close();
         WinScreen.instance.SetWinnerTeam(team);
         OpenWinScreen();
     }

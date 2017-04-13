@@ -27,8 +27,10 @@ public class GameManager : Singleton<GameManager>
     private float m_gameTimeScale;
 
     private int m_gameCount;
-    private int m_scoreP1;
-    private int m_scoreP2;
+    private int m_scoreFireFightP1;
+    private int m_scoreMatchesP1;
+    private int m_scoreFireFightP2;
+    private int m_scoreMatchesP2;
     private bool m_p1IsMatches;
 
 
@@ -117,8 +119,10 @@ public class GameManager : Singleton<GameManager>
     private void InitGame()
     {
         m_gameCount = 0;
-        m_scoreP1 = 0;
-        m_scoreP2 = 0;
+        m_scoreFireFightP1 = 0;
+        m_scoreMatchesP1 = 0;
+        m_scoreFireFightP2 = 0;
+        m_scoreMatchesP2 = 0;
         m_p1IsMatches = true;
     }
 
@@ -141,22 +145,31 @@ public class GameManager : Singleton<GameManager>
         else if (m_currentGameState == GameState.WIN_SCREEN)
         {
             CheckWinScreenButtonPress();
+
         }
     }
 
     private void CheckPressStart()
     {
-        if (Input.GetButtonDown("Submit"))
+        if (Input.GetButtonDown("Submit") || Input.GetButtonDown("Fire1_P1"))
         {
             GlobalEventBus.onMenu.Invoke();
+        }
+        else if (Input.GetButtonDown("Fire2_P1"))
+        {
+            QuitApplication();
         }
     }
 
     private void CheckMenuButtonPress()
     {
-        if (Input.GetButtonDown("Fire1_P1"))
+        if (Input.GetButtonDown("Submit") || Input.GetButtonDown("Fire1_P1"))
         {
             GlobalEventBus.onLoadingScene.Invoke(1);
+        }
+        else if (Input.GetButtonDown("Fire2_P1"))
+        {
+            GlobalEventBus.onTitleScreen.Invoke();
         }
 
     }
@@ -165,12 +178,23 @@ public class GameManager : Singleton<GameManager>
     {
         if (Input.GetButtonDown("Fire1_P1"))
         {
+            WinScreen.instance.Close();
             GlobalEventBus.onRestartGame.Invoke();
         }
         else if (Input.GetButtonDown("Fire2_P1"))
         {
+            WinScreen.instance.Close();
             GlobalEventBus.onLoadingScene.Invoke(0);
         }
+    }
+
+    private void QuitApplication()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 
     private void StartLevel()
@@ -216,6 +240,7 @@ public class GameManager : Singleton<GameManager>
     private void ChangePlayer(Matches matches)
     {
         m_currentPlayerMatches.Controller = null;
+        m_currentPlayerMatches.Die();
         m_currentPlayerMatches = matches;
         InitPlayerMatches();
     }
@@ -356,11 +381,24 @@ public class GameManager : Singleton<GameManager>
         Unpause();
     }
 
+    private void UpdateUIScore()
+    {
+        HUD.instance.P1ScoreComp.SetNFireFighterWin(m_scoreFireFightP1);
+        HUD.instance.P1ScoreComp.SetNMatchesWin(m_scoreMatchesP1);
+
+        HUD.instance.P2ScoreComp.SetNFireFighterWin(m_scoreFireFightP2);
+        HUD.instance.P2ScoreComp.SetNMatchesWin(m_scoreMatchesP2);
+    }
+
     private void OnInitLevel()
     {
-        //TODO 
+        UpdateUIScore();
+
         m_currentGameState = GameState.IN_GAME;
-        GlobalEventBus.onStartLevel.Invoke();
+        Timer.DelayThenPerform(1, () => {
+            VSIntroductionScreen.instance.Close();
+            GlobalEventBus.onStartLevel.Invoke();
+        });
     }
 
     private void OnLoadingScene(int sceneNumber = -1)
@@ -404,24 +442,19 @@ public class GameManager : Singleton<GameManager>
         if (teamWin == Team.FIRE_FIGHTER)
         {
             if (m_p1IsMatches)
-                m_scoreP2++;
+                m_scoreFireFightP2++;
             else
-                m_scoreP1++;
+                m_scoreFireFightP1++;
         }
         else
         {
             if (m_p1IsMatches)
-                m_scoreP1++;
+                m_scoreMatchesP1++;
             else
-                m_scoreP2++;
+                m_scoreMatchesP2++;
         }
 
         m_currentGameState = GameState.WIN_SCREEN;
-
-        //Time.timeScale = 0;
-
-        print("Score P1 : " + m_scoreP1);
-        print("Score P2 : " + m_scoreP2);
     }
 
     #endregion
