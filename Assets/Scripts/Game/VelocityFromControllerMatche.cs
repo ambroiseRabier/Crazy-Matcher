@@ -3,12 +3,12 @@
 namespace Assets.Scripts.Game {
 
     /// <summary>
-    /// 
+    /// SPEED variable IS NOT TO BE SETTED on the matches, (change burn speed on matches scripts)
     /// </summary>
     [RequireComponent(typeof(Rigidbody))]
     public class VelocityFromControllerMatche : VelocityFromController {
 
-        [SerializeField] private float m_turnSpeed = 0.1f; // 0 to 1;
+        /*[SerializeField]*/ private float m_turnSpeed = 0.1f; // 0 to 1;
         /*[SerializeField] */private float m_maxTurnAnglePerFrame = 15f;
         /*[SerializeField] */private float m_maxTurnAnglePerFrameCar = 5f;
         //private Vector3 previousPosition = Vector3.zero; // don't use transform.rotation dummy, get the direction from last position
@@ -17,17 +17,19 @@ namespace Assets.Scripts.Game {
         private bool firstInputSet = false;
 
         private Burnable m_burnableComponent;
+        [SerializeField] private AnimationCurve speedBurnCurve;
+        private float burnRatio;
 
         protected void Start () {
             m_burnableComponent = gameObject.GetComponent<Burnable>();
+            m_burnableComponent.OnBurnRatioProgress += BurnableComponent_OnBurnRatioProgress;
         }
 
         protected void Update () {
                 
         }
 
-        override protected void FixedUpdate() {
-
+        override protected void FixedUpdate () {
             if (m_Controller && m_Controller.Joystick.normalized != Vector3.zero) {
                 //SixthTest();
                 if (firstInputSet) {
@@ -48,10 +50,13 @@ namespace Assets.Scripts.Game {
             }
         }
 
+        private void BurnableComponent_OnBurnRatioProgress(Burnable burnable, float newBurnRatio) {
+            burnRatio = newBurnRatio;
+        }
+
         void SeventhController() {
-            print(m_burnableComponent.BurnRatio);
-            //print(m_burnableComponent.Bu);
-            m_Rigidbody.velocity = m_Controller.Joystick.normalized * m_Speed ;//* m_burnableComponent.BurnRatio);
+            print(speedBurnCurve.Evaluate(burnRatio));
+            m_Rigidbody.velocity = m_Controller.Joystick.normalized * m_Speed * speedBurnCurve.Evaluate(burnRatio);
         }
 
         //physic control, whit max speed

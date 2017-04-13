@@ -1728,6 +1728,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d1742b893f768f488a4805f2d3293dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Speed: 10
+  m_Speed: 0
   m_Controller: {fileID: 0}
-  m_turnSpeed: 0.1
+  speedBurnCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0.50079346
+      inSlope: 0.49920654
+      outSlope: 0.49920654
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0.49920654
+      outSlope: 0.49920654
+      tangentMode: 34
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0

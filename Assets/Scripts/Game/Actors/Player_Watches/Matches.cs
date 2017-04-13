@@ -189,7 +189,7 @@ public class Matches : Burnable
     private void checkIfDestinationReached () {
         // make sure next destination is m_minDistToNavMeshDestination distance far away from last destination
         if (m_NavMeshAgent.remainingDistance < m_minDistToNavMeshDestination) {
-            print("checkIfDestinationReached");
+            //print("checkIfDestinationReached");
 
             if (!IsBurning)
                 CheckIfWait();
@@ -207,8 +207,8 @@ public class Matches : Burnable
             lWait = currentWaitProb > Random.Range(0f, 1f);
             state = lWait ? "wait" : "move";
 
-            if (lWait)
-                print("WAIT");
+            /*if (lWait)
+                print("WAIT");*/
         }
         
         if (lWait)
@@ -244,13 +244,13 @@ public class Matches : Burnable
             Random.Range(-usingRange.x, usingRange.y),
             0f
         );
-        Debug.Log(destination);
+        //Debug.Log(destination);
         // add min value to destination so it won't instant reach.
         // minimum m_minDistToNavMeshDestination * 1.1 distance to travel
         destination.x += Mathf.Sign(destination.x) * m_minDistToNavMeshDestination * 1.1f;
         destination.y += Mathf.Sign(destination.y) * m_minDistToNavMeshDestination * 1.1f;
 
-        Debug.Log(destination);
+        //Debug.Log(destination);
 
         destination = new Vector3(
             position.x + destination.x,

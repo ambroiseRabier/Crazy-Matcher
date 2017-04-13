@@ -181,9 +181,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d1742b893f768f488a4805f2d3293dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Speed: 30
+  m_Speed: 0
   m_Controller: {fileID: 0}
-  m_turnSpeed: 0.1
+  speedBurnCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114690099225377488
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -204,6 +221,7 @@ MonoBehaviour:
   m_startPlayer: 0
   m_burnSpeed: 500
   m_normalSpeed: 100
+  m_audioClip: {fileID: 0}
   m_rangeNormal: {x: 50, y: 50}
   m_rangeBurning: {x: 100, y: 100}
   m_minDistToNavMeshDestination: 30
