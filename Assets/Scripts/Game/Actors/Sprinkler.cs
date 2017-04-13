@@ -7,6 +7,7 @@ public class Sprinkler : MonoBehaviour {
     [SerializeField] private GameObject m_sprinklerWaterPrefab;
     private GameObject m_sprinklerWater;
 
+    [SerializeField] private AudioClip m_audioClip;
     [SerializeField] private float m_fillSpeed = 0.1f;
     [SerializeField] private float m_emptyingSpeed = 0.1f;
     private float m_fillRatio = 0f;
@@ -39,6 +40,7 @@ public class Sprinkler : MonoBehaviour {
 
     private void Full()
     {
+        GameManager.instance.PlaySound(m_audioClip);
         isFull = true;
         InstantiateSprinklerWater();
     }
