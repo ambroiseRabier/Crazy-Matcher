@@ -20,6 +20,7 @@ public class Matches : Burnable
     [SerializeField] private GameObject m_idleGFX;
     [SerializeField] private GameObject m_walkGFX;
     [SerializeField] private GameObject m_runGFX;
+
     [SerializeField] private GameObject m_naturalDieFX;
     [SerializeField] private GameObject m_waterDieFX;
 
@@ -164,12 +165,22 @@ public class Matches : Burnable
         return false;
     }
 
-
     public override bool TryExtinguish()
     {
         if (base.TryExtinguish())
         {
             Die();
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool TryExtinguish(bool dieWithWater)
+    {
+        if (base.TryExtinguish())
+        {
+            Die(dieWithWater);
             return true;
         }
 
@@ -188,10 +199,16 @@ public class Matches : Burnable
 
     #endregion
 
-    public void Die()
+    public void Die(bool dieWithWater = false)
     {
         GameManager.instance.PlaySound(m_audioClip);
-        Transform dieFxTransform  = Instantiate(m_waterDieFX).transform;
+        Transform dieFxTransform;
+        if (dieWithWater)
+            dieFxTransform  = Instantiate(m_waterDieFX).transform;
+        else
+            dieFxTransform = Instantiate(m_naturalDieFX).transform;
+
+
         dieFxTransform.position   = transform.position;
         dieFxTransform.localScale = transform.localScale;
         Destroy(gameObject);

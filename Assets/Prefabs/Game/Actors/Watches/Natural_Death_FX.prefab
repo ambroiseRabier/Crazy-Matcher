@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114493204802187478}
   - component: {fileID: 114465084428661262}
   - component: {fileID: 114943450679617454}
+  - component: {fileID: 114344787803767634}
   m_Layer: 0
   m_Name: Natural_Death_FX
   m_TagString: Untagged
@@ -86,6 +87,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1550403373513148}
   m_Mesh: {fileID: 0}
+--- !u!114 &114344787803767634
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1550403373513148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1baf34de0ddf87409a5c4b048d9d75e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114465084428661262
 MonoBehaviour:
   m_ObjectHideFlags: 1
