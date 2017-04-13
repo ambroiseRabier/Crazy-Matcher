@@ -129,7 +129,8 @@ public class UIManager : MultiScreenManager<UIManager>
     private void OnInitLevel()
     {
         CloseAllScreens();
-        VSIntroductionScreen.instance.Open();
+        Timer.DelayThenPerform(0.25f, () => { VSIntroductionScreen.instance.Open(); });
+        
         //EnableOnlyScreen(m_HUD);
     }
 
