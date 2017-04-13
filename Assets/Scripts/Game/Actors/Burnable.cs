@@ -69,7 +69,7 @@ public abstract class Burnable : MonoBehaviour
 
         GameManager.instance.PlaySound(m_startFireSoundClip);
         //SetMaterialOnFire();
-        //InstantiateFire();
+        InstantiateFire();
 
         m_StartedBurnCoroutine = StartCoroutine(BurnCoroutine());
         return true;
