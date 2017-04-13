@@ -218,13 +218,28 @@ public class Matches : Burnable
 
         }
 
+        checkFlipX();
+
+    }
+
+    private void checkFlipX () {
+        bool goingRight = m_NavMeshAgent.velocity.x > 0;
+        Transform animContainer = transform.Find("GFX").transform;
+        float newScale = goingRight ? 1 : -1;
+
+        if (newScale != animContainer.localScale.x)
+            animContainer.localScale = new Vector3(
+                newScale,
+                animContainer.localScale.y,
+                animContainer.localScale.z
+            );
     }
 
     private void checkIfDestinationReached () {
         // make sure next destination is m_minDistToNavMeshDestination distance far away from last destination
         if (m_NavMeshAgent.remainingDistance < m_minDistToNavMeshDestination) {
             //print("checkIfDestinationReached");
-
+            
             if (!IsBurning)
                 CheckIfWait();
 
