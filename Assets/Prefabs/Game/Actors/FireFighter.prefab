@@ -193,16 +193,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90702eb1a99968f47ac5f1dd90f150ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SHOOT_POWER: 30
+  m_SHOOT_POWER: 250
   CONTROL_ROTATION_FACTOR: 4.5
-  DISPERSION_FACTOR: 3
+  DISPERSION_FACTOR: 10
   m_WaterPrefab: {fileID: 1085542151676000, guid: 0aed26aae035cd54ab1f4af9f51a1dc1,
     type: 2}
-  m_waterResourceMAX: 200
+  m_waterResourceMAX: 100
   m_waterResource: 0
   WATER_GAIN_FACTOR: 5
   WATER_GAIN_INSTANT: 0
-  m_shootCadencyMS: 30
+  m_shootCadencyMS: 200
 --- !u!114 &114622229930473746
 MonoBehaviour:
   m_ObjectHideFlags: 1

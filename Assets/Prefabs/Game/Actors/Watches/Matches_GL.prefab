@@ -544,7 +544,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1214032507161422}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: 411, y: 58.8, z: -1}
+  m_LocalPosition: {x: 411, y: 58.8, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4276840574208612}
@@ -3561,7 +3561,7 @@ MonoBehaviour:
     type: 2}
   matchesBurnMe: {fileID: 0}
   m_materialOnFire: {fileID: 2100000, guid: bda68c0a325c0a14e895b00dd236d363, type: 2}
-  m_BurnTime: 50
+  m_BurnTime: 30
   m_startFireSoundClip: {fileID: 8300000, guid: 0f4bf33b49d82e3419d1241fa27dbdc3,
     type: 3}
   m_startPlayer: 0
@@ -3583,16 +3583,28 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
-      time: 0.00077438354
-      value: 0.49920654
-      inSlope: 0.50118154
-      outSlope: 0.50118154
+      time: -0.0075531006
+      value: 0.6807556
+      inSlope: 0.09376069
+      outSlope: 0.09376069
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 0.421334
+      value: 0.72096837
+      inSlope: 0.20035961
+      outSlope: 0.20035961
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 0.805179
+      value: 0.83879286
+      inSlope: 0.54312664
+      outSlope: 0.54312664
       tangentMode: 34
     - serializedVersion: 2
       time: 1
-      value: 1
-      inSlope: 0.50118154
-      outSlope: 0.50118154
+      value: 0.99061584
+      inSlope: 0.7792947
+      outSlope: 0.7792947
       tangentMode: 34
     m_PreInfinity: 2
     m_PostInfinity: 2
