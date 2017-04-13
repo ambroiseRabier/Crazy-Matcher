@@ -16,6 +16,10 @@ public class Matches : Burnable
     [SerializeField] private Vector2 m_rangeNormal;
     [SerializeField] private Vector2 m_rangeBurning;
     [SerializeField] private float m_minDistToNavMeshDestination = 30f; // la distance à laquelle le navMesAgent décide qu'il a atteint sa destination
+    [SerializeField] private GameObject m_GFXContainer;
+    [SerializeField] private GameObject m_idleGFX;
+    [SerializeField] private GameObject m_walkGFX;
+    [SerializeField] private GameObject m_runGFX;
 
     private float m_speed;
     private NavMeshAgent m_NavMeshAgent;
