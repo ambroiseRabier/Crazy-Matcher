@@ -60,6 +60,14 @@ namespace Assets.Scripts.Game.Actors.Water {
 
             if (burnable)
                 burnable.TryExtinguish();
+            else
+            {
+                Sprinkler sprinkler = collision.gameObject.GetComponent<Sprinkler>();
+                if (sprinkler)
+                {
+                    sprinkler.TryToFill();
+                }
+            }
         }
 
         private void CheckCollisionGround () {
