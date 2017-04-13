@@ -55,7 +55,6 @@ namespace Assets.Scripts.Game {
         }
 
         void SeventhController() {
-            print(speedBurnCurve.Evaluate(burnRatio));
             m_Rigidbody.velocity = m_Controller.Joystick.normalized * m_Speed * speedBurnCurve.Evaluate(burnRatio);
         }
 
