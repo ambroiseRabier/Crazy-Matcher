@@ -91,8 +91,10 @@ public class UIManager : MultiScreenManager<UIManager>
 
     private void OnInitLevel()
     {
+        VSIntroductionScreen.instance.Open();
+
         EnableOnlyScreen(m_HUD);
-        CloseWinScreen();
+
     }
 
     private void OnTittleScreen()

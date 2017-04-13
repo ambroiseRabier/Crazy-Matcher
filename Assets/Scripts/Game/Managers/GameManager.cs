@@ -170,8 +170,7 @@ public class GameManager : Singleton<GameManager>
         }
         else if (Input.GetButtonDown("Fire2_P1"))
         {
-            WinScreen.instance.Close();
-            GlobalEventBus.onLoadingScene.Invoke(0);
+            WinScreen.instance.Close(() => GlobalEventBus.onLoadingScene.Invoke(0));
         }
     }
 
@@ -362,7 +361,10 @@ public class GameManager : Singleton<GameManager>
     {
         //TODO 
         m_currentGameState = GameState.IN_GAME;
-        GlobalEventBus.onStartLevel.Invoke();
+        Timer.DelayThenPerform(1, () => {
+            VSIntroductionScreen.instance.Close();
+            GlobalEventBus.onStartLevel.Invoke();
+        });
     }
 
     private void OnLoadingScene(int sceneNumber = -1)
