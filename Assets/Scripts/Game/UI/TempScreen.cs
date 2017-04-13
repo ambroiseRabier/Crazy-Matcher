@@ -7,6 +7,8 @@ public class TempScreen<T> : CanvasScreen<T> where T : Component {
         Close();
     }
 
+    public new bool IsOpened { get { return gameObject.activeInHierarchy; } }
+
     public new void Open(Action action = null)
     {
         gameObject.SetActive(true);
