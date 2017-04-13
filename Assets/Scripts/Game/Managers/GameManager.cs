@@ -228,6 +228,14 @@ public class GameManager : Singleton<GameManager>
         {
             GlobalEventBus.onTitleScreen.Invoke();
         }
+        else if (Input.GetButtonDown("Xbox_X"))
+        {
+            GlobalEventBus.onInputScreen.Invoke();
+        }
+        else if (Input.GetButtonDown("Xbox_Y"))
+        {
+            GlobalEventBus.onCreditScreen.Invoke();
+        }
 
     }
 
