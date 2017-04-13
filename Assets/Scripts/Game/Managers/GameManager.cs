@@ -355,7 +355,6 @@ public class GameManager : Singleton<GameManager>
     private void AddPotentialPlayers(Matches matches)
     {
         m_potentialPlayers.Add(matches);
-        print(m_potentialPlayers.Count);
         if (m_potentialPlayers.Count == 1)
         {
             StartCoroutine(StartTimerPotentialPlayers());
