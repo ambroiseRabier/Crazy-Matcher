@@ -45,6 +45,7 @@ public abstract class Burnable : MonoBehaviour
 
     /// <summary>
     /// Burn ratio state. If completely burned, BurnRatio = 1f
+    /// See VelocityFromControllerMatche, this variable don't work, there is another method.
     /// </summary>
     public float BurnRatio { get; private set; }
 

@@ -13,8 +13,8 @@ public class Matches : Burnable
     [SerializeField] private float m_normalSpeed;
     [SerializeField] private AudioClip m_audioClip;
 
-    [SerializeField] private float m_rangeX;
-    [SerializeField] private float m_rangeY;
+    [SerializeField] private Vector2 m_rangeNormal;
+    [SerializeField] private Vector2 m_rangeBurning;
     [SerializeField] private float m_minDistToNavMeshDestination = 30f; // la distance à laquelle le navMesAgent décide qu'il a atteint sa destination
 
     private float m_speed;
@@ -102,6 +102,7 @@ public class Matches : Burnable
     private void Start()
     {
         Controller = Controller; // (wtf), to call the setter one time
+        StartMove();
     }
     
 
@@ -150,57 +151,112 @@ public class Matches : Burnable
     }
 
     #region Movement
-    private void Update()
-    {
-        if (!HasController)
-            if (m_NavMeshAgent.remainingDistance < m_minDistToNavMeshDestination)
-            {
-                // isBurned et isBurning inversé.
-                //Debug.Log(IsBurning);
-                //Debug.Log(IsBurned);
-                if (IsBurned) {
-                    MoveDefault(); 
-                } else {
-                    MoveDefaultWhitPause();
-                }
-            }
-    }
 
+    private string state = "move";
     [SerializeField] private float PAUSE_TIME_RANDOM_RANGE_MIN = 1000f;
     [SerializeField] private float PAUSE_TIME_RANDOM_RANGE_MAX = 1500f;
-    [SerializeField] private float PAUSE_SKIP_PROBABILITY = 0.5f; // probabilité d'une pause après avoir atteint sa destination.
+    [SerializeField] private float PAUSE_WAIT_PROBABILITY = 1f; // probabilité d'une pause après avoir atteint sa destination.
     private float waitCount = 0f;
     private float currentPauseTime;
-    private float currentPauseProb;
+    private float currentWaitProb;
+
+    private void StartMove () {
+        state = "move";
+        SetNextDesination();
+    }
+
+    private void Update () {
+        // isBurned et isBurning inversé. peut-être plus maintenant ? 12/04
+        /*if (IsBurning)
+            Debug.Log("IsBurning " +IsBurning);
+        if (IsBurned)
+            Debug.Log("IsBurned " + IsBurned);*/
+
+        if (!HasController) {
+
+            if (state == "move") {
+                checkIfDestinationReached();
+            } else if (state == "wait") {
+                Wait();
+            }
+
+        }
+
+    }
+
+    private void checkIfDestinationReached () {
+        // make sure next destination is m_minDistToNavMeshDestination distance far away from last destination
+        if (m_NavMeshAgent.remainingDistance < m_minDistToNavMeshDestination) {
+            //print("checkIfDestinationReached");
+
+            if (!IsBurning)
+                CheckIfWait();
+
+            if (state == "move")
+                SetNextDesination();
+        }
+    }
+
+    // only one chance per destination reached
+    private void CheckIfWait() {
+        
+        bool lWait = false;
+        if (currentWaitProb != 0) {
+            lWait = currentWaitProb > Random.Range(0f, 1f);
+            state = lWait ? "wait" : "move";
+
+            /*if (lWait)
+                print("WAIT");*/
+        }
+        
+        if (lWait)
+            m_NavMeshAgent.isStopped = true;
+
+    }
 
     private void AwakeMovement() 
     {
         currentPauseTime = Random.Range(PAUSE_TIME_RANDOM_RANGE_MIN, PAUSE_TIME_RANDOM_RANGE_MAX);
-        currentPauseProb = PAUSE_SKIP_PROBABILITY;
+        currentWaitProb = PAUSE_WAIT_PROBABILITY;
     }
 
-    private void MoveDefaultWhitPause() 
-    {
-        bool lSkip = Random.Range(0, 1) < currentPauseProb;
-        // only one chance per destination reached
-        if (!lSkip)
-            currentPauseProb = 0;
-
-        m_NavMeshAgent.isStopped = true;
-        if (waitCount >= currentPauseTime || lSkip) {
-            m_NavMeshAgent.isStopped = false;
-            MoveDefault();
+    private void Wait () {        
+        if (waitCount >= currentPauseTime) {
+            SetNextDesination();
             waitCount = 0f;
             AwakeMovement();
+            return; // waitCount stay to 0
         }
 
         waitCount += Time.deltaTime * 1000;
     }
 
-    private void MoveDefault() 
+    private void SetNextDesination()
     {
+        state = "move";
+        m_NavMeshAgent.isStopped = false;
         Vector3 position = transform.position;
-        Vector3 destination = new Vector3(Random.Range(position.x - m_rangeX, position.x + m_rangeX), Random.Range(position.y - m_rangeY, position.y + m_rangeY), 0f);
+        Vector2 usingRange = IsBurning ? m_rangeBurning : m_rangeNormal;
+        Vector3 destination = new Vector3(
+            Random.Range(-usingRange.x, usingRange.y),
+            Random.Range(-usingRange.x, usingRange.y),
+            0f
+        );
+        //Debug.Log(destination);
+        // add min value to destination so it won't instant reach.
+        // minimum m_minDistToNavMeshDestination * 1.1 distance to travel
+        destination.x += Mathf.Sign(destination.x) * m_minDistToNavMeshDestination * 1.1f;
+        destination.y += Mathf.Sign(destination.y) * m_minDistToNavMeshDestination * 1.1f;
+
+        //Debug.Log(destination);
+
+        destination = new Vector3(
+            position.x + destination.x,
+            position.y + destination.y,
+            0f
+        );
+
+
         m_NavMeshAgent.SetDestination(destination);
     }
 
