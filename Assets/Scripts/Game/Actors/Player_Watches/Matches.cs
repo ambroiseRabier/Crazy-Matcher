@@ -127,7 +127,7 @@ public class Matches : Burnable
         if (base.TryExtinguish())
         {
             print("EXTINGUISH");
-            Destroy(gameObject);
+            Die();
             return true;
         }
 
@@ -141,6 +141,11 @@ public class Matches : Burnable
     }
 
     #endregion
+
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
 
     #region Movement
     private void Update()
