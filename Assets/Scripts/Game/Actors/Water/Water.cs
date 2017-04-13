@@ -1,30 +1,22 @@
 ﻿using UnityEngine;
 using GAF.Core;
 
-namespace Assets.Scripts.Game.Actors.Water {
 
+namespace Assets.Scripts.Game.Actors.Water {
     /// <summary>
     /// 
     /// </summary>
     public class Water : MonoBehaviour {
 
         // todo: put serializedfield on the same line
-        [SerializeField]
-        private float m_Z_INDEX_SNAP = -0.5f;
-        [SerializeField]
-        private Transform m_ground;
-        [SerializeField]
-        private float reduceSpeed = 0.003f; // change to lifeTime ?
-        [SerializeField]
-        private GameObject m_waterSprite;
-        [SerializeField]
-        private GameObject m_waterSplashSprite;
-        [SerializeField]
-        private AnimationCurve alphaByHeight;
-        [SerializeField]
-        private GAFMovieClip splashAnimation;
-        [SerializeField]
-        private GAFBakedMovieClip projectileAnimation;
+        [SerializeField] private float m_Z_INDEX_SNAP = -0.5f;
+        [SerializeField] private Transform m_ground;
+        [SerializeField] private float reduceSpeed = 0.003f; // change to lifeTime ?
+        [SerializeField] private GameObject m_waterSprite;
+        [SerializeField] private GameObject m_waterSplashSprite;
+        [SerializeField] private AnimationCurve alphaByHeight;
+        [SerializeField] private GAFMovieClip splashAnimation;
+        [SerializeField] private GAFBakedMovieClip projectileAnimation;
 
         private Rigidbody rb;
         private Renderer m_renderer;
@@ -41,6 +33,7 @@ namespace Assets.Scripts.Game.Actors.Water {
         }
 
         protected void Start () {
+
             // cannot add the ground by link in editor :/
             m_ground = GameObject.Find("Level").transform;
             m_startZDistance = transform.position.z;

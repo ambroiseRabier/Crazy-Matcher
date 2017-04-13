@@ -1,10 +1,16 @@
 fileFormatVersion: 2
 guid: 28c2666bf54dc134aacae60a2709f971
-timeCreated: 1491898128
+timeCreated: 1492100713
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - m_ground: {instanceID: 0}
+  - m_waterSprite: {instanceID: 0}
+  - m_waterSplashSprite: {instanceID: 0}
+  - splashAnimation: {instanceID: 0}
+  - projectileAnimation: {instanceID: 0}
+  - m_audioClip: {fileID: 8300000, guid: 5f371e4e8d173c74fb047027b8088ced, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
