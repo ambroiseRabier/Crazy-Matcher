@@ -20,7 +20,8 @@ public class Matches : Burnable
     [SerializeField] private GameObject m_idleGFX;
     [SerializeField] private GameObject m_walkGFX;
     [SerializeField] private GameObject m_runGFX;
-    [SerializeField] private GameObject m_dieFX;
+    [SerializeField] private GameObject m_naturalDieFX;
+    [SerializeField] private GameObject m_waterDieFX;
 
     [SerializeField] private GameObject m_gfxExplosionFlame;
     [SerializeField] private GameObject m_positionGfxFlame;
@@ -190,7 +191,7 @@ public class Matches : Burnable
     public void Die()
     {
         GameManager.instance.PlaySound(m_audioClip);
-        Transform dieFxTransform  = Instantiate(m_dieFX).transform;
+        Transform dieFxTransform  = Instantiate(m_waterDieFX).transform;
         dieFxTransform.position   = transform.position;
         dieFxTransform.localScale = transform.localScale;
         Destroy(gameObject);
