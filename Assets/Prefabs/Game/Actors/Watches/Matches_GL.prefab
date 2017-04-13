@@ -3472,7 +3472,7 @@ MonoBehaviour:
   m_Speed: 0
   m_Controller: {fileID: 0}
   m_gafHeadName: Matches_head_baked
-  m_ImLostColor: {r: 0, g: 0.71034503, b: 1, a: 1}
+  m_ImLostColor: {r: 0.16176468, g: 0.79188627, b: 1, a: 1}
   m_gafHead: {fileID: 114536339662284794}
 --- !u!114 &114642438330799660
 MonoBehaviour:
