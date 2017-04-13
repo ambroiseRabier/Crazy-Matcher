@@ -118,7 +118,6 @@ public abstract class CanvasScreen<T> : Singleton<T> where T : Component
             case CanvasScreenState.OPENED:
                 if (OnOpened != null)
                     OnOpened(this as T);
-                else Debug.Log("Il n'y a rien sur l'opened lol");
                 break;
             case CanvasScreenState.OPENING:
                 if (OnOpening != null)
