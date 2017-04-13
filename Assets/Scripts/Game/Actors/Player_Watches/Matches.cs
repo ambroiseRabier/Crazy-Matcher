@@ -105,6 +105,20 @@ public class Matches : Burnable
         m_NavMeshAgent.updateRotation = false; 
         Speed                          = m_normalSpeed;
         AwakeMovement();
+        DisableAllGFX();
+    }
+    
+    private void DisableAllGFX()
+    {
+        m_idleGFX.SetActive(false);
+        m_walkGFX.SetActive(false);
+        m_runGFX.SetActive(false);
+    }
+
+    private void EnableGfx(GameObject gfx)
+    {
+        DisableAllGFX();
+        gfx.SetActive(true);
     }
 
     private void Start()
@@ -112,6 +126,8 @@ public class Matches : Burnable
         Controller = Controller; // (wtf), to call the setter one time
         StartMove();
         OnBurnRatioProgress += BurnableComponent_OnBurnRatioProgress;
+
+        EnableGfx(m_idleGFX);
     }
     
 
@@ -125,6 +141,8 @@ public class Matches : Burnable
         if (base.TryStartBurn())
         {
             Speed = m_burnSpeed;
+
+            EnableGfx(m_runGFX);
 
             return true;
         }
@@ -228,7 +246,10 @@ public class Matches : Burnable
         }
         
         if (lWait)
+        {
             m_NavMeshAgent.isStopped = true;
+            EnableGfx(m_idleGFX);
+        }
 
     }
 
@@ -240,6 +261,10 @@ public class Matches : Burnable
 
     private void Wait () {        
         if (waitCount >= currentPauseTime) {
+
+            if (!IsBurning)
+                EnableGfx(m_walkGFX);
+
             SetNextDesination();
             waitCount = 0f;
             AwakeMovement();

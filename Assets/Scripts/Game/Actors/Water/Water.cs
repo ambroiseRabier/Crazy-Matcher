@@ -23,6 +23,8 @@ namespace Assets.Scripts.Game.Actors.Water {
         private AnimationCurve alphaByHeight;
         [SerializeField]
         private GAFMovieClip splashAnimation;
+        [SerializeField]
+        private GAFBakedMovieClip projectileAnimation;
 
         private Rigidbody rb;
         private Renderer m_renderer;
@@ -34,8 +36,8 @@ namespace Assets.Scripts.Game.Actors.Water {
             m_renderer = gameObject.GetComponent<Renderer>();
             rb = gameObject.GetComponent<Rigidbody>();
             m_renderers = gameObject.transform.Find("GFX").GetComponentsInChildren<SpriteRenderer>();
-            m_waterSplashSprite.GetComponent<Renderer>().enabled = false;
-            m_waterSprite.GetComponent<Renderer>().enabled = true;
+            m_waterSplashSprite.GetComponent<Renderer>().enabled = false; // useless
+            m_waterSprite.GetComponent<Renderer>().enabled = true; // useless
         }
 
         protected void Start () {
@@ -43,6 +45,7 @@ namespace Assets.Scripts.Game.Actors.Water {
             m_ground = GameObject.Find("Level").transform;
             m_startZDistance = transform.position.z;
             splashAnimation.gameObject.SetActive(false);
+            projectileAnimation.gameObject.SetActive(true);
         }
 
         protected void Update () {
@@ -72,6 +75,12 @@ namespace Assets.Scripts.Game.Actors.Water {
 
             if (burnable)
                 burnable.TryExtinguish();
+            else {
+                Sprinkler sprinkler = collision.gameObject.GetComponent<Sprinkler>();
+                if (sprinkler) {
+                    sprinkler.TryToFill();
+                }
+            }
         }
 
         private void CheckCollisionGround () {
@@ -93,7 +102,12 @@ namespace Assets.Scripts.Game.Actors.Water {
         private void UpdateHeightFeedBack () {
             // this calcul seem a bit wrong, but in global it work.
             //Debug.Log("("+m_startZDistance+" - "+transform.position.z+") / "+m_startZDistance);
-            SetAlphas(alphaByHeight.Evaluate(Mathf.Clamp((m_startZDistance - transform.position.z) / m_startZDistance, 0, 1))); // ((-400) - (-380))/(-400) // ((-total) - (-current))/(-total) // m_startZDistance / transform.position.z
+
+            // this one only work for sprite renderer, not GAF
+            //SetAlphas(alphaByHeight.Evaluate(Mathf.Clamp((m_startZDistance - transform.position.z) / m_startZDistance, 0, 1))); // ((-400) - (-380))/(-400) // ((-total) - (-current))/(-total) // m_startZDistance / transform.position.z
+
+            float newScale = alphaByHeight.Evaluate(Mathf.Clamp((m_startZDistance - transform.position.z) / m_startZDistance, 0, 1));
+            transform.localScale = new Vector3(newScale, newScale, 1);
         }
 
         public void SetAlphas (float newAlpha) {
@@ -110,6 +124,7 @@ namespace Assets.Scripts.Game.Actors.Water {
 
         private void PlaySplash () {
             //splashAnimation.GetComponent<Renderer>().enabled = true;
+            projectileAnimation.gameObject.SetActive(false);
             splashAnimation.gameObject.SetActive(true);
             splashAnimation.play();
         }

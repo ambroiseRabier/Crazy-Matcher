@@ -16,7 +16,7 @@ public abstract class Burnable : MonoBehaviour
 
     public Matches matchesBurnMe;
 
-    [SerializeField] private MeshRenderer m_Gfx;
+    //[SerializeField] private MeshRenderer m_Gfx;
 
     [Header("To debug")]
     [SerializeField]
