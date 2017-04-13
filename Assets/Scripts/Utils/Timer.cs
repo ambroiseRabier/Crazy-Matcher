@@ -97,10 +97,10 @@ public class Timer : MonoBehaviour
     {
         while(true)
         {
-
             if (IsPlaying)
             {
-                RemainingSeconds -= Time.deltaTime;
+                RemainingSeconds -= Time.unscaledDeltaTime;
+
 
                 if (m_LastEmitUpdateRemainingSeconds - RemainingSeconds >= MinIntervalForTimeUpdate)
                 {

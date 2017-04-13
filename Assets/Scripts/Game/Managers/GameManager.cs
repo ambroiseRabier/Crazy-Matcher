@@ -161,9 +161,7 @@ public class GameManager : Singleton<GameManager>
             }
             else if (m_currentGameState == GameState.WIN_SCREEN)
             {
-                print("WIN SCREE");
                 CheckWinScreenButtonPress();
-
             }
             yield return null;
         }
@@ -451,9 +449,12 @@ public class GameManager : Singleton<GameManager>
         UpdateUIScore();
 
         m_currentGameState = GameState.IN_GAME;
+        Time.timeScale = 0;
+
         Timer.DelayThenPerform(1, () => {
-            VSIntroductionScreen.instance.Close();
-            GlobalEventBus.onStartLevel.Invoke();
+            VSIntroductionScreen.instance.Close(()=>{
+                Starter.instance.StartStarterThenPerformOnEnd(GlobalEventBus.onStartLevel.Invoke);
+            });
         });
     }
 
@@ -512,7 +513,7 @@ public class GameManager : Singleton<GameManager>
                 m_scoreMatchesP2++;
         }
 
-        Timer.DelayThenPerform(2, () => { print("MES COUILLES"); m_currentGameState = GameState.WIN_SCREEN; });
+        Timer.DelayThenPerform(2, () => { m_currentGameState = GameState.WIN_SCREEN; });
         UpdateUIScore();
     }
 
