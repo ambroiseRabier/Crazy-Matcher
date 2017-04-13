@@ -103,6 +103,8 @@ public abstract class CanvasScreen<T> : Singleton<T> where T : Component
 
     private void CanvasScreenMachineStates_OnEnter(CanvasScreenState state)
     {
+        Debug.Log("Enter state " + state + " on " + GetType().Name);
+
         switch (state)
         {
             case CanvasScreenState.CLOSED:
@@ -131,7 +133,29 @@ public abstract class CanvasScreen<T> : Singleton<T> where T : Component
     /// <param name="actionOnOpened"></param>
     public void Open(Action actionOnOpened = null)
     {
-        ChangeStateThenPerformCallBackOnCompleted(CanvasScreenState.OPENED, OnOpened, actionOnOpened);
+        CanvasScreenState targetedState = CanvasScreenState.OPENED;
+
+        if (actionOnOpened != null)
+        {
+            if (State == targetedState)
+            {
+                actionOnOpened();
+                return;
+            }
+            else
+            {
+                CanvasScreenEventHandler onStatedCompletedCallback = null;
+
+                onStatedCompletedCallback = (T canvasScreen) => {
+                    actionOnOpened();
+                    OnOpened -= onStatedCompletedCallback;
+                };
+
+                OnOpened += onStatedCompletedCallback;
+            }
+        }
+
+        DesiredState = targetedState;
     }
 
     /// <summary>
@@ -141,16 +165,13 @@ public abstract class CanvasScreen<T> : Singleton<T> where T : Component
     /// <param name="actionOnClosed"></param>
     public void Close(Action actionOnClosed = null)
     {
-        ChangeStateThenPerformCallBackOnCompleted(CanvasScreenState.CLOSED, OnClosed, actionOnClosed);
-    }
+        CanvasScreenState targetedState = CanvasScreenState.CLOSED;
 
-    private void ChangeStateThenPerformCallBackOnCompleted(CanvasScreenState targetedState, CanvasScreenEventHandler eventHandler, Action callBack)
-    {
-        if (callBack != null)
+        if (actionOnClosed != null)
         {
             if (State == targetedState)
             {
-                callBack();
+                actionOnClosed();
                 return;
             }
             else
@@ -158,11 +179,11 @@ public abstract class CanvasScreen<T> : Singleton<T> where T : Component
                 CanvasScreenEventHandler onStatedCompletedCallback = null;
 
                 onStatedCompletedCallback = (T canvasScreen) => {
-                    callBack();
-                    eventHandler -= onStatedCompletedCallback;
+                    actionOnClosed();
+                    OnOpened -= onStatedCompletedCallback;
                 };
 
-                eventHandler += onStatedCompletedCallback;
+                OnOpened += onStatedCompletedCallback;
             }
         }
 
