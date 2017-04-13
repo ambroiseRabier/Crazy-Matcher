@@ -66,8 +66,6 @@ public abstract class Burnable : MonoBehaviour
         if (OnStartBurn != null)
             OnStartBurn(this);
 
-
-        SetMaterialOnFire();
         InstantiateFire();
 
         m_StartedBurnCoroutine = StartCoroutine(BurnCoroutine());
@@ -123,11 +121,5 @@ public abstract class Burnable : MonoBehaviour
         m_fire = Instantiate(m_FirePrefab);
         m_fire.transform.parent = transform;
         m_fire.transform.localPosition = Vector2.zero;
-    }
-
-
-    private void SetMaterialOnFire()
-    {
-        m_Gfx.GetComponent<MeshRenderer>().material = m_materialOnFire;
     }
 }
