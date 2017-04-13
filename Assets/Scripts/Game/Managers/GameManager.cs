@@ -155,6 +155,10 @@ public class GameManager : Singleton<GameManager>
         {
             GlobalEventBus.onMenu.Invoke();
         }
+        else if (Input.GetButtonDown("Fire2_P1"))
+        {
+            QuitApplication();
+        }
     }
 
     private void CheckMenuButtonPress()
@@ -162,6 +166,10 @@ public class GameManager : Singleton<GameManager>
         if (Input.GetButtonDown("Submit") || Input.GetButtonDown("Fire1_P1"))
         {
             GlobalEventBus.onLoadingScene.Invoke(1);
+        }
+        else if (Input.GetButtonDown("Fire2_P1"))
+        {
+            GlobalEventBus.onTitleScreen.Invoke();
         }
 
     }
@@ -178,6 +186,15 @@ public class GameManager : Singleton<GameManager>
             WinScreen.instance.Close();
             GlobalEventBus.onLoadingScene.Invoke(0);
         }
+    }
+
+    private void QuitApplication()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 
     private void StartLevel()
