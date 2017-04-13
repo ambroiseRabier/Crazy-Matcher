@@ -13,10 +13,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EnableSequenceCaching: 0
   m_AssetVersion: 4
-  m_AudioResourcesDirectory: 
+  m_AudioResourcesDirectory: Graphism/Animations/GAF/Matches/Run/MatchesBodyState1/
   m_AssetData: 434147000508fc00000078da63640081067b4628cdc9c009a4e5fe038112e35e465e868b402e331043144c3cccd070ef30907606d2ce309a919bc1293fa532beb824b124d59083c10366284813233fb2a45e415e3ac23e860608767080e0067bb891302bb918f8a04c26b82b78184ca16c08861ac6c4000320734018990f733a020000208226f8
   m_GUID: e013844e699829c47af0041354268267
-  m_Path: 
+  m_Path: Graphism/Animations/GAF/Matches/Run/MatchesBodyState1/
   m_IsExternalDataCollected: 1
   m_ExternalData:
   - m_TimelineID: 3
