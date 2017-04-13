@@ -235,6 +235,10 @@ public class Matches : Burnable
     }
 
     private void checkFlipX () {
+        // no instant comback to default looking left side if percuting obstacle. (only players take obstacle)
+        if (gameObject.GetComponent<Rigidbody>().velocity.x == 0)
+            return;
+
         bool goingRight = HasController ? gameObject.GetComponent<Rigidbody>().velocity.x > 0 : m_NavMeshAgent.velocity.x > 0;
         Transform animContainer = transform.Find("GFX").transform;
         float newScale = goingRight ? 1 : -1;

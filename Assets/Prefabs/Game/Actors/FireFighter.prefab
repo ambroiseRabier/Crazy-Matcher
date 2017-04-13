@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114142870643497246}
   - component: {fileID: 114488819972318814}
   - component: {fileID: 82663173695332022}
+  - component: {fileID: 114640098925858958}
   m_Layer: 0
   m_Name: FireFighter
   m_TagString: Untagged
@@ -217,6 +218,17 @@ MonoBehaviour:
   m_defaultScale: 0.9
   m_shootScale: 1
   m_fireFigther: {fileID: 1364742906984592}
+--- !u!114 &114640098925858958
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1364742906984592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ea71ff021c1f7146ad21f4c694bf290, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212699328800073104
 SpriteRenderer:
   m_ObjectHideFlags: 1
