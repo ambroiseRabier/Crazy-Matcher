@@ -22,6 +22,9 @@ public class Matches : Burnable
     [SerializeField] private GameObject m_runGFX;
     [SerializeField] private GameObject m_dieFX;
 
+    [SerializeField] private GameObject m_gfxExplosionFlame;
+    [SerializeField] private GameObject m_positionGfxFlame;
+
     private float m_speed;
     private NavMeshAgent m_NavMeshAgent;
     private VelocityFromControllerMatche m_VelocityFromController;
@@ -129,6 +132,15 @@ public class Matches : Burnable
 
         EnableGfx(m_idleGFX);
     }
+
+    private void InstantiateGfxFlame()
+    {
+        GameObject gfx = Instantiate(m_gfxExplosionFlame);
+        gfx.SetActive(true);
+        gfx.transform.SetParent(m_positionGfxFlame.transform, false);
+        gfx.transform.localPosition = Vector2.zero;
+
+    }
     
 
     /// <summary>
@@ -142,6 +154,7 @@ public class Matches : Burnable
         {
             Speed = m_burnSpeed;
 
+            InstantiateGfxFlame();
             EnableGfx(m_runGFX);
 
             return true;
