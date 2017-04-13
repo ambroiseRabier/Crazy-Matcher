@@ -1,7 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class TestStarter : MonoBehaviour {
-	private void Start () {
-        Starter.instance.StartStarterThenPerform(() => { Debug.Log("animationended"); });
+	private IEnumerator Start () {
+        yield return null;
+        Starter.instance.StartStarterThenPerform(() => {
+            Debug.Log("animationended");
+            Starter.instance.StartStarterThenPerform(() => Debug.Log("Ahaha"));
+        });
     }
 }
