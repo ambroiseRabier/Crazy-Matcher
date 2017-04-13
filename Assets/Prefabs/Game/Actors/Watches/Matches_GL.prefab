@@ -220,10 +220,10 @@ MonoBehaviour:
   m_BurnTime: 10
   m_startFireSoundClip: {fileID: 8300000, guid: 0f4bf33b49d82e3419d1241fa27dbdc3,
     type: 3}
-  m_startPlayer: 0
+  m_startPlayer: 1
   m_burnSpeed: 500
   m_normalSpeed: 100
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: f619066f7efb6bf45afdd5cdb1326671, type: 3}
   m_rangeNormal: {x: 50, y: 50}
   m_rangeBurning: {x: 100, y: 100}
   m_minDistToNavMeshDestination: 30
