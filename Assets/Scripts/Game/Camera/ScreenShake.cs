@@ -60,9 +60,9 @@ namespace Assets.Scripts.Game.Camera {
         }
 
         protected int GetBurningObjectiveNumber () {
-            BurnableObjectif[] list = GameObject.FindObjectsOfType<BurnableObjectif>();
+            Objectif[] list = GameObject.FindObjectsOfType<Objectif>();
             int count = 0;
-            foreach (BurnableObjectif element in list) {
+            foreach (Objectif element in list) {
                 if (element.IsBurning)
                     count++;
             }
