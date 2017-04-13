@@ -1501,12 +1501,12 @@ MeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: c812611328ce7424d89e94de4f2dd36e, type: 2}
-  - {fileID: 2100000, guid: c812611328ce7424d89e94de4f2dd36e, type: 2}
-  - {fileID: 2100000, guid: c812611328ce7424d89e94de4f2dd36e, type: 2}
-  - {fileID: 2100000, guid: c812611328ce7424d89e94de4f2dd36e, type: 2}
-  - {fileID: 2100000, guid: c812611328ce7424d89e94de4f2dd36e, type: 2}
-  - {fileID: 2100000, guid: c812611328ce7424d89e94de4f2dd36e, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3242,7 +3242,7 @@ MonoBehaviour:
     m_SpriteLayerName: Default
     m_SpriteLayerValue: 0
     m_PivotOffset: {x: 0, y: 0}
-    m_HasIndividualMaterial: 0
+    m_HasIndividualMaterial: 1
     m_AnimationColor: {r: 1, g: 1, b: 1, a: 1}
     m_AnimationColorOffset: {x: 0, y: 0, z: 0, w: 0}
     m_StencilValue: 0
@@ -3442,6 +3442,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Speed: 0
   m_Controller: {fileID: 0}
+  m_gafHeadName: Matches_head_baked
+  m_ImLostColor: {r: 0, g: 0, b: 1, a: 1}
+  m_gafHead: {fileID: 114536339662284794}
 --- !u!114 &114642438330799660
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3529,7 +3532,7 @@ MonoBehaviour:
     type: 2}
   matchesBurnMe: {fileID: 0}
   m_materialOnFire: {fileID: 2100000, guid: bda68c0a325c0a14e895b00dd236d363, type: 2}
-  m_BurnTime: 10
+  m_BurnTime: 50
   m_startFireSoundClip: {fileID: 8300000, guid: 0f4bf33b49d82e3419d1241fa27dbdc3,
     type: 3}
   m_startPlayer: 0
