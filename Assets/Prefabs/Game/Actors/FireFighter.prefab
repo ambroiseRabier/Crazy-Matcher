@@ -121,6 +121,7 @@ MonoBehaviour:
   m_waterResource: 0
   WATER_GAIN_FACTOR: 5
   WATER_GAIN_INSTANT: 0
+  m_shootCadencyMS: 30
 --- !u!114 &114622229930473746
 MonoBehaviour:
   m_ObjectHideFlags: 1
