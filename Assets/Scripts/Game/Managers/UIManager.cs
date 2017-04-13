@@ -66,6 +66,8 @@ public class UIManager : MultiScreenManager<UIManager>
         GlobalEventBus.onPause.AddListener(OnPause);
         GlobalEventBus.onTeamWin.AddListener(OnTeamWin);
         GlobalEventBus.onWaterChange.AddListener(OnWaterChange);
+        GlobalEventBus.onInputScreen.AddListener(OnInputScreen);
+        GlobalEventBus.onCreditScreen.AddListener(OnCreditScreen);
     }
     
 
@@ -107,6 +109,11 @@ public class UIManager : MultiScreenManager<UIManager>
             WinScreen.instance.Close();
         }
 
+        if (InputScreen.instance.IsOpened)
+        {
+            InputScreen.instance.Close();
+        }
+
     }
 
     #region Events
@@ -138,6 +145,19 @@ public class UIManager : MultiScreenManager<UIManager>
         CinematicIntroduction.instance.Open();
         //EnableOnlyScreen(m_titleScreen);
         //CloseWinScreen();
+    }
+
+    private void OnInputScreen()
+    {
+        CloseAllScreens();
+        InputScreen.instance.Open();
+    }
+
+
+    private void OnCreditScreen()
+    {
+        CloseAllScreens();
+        //CreditScreen.instance.Open();
     }
 
     private void OnPause()
