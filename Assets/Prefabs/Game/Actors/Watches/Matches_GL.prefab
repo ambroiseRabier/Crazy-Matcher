@@ -422,7 +422,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4622914137352478}
-  - component: {fileID: 114959226330918256}
   m_Layer: 0
   m_Name: targetedArmTransform
   m_TagString: Untagged
@@ -4127,19 +4126,6 @@ MonoBehaviour:
       y: 22
       width: 83
       height: 128
---- !u!114 &114959226330918256
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1796002224904238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf1e0aa9cd61df54c81d1ceb05d5f74c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_burnable: {fileID: 114690099225377488}
-  m_targetedTransform: {fileID: 0}
 --- !u!114 &114963144375119728
 MonoBehaviour:
   m_ObjectHideFlags: 1
