@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent), typeof(VelocityFromControllerMatche))]
-[RequireComponent(typeof(AudioSource))]
 public class Matches : Burnable
 {
     #region Members
@@ -12,6 +11,7 @@ public class Matches : Burnable
 
     [SerializeField] private float m_burnSpeed;
     [SerializeField] private float m_normalSpeed;
+    [SerializeField] private AudioClip m_audioClip;
 
     [SerializeField] private float m_rangeX;
     [SerializeField] private float m_rangeY;
@@ -147,7 +147,7 @@ public class Matches : Burnable
 
     public void Die()
     {
-        m_DeathFX.Play();
+        GameManager.instance.PlaySound(m_audioClip);
         Destroy(gameObject);
     }
 

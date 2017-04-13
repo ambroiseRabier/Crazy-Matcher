@@ -5,7 +5,9 @@ using Events;
 using Utils;
 using System.Collections.Generic;
 using Assets.Scripts.Game.Actors.Player_Firefighter;
+using Random = UnityEngine.Random;
 
+[RequireComponent(typeof(AudioSource))]
 public class GameManager : Singleton<GameManager>
 {
 
@@ -32,6 +34,7 @@ public class GameManager : Singleton<GameManager>
     private int m_scoreFireFightP2;
     private int m_scoreMatchesP2;
     private bool m_p1IsMatches;
+    private AudioSource m_audioSource;
 
 
     public enum GameState
@@ -131,6 +134,12 @@ public class GameManager : Singleton<GameManager>
 
     #region Game
 
+    protected override void Awake()
+    {
+        base.Awake();
+        m_audioSource = GetComponent<AudioSource>();
+    }
+
     void Update()
     {
         // DEGUEULASSE NE PAS REPRODUIRE
@@ -159,6 +168,12 @@ public class GameManager : Singleton<GameManager>
         {
             QuitApplication();
         }
+    }
+
+    public void PlaySound(AudioClip audioClip)
+    {
+        m_audioSource.clip = audioClip;
+        m_audioSource.Play();
     }
 
     private void CheckMenuButtonPress()
