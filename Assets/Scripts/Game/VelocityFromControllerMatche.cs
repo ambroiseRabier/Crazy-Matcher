@@ -20,23 +20,22 @@ namespace Assets.Scripts.Game {
         }
 
         override protected void FixedUpdate () {
-
-            if (m_Controller) {
-                if (firstInputSet && m_Controller.Joystick.normalized != Vector3.zero) {
-
+            if (m_Controller && m_Controller.Joystick.normalized != Vector3.zero)
+            {
+                if (firstInputSet)
+                {
                     ThirdTest();
-                } else {
-                    if (!firstInputSet && m_Controller.Joystick.normalized != Vector3.zero) {
-                        firstInputSet = true;
-                        //previousInputAngle = Mathf.Atan2(m_Controller.Joystick.normalized.y, m_Controller.Joystick.normalized.x);
-                        previousDirection = m_Controller.Joystick.normalized;
-                        m_currentDirection = m_Controller.Joystick.normalized;
-                    }
-                        
                 }
-                
+                else
+                {
+                    firstInputSet = true;
+                    //previousInputAngle = Mathf.Atan2(m_Controller.Joystick.normalized.y, m_Controller.Joystick.normalized.x);
+                    previousDirection = m_Controller.Joystick.normalized;
+                    m_currentDirection = m_Controller.Joystick.normalized;
+                }
+
             }
-            
+
         }
 
         void ThirdTest() {

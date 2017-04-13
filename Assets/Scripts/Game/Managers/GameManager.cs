@@ -6,6 +6,7 @@ using Utils;
 using System.Collections.Generic;
 using Assets.Scripts.Game.Actors.Player_Firefighter;
 using Random = UnityEngine.Random;
+using Assets.Scripts.Game;
 
 [RequireComponent(typeof(AudioSource))]
 public class GameManager : Singleton<GameManager>
