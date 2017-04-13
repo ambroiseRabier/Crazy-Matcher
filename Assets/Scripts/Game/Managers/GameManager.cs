@@ -147,7 +147,7 @@ public class GameManager : Singleton<GameManager>
 
     private void CheckPressStart()
     {
-        if (Input.GetButtonDown("Submit"))
+        if (Input.GetButtonDown("Submit") || Input.GetButtonDown("Fire1_P1"))
         {
             GlobalEventBus.onMenu.Invoke();
         }
@@ -155,7 +155,7 @@ public class GameManager : Singleton<GameManager>
 
     private void CheckMenuButtonPress()
     {
-        if (Input.GetButtonDown("Fire1_P1"))
+        if (Input.GetButtonDown("Submit") || Input.GetButtonDown("Fire1_P1"))
         {
             GlobalEventBus.onLoadingScene.Invoke(1);
         }
@@ -166,11 +166,13 @@ public class GameManager : Singleton<GameManager>
     {
         if (Input.GetButtonDown("Fire1_P1"))
         {
+            WinScreen.instance.Close();
             GlobalEventBus.onRestartGame.Invoke();
         }
         else if (Input.GetButtonDown("Fire2_P1"))
         {
-            WinScreen.instance.Close(() => GlobalEventBus.onLoadingScene.Invoke(0));
+            WinScreen.instance.Close();
+            GlobalEventBus.onLoadingScene.Invoke(0);
         }
     }
 
