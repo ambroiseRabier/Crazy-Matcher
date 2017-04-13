@@ -172,8 +172,11 @@ public class GameManager : Singleton<GameManager>
 
     public void PlaySound(AudioClip audioClip)
     {
-        m_audioSource.clip = audioClip;
-        m_audioSource.Play();
+        if (m_audioSource != null)
+        {
+            m_audioSource.clip = audioClip;
+            m_audioSource.Play();
+        }
     }
 
     private void CheckMenuButtonPress()
@@ -254,6 +257,7 @@ public class GameManager : Singleton<GameManager>
 
     private void ChangePlayer(Matches matches)
     {
+        print("ChangePlayer");
         m_currentPlayerMatches.Controller = null;
         m_currentPlayerMatches.Die();
         m_currentPlayerMatches = matches;
