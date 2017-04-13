@@ -454,7 +454,8 @@ public class GameManager : Singleton<GameManager>
                 m_scoreMatchesP2++;
         }
 
-        m_currentGameState = GameState.WIN_SCREEN;
+        Timer.DelayThenPerform(2, () => { m_currentGameState = GameState.WIN_SCREEN; });
+        UpdateUIScore();
     }
 
     #endregion
