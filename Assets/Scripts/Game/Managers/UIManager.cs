@@ -139,6 +139,10 @@ public class UIManager : MultiScreenManager<UIManager>
 
     private void CloseWinScreen()
     {
+        if (WinScreen.instance == null) {
+            Debug.LogWarning("WinScreen.instance is null");
+            return;
+        }
         if (WinScreen.instance.IsOpened)
         {
             WinScreen.instance.Close();
