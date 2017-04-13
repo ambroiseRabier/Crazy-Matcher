@@ -196,10 +196,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SHOOT_POWER: 250
   CONTROL_ROTATION_FACTOR: 4.5
-  DISPERSION_FACTOR: 10
+  DISPERSION_FACTOR: 30
   m_WaterPrefab: {fileID: 1085542151676000, guid: 0aed26aae035cd54ab1f4af9f51a1dc1,
     type: 2}
-  m_waterResourceMAX: 100
+  m_waterResourceMAX: 75
   m_waterResource: 0
   WATER_GAIN_FACTOR: 5
   WATER_GAIN_INSTANT: 0
