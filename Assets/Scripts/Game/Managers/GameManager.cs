@@ -216,7 +216,7 @@ public class GameManager : Singleton<GameManager>
 
     private void CheckWinScreenButtonPress()
     {
-        if (Input.GetButtonDown("Fire1_P1"))
+        if (Input.GetButtonDown("Submit") || Input.GetButtonDown("Fire1_P1"))
         {
             WinScreen.instance.Close();
             GlobalEventBus.onRestartGame.Invoke();
