@@ -387,7 +387,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1512098494888944}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 350, y: 103, z: 1}
+  m_LocalPosition: {x: -448, y: 64, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4894289407966192}
@@ -847,8 +847,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 98.2, y: 136.29, z: 5}
-  m_Center: {x: 9.7, y: -6.7, z: 0}
+  m_Size: {x: 71.9, y: 88.6, z: 5}
+  m_Center: {x: 3.4, y: -4, z: 0}
 --- !u!114 &114011138353877342
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1536,6 +1536,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_sprinklerWaterPrefab: {fileID: 1870356769502820, guid: b435135bc4d9d6243906bfc73b742703,
     type: 2}
+  m_audioClip: {fileID: 0}
   m_fillSpeed: 0.1
   m_emptyingSpeed: 0.1
 --- !u!114 &114874778003856012
