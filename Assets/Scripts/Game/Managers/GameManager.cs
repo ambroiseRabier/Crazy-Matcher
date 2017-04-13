@@ -172,8 +172,11 @@ public class GameManager : Singleton<GameManager>
 
     public void PlaySound(AudioClip audioClip)
     {
-        m_audioSource.clip = audioClip;
-        m_audioSource.Play();
+        if (m_audioSource != null)
+        {
+            m_audioSource.clip = audioClip;
+            m_audioSource.Play();
+        }
     }
 
     private void CheckMenuButtonPress()
@@ -254,6 +257,7 @@ public class GameManager : Singleton<GameManager>
 
     private void ChangePlayer(Matches matches)
     {
+        print("ChangePlayer");
         m_currentPlayerMatches.Controller = null;
         m_currentPlayerMatches.Die();
         m_currentPlayerMatches = matches;
@@ -381,6 +385,20 @@ public class GameManager : Singleton<GameManager>
         GlobalEventBus.onTitleScreen.Invoke();
     }
 
+    private void UpdatePlayer()
+    {
+        if (m_p1IsMatches)
+        {
+            VSIntroductionScreen.instance.SetP1Team(Team.MATCHES);
+            VSIntroductionScreen.instance.SetP2Team(Team.FIRE_FIGHTER);
+        }
+        else
+        {
+            VSIntroductionScreen.instance.SetP1Team(Team.FIRE_FIGHTER);
+            VSIntroductionScreen.instance.SetP2Team(Team.MATCHES);
+        }
+    }
+
     #endregion
 
 
@@ -407,6 +425,7 @@ public class GameManager : Singleton<GameManager>
 
     private void OnInitLevel()
     {
+        UpdatePlayer();
         UpdateUIScore();
 
         m_currentGameState = GameState.IN_GAME;
@@ -443,6 +462,7 @@ public class GameManager : Singleton<GameManager>
     private void OnRestartGame()
     {
         m_p1IsMatches = !m_p1IsMatches;
+        UpdatePlayer();
         GlobalEventBus.onLoadingScene.Invoke(1);
     }
 

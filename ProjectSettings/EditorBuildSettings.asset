@@ -16,4 +16,10 @@ EditorBuildSettings:
     guid: 6f9037dbf63fe8241ad1acedd2e66fdc
   - enabled: 1
     path: Assets/Scenes/Test/AMB_Level01.unity
-    guid: 00000000000000000000000000000000
+    guid: 2c0e362e2d0736a49b64f858b220927a
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: 6f722b6a11a8b1e429bfc6368c47ec5e
+  - enabled: 1
+    path: Assets/Scenes/Level01.unity
+    guid: 7f981718b8eed834cb3719db77761f70

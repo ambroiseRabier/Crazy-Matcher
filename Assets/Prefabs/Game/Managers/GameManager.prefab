@@ -53,8 +53,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SingletonMode: 1
   m_sceneName:
-  - GL_Main
-  - GL_Level01
+  - Main
+  - Level01
   m_timeBeforePlayerChange: 1
   m_controllerP1: {fileID: 0}
   m_controllerP2: {fileID: 0}
