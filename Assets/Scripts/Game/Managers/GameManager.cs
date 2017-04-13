@@ -180,7 +180,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (Input.GetButtonDown("Fire2_P1") || Input.GetButtonDown("Fire2_P2"))
         {
-            GlobalEventBus.onTitleScreen.Invoke();
+            GlobalEventBus.onMenu.Invoke();
         }
     }
 

@@ -150,7 +150,7 @@ public class UIManager : MultiScreenManager<UIManager>
 
     private void OnInputScreen()
     {
-        CloseAllScreens();
+        //CloseAllScreens();
         InputScreen.instance.Open();
     }
 
