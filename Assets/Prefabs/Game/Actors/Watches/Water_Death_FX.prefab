@@ -1,0 +1,351 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1259688678444478}
+  m_IsPrefabParent: 1
+--- !u!1 &1259688678444478
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4131064406270540}
+  - component: {fileID: 33836089963623600}
+  - component: {fileID: 23469037053265734}
+  - component: {fileID: 114869615349022340}
+  - component: {fileID: 114566280042379852}
+  - component: {fileID: 114535710965464784}
+  - component: {fileID: 114089364752731498}
+  - component: {fileID: 114312574008194592}
+  m_Layer: 0
+  m_Name: Water_Death_FX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4131064406270540
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1259688678444478}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &23469037053265734
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1259688678444478}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_Materials:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &33836089963623600
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1259688678444478}
+  m_Mesh: {fileID: 0}
+--- !u!114 &114089364752731498
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1259688678444478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f130c6cbc5524dca948bb59d66fb47c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Parent: {fileID: 0}
+  m_GAFAsset: {fileID: 11400000, guid: af21c88b43c2d7f43b1f69f88bcd1ccd, type: 2}
+  m_IsInitialized: 1
+  m_TimelineID: 8
+  m_Settings:
+    m_Scale: 1
+    m_CSF: 1
+    m_PixelsPerUnit: 2.5
+    m_PlayAutomatically: 1
+    m_IgnoreTimeScale: 0
+    m_PerfectTiming: 1
+    m_PlayInBackground: 1
+    m_WrapMode: 1
+    m_TargetFPS: 60
+    m_SpriteLayerID: 0
+    m_SpriteLayerName: Default
+    m_SpriteLayerValue: 0
+    m_PivotOffset: {x: 0, y: 0}
+    m_HasIndividualMaterial: 0
+    m_AnimationColor: {r: 1, g: 1, b: 1, a: 1}
+    m_AnimationColorOffset: {x: 0, y: 0, z: 0, w: 0}
+    m_StencilValue: 0
+    m_ZLayerScale: 1
+    m_DecomposeFlashTransform: 0
+    m_UseLights: 0
+    m_CacheStates: 0
+  m_CurrentFrameNumber: 0
+  m_InternalFrameNumber: 1
+  m_IsActive: 1
+  m_AudioSources: []
+  m_ClipVersion: 6
+  m_SequenceIndex: 0
+  m_ObjectsManager: {fileID: 114566280042379852}
+--- !u!114 &114312574008194592
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1259688678444478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1baf34de0ddf87409a5c4b048d9d75e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114535710965464784
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1259688678444478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -736414528, guid: 86057e0c3e6f68343894579d83be909f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Parent: {fileID: 0}
+  m_Childs: []
+  m_LocalMatrix:
+    e00: 1
+    e01: 0
+    e02: 0
+    e03: 0
+    e10: 0
+    e11: 1
+    e12: 0
+    e13: 0
+    e20: 0
+    e21: 0
+    e22: 1
+    e23: 0
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 1
+  m_IsLocalVisible: 1
+  m_RealVisibility: 0
+  m_StencilValue: 0
+  m_HasIndividualMaterial: 0
+--- !u!114 &114566280042379852
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1259688678444478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3070aa36247534dbeb4772e4c9f6a20c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MovieClip: {fileID: 114089364752731498}
+  m_MeshManager: {fileID: 114869615349022340}
+  m_BakedObjects:
+  - m_Data:
+      m_Name: 2_171
+      m_Clip: {fileID: 114089364752731498}
+      m_Manager: {fileID: 114566280042379852}
+      m_ID: 171
+      m_AtlasCustomElementID: -1
+      m_AtlasInitialElementID: 2
+      m_ObjectType: 0
+      m_BehaviourType: 2
+      m_IsVisible: 1
+      m_Offset: {x: 0, y: 0}
+      m_MeshSizeMultiplier: {x: 1, y: 1}
+      m_Material: {fileID: 0}
+      m_UseCustomAtlasTextureRect: 0
+      m_AtlasTextureRect:
+        serializedVersion: 2
+        x: 252
+        y: 267
+        width: 107
+        height: 166
+    m_Controller: {fileID: 0}
+  - m_Data:
+      m_Name: 7_176_mask
+      m_Clip: {fileID: 114089364752731498}
+      m_Manager: {fileID: 114566280042379852}
+      m_ID: 176
+      m_AtlasCustomElementID: -1
+      m_AtlasInitialElementID: 7
+      m_ObjectType: 0
+      m_BehaviourType: 1
+      m_IsVisible: 1
+      m_Offset: {x: 0, y: 0}
+      m_MeshSizeMultiplier: {x: 1, y: 1}
+      m_Material: {fileID: 0}
+      m_UseCustomAtlasTextureRect: 0
+      m_AtlasTextureRect:
+        serializedVersion: 2
+        x: 962
+        y: 882
+        width: 20
+        height: 142
+    m_Controller: {fileID: 0}
+  - m_Data:
+      m_Name: 1_170_mask
+      m_Clip: {fileID: 114089364752731498}
+      m_Manager: {fileID: 114566280042379852}
+      m_ID: 170
+      m_AtlasCustomElementID: -1
+      m_AtlasInitialElementID: 1
+      m_ObjectType: 0
+      m_BehaviourType: 1
+      m_IsVisible: 1
+      m_Offset: {x: 0, y: 0}
+      m_MeshSizeMultiplier: {x: 1, y: 1}
+      m_Material: {fileID: 0}
+      m_UseCustomAtlasTextureRect: 0
+      m_AtlasTextureRect:
+        serializedVersion: 2
+        x: 1051
+        y: 240
+        width: 23
+        height: 142
+    m_Controller: {fileID: 0}
+  - m_Data:
+      m_Name: 3_172_mask
+      m_Clip: {fileID: 114089364752731498}
+      m_Manager: {fileID: 114566280042379852}
+      m_ID: 172
+      m_AtlasCustomElementID: -1
+      m_AtlasInitialElementID: 3
+      m_ObjectType: 0
+      m_BehaviourType: 1
+      m_IsVisible: 1
+      m_Offset: {x: 0, y: 0}
+      m_MeshSizeMultiplier: {x: 1, y: 1}
+      m_Material: {fileID: 0}
+      m_UseCustomAtlasTextureRect: 0
+      m_AtlasTextureRect:
+        serializedVersion: 2
+        x: 984
+        y: 882
+        width: 20
+        height: 141
+    m_Controller: {fileID: 0}
+  - m_Data:
+      m_Name: 4_173_mask
+      m_Clip: {fileID: 114089364752731498}
+      m_Manager: {fileID: 114566280042379852}
+      m_ID: 173
+      m_AtlasCustomElementID: -1
+      m_AtlasInitialElementID: 4
+      m_ObjectType: 0
+      m_BehaviourType: 1
+      m_IsVisible: 1
+      m_Offset: {x: 0, y: 0}
+      m_MeshSizeMultiplier: {x: 1, y: 1}
+      m_Material: {fileID: 0}
+      m_UseCustomAtlasTextureRect: 0
+      m_AtlasTextureRect:
+        serializedVersion: 2
+        x: 939
+        y: 882
+        width: 21
+        height: 141
+    m_Controller: {fileID: 0}
+  - m_Data:
+      m_Name: 5_174_mask
+      m_Clip: {fileID: 114089364752731498}
+      m_Manager: {fileID: 114566280042379852}
+      m_ID: 174
+      m_AtlasCustomElementID: -1
+      m_AtlasInitialElementID: 5
+      m_ObjectType: 0
+      m_BehaviourType: 1
+      m_IsVisible: 1
+      m_Offset: {x: 0, y: 0}
+      m_MeshSizeMultiplier: {x: 1, y: 1}
+      m_Material: {fileID: 0}
+      m_UseCustomAtlasTextureRect: 0
+      m_AtlasTextureRect:
+        serializedVersion: 2
+        x: 1059
+        y: 384
+        width: 22
+        height: 139
+    m_Controller: {fileID: 0}
+  - m_Data:
+      m_Name: 6_175_mask
+      m_Clip: {fileID: 114089364752731498}
+      m_Manager: {fileID: 114566280042379852}
+      m_ID: 175
+      m_AtlasCustomElementID: -1
+      m_AtlasInitialElementID: 6
+      m_ObjectType: 0
+      m_BehaviourType: 1
+      m_IsVisible: 1
+      m_Offset: {x: 0, y: 0}
+      m_MeshSizeMultiplier: {x: 1, y: 1}
+      m_Material: {fileID: 0}
+      m_UseCustomAtlasTextureRect: 0
+      m_AtlasTextureRect:
+        serializedVersion: 2
+        x: 1051
+        y: 93
+        width: 24
+        height: 145
+    m_Controller: {fileID: 0}
+--- !u!114 &114869615349022340
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1259688678444478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1685943208, guid: 86057e0c3e6f68343894579d83be909f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Clip: {fileID: 114089364752731498}

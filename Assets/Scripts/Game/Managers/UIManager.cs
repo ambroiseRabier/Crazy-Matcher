@@ -21,8 +21,6 @@ public class UIManager : MultiScreenManager<UIManager>
     private GameObject m_HUD;
     [SerializeField]
     private GameObject m_winScreen;
-    
-    
 
     [Header("HUD")]
     [SerializeField]
@@ -68,6 +66,8 @@ public class UIManager : MultiScreenManager<UIManager>
         GlobalEventBus.onPause.AddListener(OnPause);
         GlobalEventBus.onTeamWin.AddListener(OnTeamWin);
         GlobalEventBus.onWaterChange.AddListener(OnWaterChange);
+        GlobalEventBus.onInputScreen.AddListener(OnInputScreen);
+        GlobalEventBus.onCreditScreen.AddListener(OnCreditScreen);
     }
     
 
@@ -82,47 +82,102 @@ public class UIManager : MultiScreenManager<UIManager>
 
     #endregion
 
+    private void CloseAllScreens()
+    {
+        if (HUD.instance.IsOpened)
+        {
+            HUD.instance.Close();
+        }
+
+        if (TitleScreen.instance.IsOpened)
+        {
+            TitleScreen.instance.Close();
+        }
+
+        if (VSIntroductionScreen.instance.IsOpened)
+        {
+            VSIntroductionScreen.instance.Close();
+        }
+
+        if (CinematicIntroduction.instance.IsOpened)
+        {
+            CinematicIntroduction.instance.Close();
+        }
+
+        if (WinScreen.instance.IsOpened)
+        {
+            WinScreen.instance.Close();
+        }
+
+        if (InputScreen.instance.IsOpened)
+        {
+            InputScreen.instance.Close();
+        }
+
+    }
 
     #region Events
 
     private void OnMenu()
     {
-        EnableOnlyScreen(m_menu);
+        CloseAllScreens();
+        TitleScreen.instance.Open();
+
+        //EnableOnlyScreen(m_menu);
     }
 
     private void OnInitLevel()
     {
-        VSIntroductionScreen.instance.Open();
-        EnableOnlyScreen(m_HUD);
+        CloseAllScreens();
+        Timer.DelayThenPerform(0.25f, () => { VSIntroductionScreen.instance.Open(); });
+        
+        //EnableOnlyScreen(m_HUD);
     }
 
     private void OnStartLevel()
     {
+        CloseAllScreens();
         HUD.instance.Open();
     }
 
     private void OnTittleScreen()
     {
-        EnableOnlyScreen(m_titleScreen);
-        CloseWinScreen();
+        CloseAllScreens();
+        CinematicIntroduction.instance.Open();
+        //EnableOnlyScreen(m_titleScreen);
+        //CloseWinScreen();
+    }
+
+    private void OnInputScreen()
+    {
+        //CloseAllScreens();
+        InputScreen.instance.Open();
+    }
+
+
+    private void OnCreditScreen()
+    {
+        CloseAllScreens();
+        //CreditScreen.instance.Open();
     }
 
     private void OnPause()
     {
-        EnableOnlyScreen(m_pauseMenu);
+        //EnableOnlyScreen(m_pauseMenu);
     }
 
     private void OnTeamWin(GameManager.Team team)
     {
+        CloseAllScreens();
         //EnableOnlyScreen(m_winScreen);
-        HUD.instance.Close();
+        //HUD.instance.Close();
         WinScreen.instance.SetWinnerTeam(team);
         OpenWinScreen();
     }
 
     private void OnResume()
     {
-        EnableOnlyScreen(m_HUD);
+        //EnableOnlyScreen(m_HUD);
     }
 
     private void OnWaterChange(float newValue) 
