@@ -16,13 +16,7 @@ namespace Assets.Scripts.Game {
         private Vector3 previousDirection = Vector3.zero;
         private bool firstInputSet = false;
 
-        private Burnable m_burnableComponent;
-        [SerializeField] private AnimationCurve speedBurnCurve;
-        private float burnRatio;
-
         protected void Start () {
-            m_burnableComponent = gameObject.GetComponent<Burnable>();
-            m_burnableComponent.OnBurnRatioProgress += BurnableComponent_OnBurnRatioProgress;
         }
 
         protected void Update () {
@@ -50,13 +44,8 @@ namespace Assets.Scripts.Game {
             }
         }
 
-        private void BurnableComponent_OnBurnRatioProgress(Burnable burnable, float newBurnRatio) {
-            burnRatio = newBurnRatio;
-        }
-
         void SeventhController() {
-            print(speedBurnCurve.Evaluate(burnRatio));
-            m_Rigidbody.velocity = m_Controller.Joystick.normalized * m_Speed * speedBurnCurve.Evaluate(burnRatio);
+            m_Rigidbody.velocity = m_Controller.Joystick.normalized * m_Speed;
         }
 
         //physic control, whit max speed

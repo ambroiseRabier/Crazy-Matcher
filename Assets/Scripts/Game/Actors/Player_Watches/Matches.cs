@@ -20,6 +20,9 @@ public class Matches : Burnable
     private float m_speed;
     private NavMeshAgent m_NavMeshAgent;
     private VelocityFromControllerMatche m_VelocityFromController;
+
+    [SerializeField] private AnimationCurve speedBurnCurve;
+    private float burnRatio;
     #endregion
 
     #region Properties
@@ -103,6 +106,7 @@ public class Matches : Burnable
     {
         Controller = Controller; // (wtf), to call the setter one time
         StartMove();
+        OnBurnRatioProgress += BurnableComponent_OnBurnRatioProgress;
     }
     
 
@@ -141,7 +145,11 @@ public class Matches : Burnable
         base.InstantiateFire();
         m_fire.GetComponent<Burner>().fireOwner = this;
     }
-    
+
+    private void BurnableComponent_OnBurnRatioProgress(Burnable burnable, float newBurnRatio) {
+        burnRatio = newBurnRatio;
+    }
+
     #endregion
 
     public void Die()
@@ -171,6 +179,8 @@ public class Matches : Burnable
             Debug.Log("IsBurning " +IsBurning);
         if (IsBurned)
             Debug.Log("IsBurned " + IsBurned);*/
+
+        Speed = m_burnSpeed * speedBurnCurve.Evaluate(burnRatio); 
 
         if (!HasController) {
 

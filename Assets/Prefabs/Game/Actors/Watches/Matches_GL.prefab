@@ -183,24 +183,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Speed: 0
   m_Controller: {fileID: 0}
-  speedBurnCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
 --- !u!114 &114690099225377488
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -227,6 +209,24 @@ MonoBehaviour:
   m_rangeNormal: {x: 50, y: 50}
   m_rangeBurning: {x: 100, y: 100}
   m_minDistToNavMeshDestination: 30
+  speedBurnCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0.00077438354
+      value: 0.49920654
+      inSlope: 0.50118154
+      outSlope: 0.50118154
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0.50118154
+      outSlope: 0.50118154
+      tangentMode: 34
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
   PAUSE_TIME_RANDOM_RANGE_MIN: 1500
   PAUSE_TIME_RANDOM_RANGE_MAX: 2500
   PAUSE_WAIT_PROBABILITY: 0.75
