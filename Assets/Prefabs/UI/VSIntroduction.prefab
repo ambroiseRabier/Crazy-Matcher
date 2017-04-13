@@ -396,8 +396,8 @@ MonoBehaviour:
   m_SingletonMode: 1
   m_mamySprite: {fileID: 21300000, guid: a119ac17c8ffddf48a461e15ada73d0a, type: 3}
   m_matchesSprite: {fileID: 21300000, guid: 130c928d767590840aad2de29d5e3242, type: 3}
-  m_p1Image: {fileID: 114278443727978122}
-  m_p2Image: {fileID: 114669390574532532}
+  m_p1Image: {fileID: 114669390574532532}
+  m_p2Image: {fileID: 114278443727978122}
 --- !u!114 &114960116851115156
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -630,7 +630,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.013183594, y: 0.000061035156}
+  m_AnchoredPosition: {x: 0.0126953125, y: 0.000061035156}
   m_SizeDelta: {x: 0, y: 20}
   m_Pivot: {x: -1, y: 1}
 --- !u!224 &224902198773996160

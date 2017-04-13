@@ -385,6 +385,20 @@ public class GameManager : Singleton<GameManager>
         GlobalEventBus.onTitleScreen.Invoke();
     }
 
+    private void UpdatePlayer()
+    {
+        if (m_p1IsMatches)
+        {
+            VSIntroductionScreen.instance.SetP1Team(Team.MATCHES);
+            VSIntroductionScreen.instance.SetP2Team(Team.FIRE_FIGHTER);
+        }
+        else
+        {
+            VSIntroductionScreen.instance.SetP1Team(Team.FIRE_FIGHTER);
+            VSIntroductionScreen.instance.SetP2Team(Team.MATCHES);
+        }
+    }
+
     #endregion
 
 
@@ -411,6 +425,7 @@ public class GameManager : Singleton<GameManager>
 
     private void OnInitLevel()
     {
+        UpdatePlayer();
         UpdateUIScore();
 
         m_currentGameState = GameState.IN_GAME;
@@ -447,6 +462,7 @@ public class GameManager : Singleton<GameManager>
     private void OnRestartGame()
     {
         m_p1IsMatches = !m_p1IsMatches;
+        UpdatePlayer();
         GlobalEventBus.onLoadingScene.Invoke(1);
     }
 
