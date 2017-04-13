@@ -22,13 +22,15 @@ GameObject:
   - component: {fileID: 223000010317930406}
   - component: {fileID: 114000011763308618}
   - component: {fileID: 114000012489029212}
+  - component: {fileID: 114820541075098242}
+  - component: {fileID: 95411775656903262}
   m_Layer: 5
   m_Name: TitleScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1000011064927482
 GameObject:
   m_ObjectHideFlags: 0
@@ -80,6 +82,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &95411775656903262
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010929022296}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114000010605792050
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -210,6 +229,18 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Press Start
+--- !u!114 &114820541075098242
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010929022296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5a5ab58ac79fbb4298ed129434de7c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SingletonMode: 1
 --- !u!222 &222000010789977818
 CanvasRenderer:
   m_ObjectHideFlags: 1
