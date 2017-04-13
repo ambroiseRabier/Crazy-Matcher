@@ -27,8 +27,10 @@ public class GameManager : Singleton<GameManager>
     private float m_gameTimeScale;
 
     private int m_gameCount;
-    private int m_scoreP1;
-    private int m_scoreP2;
+    private int m_scoreFireFightP1;
+    private int m_scoreMatchesP1;
+    private int m_scoreFireFightP2;
+    private int m_scoreMatchesP2;
     private bool m_p1IsMatches;
 
 
@@ -117,8 +119,10 @@ public class GameManager : Singleton<GameManager>
     private void InitGame()
     {
         m_gameCount = 0;
-        m_scoreP1 = 0;
-        m_scoreP2 = 0;
+        m_scoreFireFightP1 = 0;
+        m_scoreMatchesP1 = 0;
+        m_scoreFireFightP2 = 0;
+        m_scoreMatchesP2 = 0;
         m_p1IsMatches = true;
     }
 
@@ -219,6 +223,7 @@ public class GameManager : Singleton<GameManager>
     private void ChangePlayer(Matches matches)
     {
         m_currentPlayerMatches.Controller = null;
+        m_currentPlayerMatches.Die();
         m_currentPlayerMatches = matches;
         InitPlayerMatches();
     }
@@ -359,9 +364,19 @@ public class GameManager : Singleton<GameManager>
         Unpause();
     }
 
+    private void UpdateUIScore()
+    {
+        HUD.instance.P1ScoreComp.SetNFireFighterWin(m_scoreFireFightP1);
+        HUD.instance.P1ScoreComp.SetNMatchesWin(m_scoreMatchesP1);
+
+        HUD.instance.P2ScoreComp.SetNFireFighterWin(m_scoreFireFightP2);
+        HUD.instance.P2ScoreComp.SetNMatchesWin(m_scoreMatchesP2);
+    }
+
     private void OnInitLevel()
     {
-        //TODO 
+        UpdateUIScore();
+
         m_currentGameState = GameState.IN_GAME;
         Timer.DelayThenPerform(1, () => {
             VSIntroductionScreen.instance.Close();
@@ -410,24 +425,19 @@ public class GameManager : Singleton<GameManager>
         if (teamWin == Team.FIRE_FIGHTER)
         {
             if (m_p1IsMatches)
-                m_scoreP2++;
+                m_scoreFireFightP2++;
             else
-                m_scoreP1++;
+                m_scoreFireFightP1++;
         }
         else
         {
             if (m_p1IsMatches)
-                m_scoreP1++;
+                m_scoreMatchesP1++;
             else
-                m_scoreP2++;
+                m_scoreMatchesP2++;
         }
 
         m_currentGameState = GameState.WIN_SCREEN;
-
-        //Time.timeScale = 0;
-
-        print("Score P1 : " + m_scoreP1);
-        print("Score P2 : " + m_scoreP2);
     }
 
     #endregion
