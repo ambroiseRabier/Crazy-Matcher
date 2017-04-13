@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent), typeof(VelocityFromControllerMatche))]
+[RequireComponent(typeof(AudioSource))]
 public class Matches : Burnable
 {
     #region Members
@@ -19,6 +20,7 @@ public class Matches : Burnable
     private float m_speed;
     private NavMeshAgent m_NavMeshAgent;
     private VelocityFromControllerMatche m_VelocityFromController;
+    private AudioSource m_DeathFX;
     #endregion
 
     #region Properties
@@ -91,6 +93,7 @@ public class Matches : Burnable
 
     #region Fire
     private void Awake () {
+        m_DeathFX = GetComponent<AudioSource>();
         m_NavMeshAgent                 = GetComponent<NavMeshAgent>();
         m_VelocityFromController       = GetComponent<VelocityFromControllerMatche>();
         m_NavMeshAgent.updateRotation = false; 
@@ -128,6 +131,7 @@ public class Matches : Burnable
         {
             print("EXTINGUISH");
             Destroy(gameObject);
+            m_DeathFX.Play();
             return true;
         }
 
@@ -139,7 +143,7 @@ public class Matches : Burnable
         base.InstantiateFire();
         m_fire.GetComponent<Burner>().fireOwner = this;
     }
-
+    
     #endregion
 
     #region Movement
