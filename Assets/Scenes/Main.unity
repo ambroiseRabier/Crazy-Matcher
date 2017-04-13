@@ -422,12 +422,12 @@ Transform:
 GameObject:
   m_PrefabParentObject: {fileID: 1278998504473082, guid: 055b9be370f9e994c8a95b88666f6c17,
     type: 2}
-  m_PrefabInternal: {fileID: 1050772987}
+  m_PrefabInternal: {fileID: 1049672934}
 --- !u!224 &623939974 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224750931428607170, guid: 055b9be370f9e994c8a95b88666f6c17,
     type: 2}
-  m_PrefabInternal: {fileID: 1050772987}
+  m_PrefabInternal: {fileID: 1049672934}
 --- !u!1001 &655284316
 Prefab:
   m_ObjectHideFlags: 0
@@ -763,7 +763,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 829830884}
   m_Script: {fileID: 11500000, guid: 34030774860f18441ac3c63251f5a8ae, type: 3}
---- !u!1001 &1050772987
+--- !u!1001 &1049672934
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
