@@ -130,7 +130,6 @@ public class Matches : Burnable
     {
         if (base.TryExtinguish())
         {
-            print("EXTINGUISH");
             Die();
             return true;
         }

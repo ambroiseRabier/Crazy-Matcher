@@ -75,6 +75,7 @@ public class GameManager : Singleton<GameManager>
         InitEvent();
 
         InitCurrentScene();
+        StartCoroutine(ControllerUpdate());
 
     }
 
@@ -141,22 +142,31 @@ public class GameManager : Singleton<GameManager>
         m_audioSource = GetComponent<AudioSource>();
     }
 
+    IEnumerator ControllerUpdate()
+    {
+        while (true)
+        {
+            // DEGUEULASSE NE PAS REPRODUIRE
+            if (m_currentGameState == GameState.TITLE_SCREEN)
+            {
+                CheckPressStart();
+            }
+            else if (m_currentGameState == GameState.MENU)
+            {
+                CheckMenuButtonPress();
+            }
+            else if (m_currentGameState == GameState.WIN_SCREEN)
+            {
+                print("WIN SCREE");
+                CheckWinScreenButtonPress();
+
+            }
+            yield return null;
+        }
+    }
+
     void Update()
     {
-        // DEGUEULASSE NE PAS REPRODUIRE
-        if (m_currentGameState == GameState.TITLE_SCREEN)
-        {
-            CheckPressStart();
-        }
-        else if (m_currentGameState == GameState.MENU)
-        {
-            CheckMenuButtonPress();
-        }
-        else if (m_currentGameState == GameState.WIN_SCREEN)
-        {
-            CheckWinScreenButtonPress();
-
-        }
     }
 
     private void CheckPressStart()
@@ -258,7 +268,6 @@ public class GameManager : Singleton<GameManager>
 
     private void ChangePlayer(Matches matches)
     {
-        print("ChangePlayer");
         m_currentPlayerMatches.Controller = null;
         m_currentPlayerMatches.Die();
         m_currentPlayerMatches = matches;
@@ -342,7 +351,6 @@ public class GameManager : Singleton<GameManager>
     private void AddPotentialPlayers(Matches matches)
     {
         m_potentialPlayers.Add(matches);
-        print(m_potentialPlayers.Count);
         if (m_potentialPlayers.Count == 1)
         {
             StartCoroutine(StartTimerPotentialPlayers());
@@ -475,6 +483,7 @@ public class GameManager : Singleton<GameManager>
 
     private void OnTeamWin(Team teamWin)
     {
+        Time.timeScale = 0;
         if (teamWin == Team.FIRE_FIGHTER)
         {
             if (m_p1IsMatches)
@@ -490,7 +499,7 @@ public class GameManager : Singleton<GameManager>
                 m_scoreMatchesP2++;
         }
 
-        Timer.DelayThenPerform(2, () => { m_currentGameState = GameState.WIN_SCREEN; });
+        Timer.DelayThenPerform(2, () => { print("MES COUILLES"); m_currentGameState = GameState.WIN_SCREEN; });
         UpdateUIScore();
     }
 
