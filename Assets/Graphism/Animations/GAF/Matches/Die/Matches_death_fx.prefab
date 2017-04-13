@@ -3260,7 +3260,7 @@ MonoBehaviour:
   m_Settings:
     m_Scale: 1
     m_CSF: 1
-    m_PixelsPerUnit: 1
+    m_PixelsPerUnit: 2.5
     m_PlayAutomatically: 1
     m_IgnoreTimeScale: 0
     m_PerfectTiming: 1
