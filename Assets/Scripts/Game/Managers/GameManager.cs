@@ -141,6 +141,7 @@ public class GameManager : Singleton<GameManager>
         else if (m_currentGameState == GameState.WIN_SCREEN)
         {
             CheckWinScreenButtonPress();
+
         }
     }
 
@@ -169,6 +170,7 @@ public class GameManager : Singleton<GameManager>
         }
         else if (Input.GetButtonDown("Fire2_P1"))
         {
+            WinScreen.instance.Close();
             GlobalEventBus.onLoadingScene.Invoke(0);
         }
     }
