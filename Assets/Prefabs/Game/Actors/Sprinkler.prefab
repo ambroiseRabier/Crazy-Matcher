@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23533202527561612}
   - component: {fileID: 114490161465063402}
   - component: {fileID: 114106727354642832}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: 1_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 23070643506861492}
   - component: {fileID: 114895969356778334}
   - component: {fileID: 114011138353877342}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: 3_9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 23041784935690918}
   - component: {fileID: 114658339987933074}
   - component: {fileID: 114758506726886638}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: 1_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 23252843029296754}
   - component: {fileID: 114484088721653462}
   - component: {fileID: 114073936005823808}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: 3_8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 114391220638349858}
   - component: {fileID: 114606881592337672}
   - component: {fileID: 114271266375980716}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Anim_Sponge_Idle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 23127502351699116}
   - component: {fileID: 114558041280157392}
   - component: {fileID: 114594059161837918}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: 2_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 4933187822582622}
   - component: {fileID: 114814501399973286}
   - component: {fileID: 65916919177906050}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Sprinkler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 23681742604175200}
   - component: {fileID: 114645103319368124}
   - component: {fileID: 114876714964414030}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: 3_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 23393633563772226}
   - component: {fileID: 114339441775655944}
   - component: {fileID: 114247354704776950}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: 1_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 23866086691247386}
   - component: {fileID: 114588169249229896}
   - component: {fileID: 114746768451731298}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: 1_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 114422475104948576}
   - component: {fileID: 114874778003856012}
   - component: {fileID: 114455582961844384}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Anim_Sponge_Hit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 23943985599761152}
   - component: {fileID: 114520530479444948}
   - component: {fileID: 114894856217513580}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: 2_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -387,7 +387,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1512098494888944}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -448, y: 64, z: 1}
+  m_LocalPosition: {x: 350, y: 103, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4894289407966192}
@@ -1536,9 +1536,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_sprinklerWaterPrefab: {fileID: 1870356769502820, guid: b435135bc4d9d6243906bfc73b742703,
     type: 2}
+  m_gfxIdle: {fileID: 1310734453917304}
+  m_gfxFill: {fileID: 1825536803770996}
   m_audioClip: {fileID: 0}
-  m_fillSpeed: 0.1
-  m_emptyingSpeed: 0.1
+  m_fillSpeed: 0.8
+  m_emptyingSpeed: 0.2
 --- !u!114 &114874778003856012
 MonoBehaviour:
   m_ObjectHideFlags: 1

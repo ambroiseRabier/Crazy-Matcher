@@ -990,7 +990,7 @@ Prefab:
     - target: {fileID: 114000010867629504, guid: 838d19f09e4e5ba448873aa5be5e3bb1,
         type: 2}
       propertyPath: m_timeBeforePlayerChange
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 838d19f09e4e5ba448873aa5be5e3bb1, type: 2}
