@@ -180,7 +180,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (Input.GetButtonDown("Fire2_P1") || Input.GetButtonDown("Fire2_P2"))
         {
-            GlobalEventBus.onTitleScreen.Invoke();
+            GlobalEventBus.onMenu.Invoke();
         }
     }
 
@@ -476,9 +476,11 @@ public class GameManager : Singleton<GameManager>
         m_currentGameState = GameState.IN_GAME;
         Time.timeScale = 0;
 
-        Timer.DelayThenPerform(1, () => {
+        Timer.DelayThenPerform(1.25f, () => {
             VSIntroductionScreen.instance.Close(()=>{
-                Starter.instance.StartStarterThenPerformOnEnd(GlobalEventBus.onStartLevel.Invoke);
+                Timer.DelayThenPerform(0.25f, () =>{
+                    Starter.instance.StartStarterThenPerformOnEnd(GlobalEventBus.onStartLevel.Invoke);
+                });
             });
         });
     }

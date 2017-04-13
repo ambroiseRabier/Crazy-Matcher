@@ -544,7 +544,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1214032507161422}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: 411, y: 58.8, z: -10}
+  m_LocalPosition: {x: 91, y: -432, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4276840574208612}
@@ -3472,7 +3472,7 @@ MonoBehaviour:
   m_Speed: 0
   m_Controller: {fileID: 0}
   m_gafHeadName: Matches_head_baked
-  m_ImLostColor: {r: 0, g: 0.71034503, b: 1, a: 1}
+  m_ImLostColor: {r: 0.16176468, g: 0.79188627, b: 1, a: 1}
   m_gafHead: {fileID: 114536339662284794}
 --- !u!114 &114642438330799660
 MonoBehaviour:
@@ -3564,7 +3564,7 @@ MonoBehaviour:
   m_BurnTime: 30
   m_startFireSoundClip: {fileID: 8300000, guid: 0f4bf33b49d82e3419d1241fa27dbdc3,
     type: 3}
-  m_startPlayer: 0
+  m_startPlayer: 1
   m_burnSpeed: 500
   m_normalSpeed: 100
   m_audioClip: {fileID: 8300000, guid: f619066f7efb6bf45afdd5cdb1326671, type: 3}
@@ -3575,7 +3575,10 @@ MonoBehaviour:
   m_idleGFX: {fileID: 1316167347035538}
   m_walkGFX: {fileID: 1126042045809752}
   m_runGFX: {fileID: 1148538599187976}
-  m_dieFX: {fileID: 1645989690569658, guid: 7b53abe0756f89f45becaf833a9d5d11, type: 2}
+  m_naturalDieFX: {fileID: 1550403373513148, guid: af2660ca6073f954bb115eada677dcb8,
+    type: 2}
+  m_waterDieFX: {fileID: 1259688678444478, guid: 663d441f35117d74bad555a4f990eb3d,
+    type: 2}
   m_gfxExplosionFlame: {fileID: 1394812030180836, guid: 3ee3da8ff334f404eaf0e9f65422d1c0,
     type: 2}
   m_positionGfxFlame: {fileID: 1508679734185168}

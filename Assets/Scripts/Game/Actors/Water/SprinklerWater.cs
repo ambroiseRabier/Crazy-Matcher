@@ -7,9 +7,9 @@ public class SprinklerWater : MonoBehaviour {
 
     private void OnTriggerEnter(Collider collision)
     {
-        Burnable burnable = collision.gameObject.GetComponent<Burnable>();
+        Matches matches = collision.gameObject.GetComponent<Matches>();
 
-        if (burnable)
-            burnable.TryExtinguish();
+        if (matches)
+            matches.TryExtinguish(true);
     }
 }
