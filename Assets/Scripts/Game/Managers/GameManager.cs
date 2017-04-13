@@ -43,7 +43,8 @@ public class GameManager : Singleton<GameManager>
         TITLE_SCREEN,
         MENU,
         IN_GAME,
-        WIN_SCREEN
+        WIN_SCREEN,
+        OTHER_MENU
     }
 
     private GameState m_currentGameState;
@@ -94,6 +95,9 @@ public class GameManager : Singleton<GameManager>
         GlobalEventBus.onPause.AddListener(OnPause);
         GlobalEventBus.onResume.AddListener(OnResume);
         GlobalEventBus.onInitLevel.AddListener(OnInitLevel);
+
+        GlobalEventBus.onInputScreen.AddListener(OnOtherMenu);
+        GlobalEventBus.onCreditScreen.AddListener(OnOtherMenu);
 
         GlobalEventBus.onStartLevel.AddListener(OnStartLevel);
         GlobalEventBus.onTeamWin.AddListener(OnTeamWin);
@@ -163,7 +167,20 @@ public class GameManager : Singleton<GameManager>
             {
                 CheckWinScreenButtonPress();
             }
+            else if (m_currentGameState == GameState.OTHER_MENU)
+            {
+                CheckOtherMenuPress();
+            }
+
             yield return null;
+        }
+    }
+
+    private void CheckOtherMenuPress()
+    {
+        if (Input.GetButtonDown("Fire2_P1") || Input.GetButtonDown("Fire2_P2"))
+        {
+            GlobalEventBus.onTitleScreen.Invoke();
         }
     }
 
@@ -211,12 +228,20 @@ public class GameManager : Singleton<GameManager>
         {
             GlobalEventBus.onTitleScreen.Invoke();
         }
+        else if (Input.GetButtonDown("Xbox_X"))
+        {
+            GlobalEventBus.onInputScreen.Invoke();
+        }
+        else if (Input.GetButtonDown("Xbox_Y"))
+        {
+            GlobalEventBus.onCreditScreen.Invoke();
+        }
 
     }
 
     private void CheckWinScreenButtonPress()
     {
-        if (Input.GetButtonDown("Fire1_P1"))
+        if (Input.GetButtonDown("Submit") || Input.GetButtonDown("Fire1_P1"))
         {
             WinScreen.instance.Close();
             GlobalEventBus.onRestartGame.Invoke();
@@ -456,6 +481,11 @@ public class GameManager : Singleton<GameManager>
                 Starter.instance.StartStarterThenPerformOnEnd(GlobalEventBus.onStartLevel.Invoke);
             });
         });
+    }
+
+    private void OnOtherMenu()
+    {
+        m_currentGameState = GameState.OTHER_MENU;
     }
 
     private void OnLoadingScene(int sceneNumber = -1)
