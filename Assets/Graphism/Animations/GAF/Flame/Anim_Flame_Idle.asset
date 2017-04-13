@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1730d0b8751ac9e44b6303c6b7703fa7, type: 3}
+  m_Name: Anim_Flame_Idle
+  m_EditorClassIdentifier: 
+  m_EnableSequenceCaching: 0
+  m_AssetVersion: 4
+  m_AudioResourcesDirectory: 
+  m_AssetData: 4341470005085804000078da8d90bd4a034110c7e7f27d9f820a6a2708298468e4b03edd05415bb1b04914cc89908b8276829e6004c18f3a79079f21416b4b3b6b5fc007d0d9d9dbf508163bb0ccceec7f7ffbdfb140441a5959b6c1c63cff83f1092dcb874609a815e01a2e3cbd86dfcd3718af7238e873ac19d6dc9a82cdde49d2deea1e269df6f651b75383652b038b6ccd4c0a56ce7ac7e2b88aa76178cf206d7080695cd75cf4015cccb79c6e0389ae1840139bb0f1270a38a47d1215e803b0cb605cc1e6478ee4636e91a8282471bcc7de3d079b2f194d88e670df2151498a2ed870308bcdf59c6809f70989ca24fa7a64717d311328d11ad69724aa484f0fe8a98e9e9e739ec4f337241213000776b26d4d7d98a62e7fe528ebe02a7fe02913e0eb970285c3d3d382ace5002591e0228683fd48fa509146717c370ac3f3917cb248d7b2a1da06d7727475f49f4c9a2fe7e98e19dd36a0cb3154f374d78cee18d06b7a189aee99d15d03baa3ed6aba6f46f70ce89e066a7a6046f70de8014cc62f2f749779
+  m_GUID: 3221e04aaa1a44e4ba4721570b173850
+  m_Path: 
+  m_IsExternalDataCollected: 1
+  m_ExternalData:
+  - m_TimelineID: 9
+    m_ObjectTypeFlags: 00000000000000000000000000000000000000000000000000000000
+  m_HasNesting: 0
+  m_KeyFrames: []
+  m_AudioResources: []
