@@ -20,6 +20,7 @@ public class Matches : Burnable
     [SerializeField] private GameObject m_idleGFX;
     [SerializeField] private GameObject m_walkGFX;
     [SerializeField] private GameObject m_runGFX;
+    [SerializeField] private GameObject m_dieFX;
 
     private float m_speed;
     private NavMeshAgent m_NavMeshAgent;
@@ -159,6 +160,9 @@ public class Matches : Burnable
     public void Die()
     {
         GameManager.instance.PlaySound(m_audioClip);
+        Transform dieFxTransform  = Instantiate(m_dieFX).transform;
+        dieFxTransform.position   = transform.position;
+        dieFxTransform.localScale = transform.localScale;
         Destroy(gameObject);
     }
 
