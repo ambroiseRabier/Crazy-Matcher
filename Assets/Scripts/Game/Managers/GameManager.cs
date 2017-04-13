@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using Assets.Scripts.Game.Actors.Player_Firefighter;
 using Random = UnityEngine.Random;
 using Assets.Scripts.Game;
+using System;
 
-[RequireComponent(typeof(AudioSource))]
 public class GameManager : Singleton<GameManager>
 {
 
@@ -35,8 +35,8 @@ public class GameManager : Singleton<GameManager>
     private int m_scoreFireFightP2;
     private int m_scoreMatchesP2;
     private bool m_p1IsMatches;
-    private AudioSource m_audioSource;
 
+    private Dictionary<AudioClip, AudioSource> m_audioClipsToAudioSource = new Dictionary<AudioClip, AudioSource>();
 
     public enum GameState
     {
@@ -77,6 +77,11 @@ public class GameManager : Singleton<GameManager>
         InitCurrentScene();
         StartCoroutine(ControllerUpdate());
 
+    }
+
+    internal void PlaySound(object m_startFireSoundClip)
+    {
+        throw new NotImplementedException();
     }
 
     #endregion
@@ -139,7 +144,6 @@ public class GameManager : Singleton<GameManager>
     protected override void Awake()
     {
         base.Awake();
-        m_audioSource = GetComponent<AudioSource>();
     }
 
     IEnumerator ControllerUpdate()
@@ -183,11 +187,20 @@ public class GameManager : Singleton<GameManager>
 
     public void PlaySound(AudioClip audioClip)
     {
-        if (m_audioSource != null)
+        GetAudioSourceFromAudioClip(audioClip).Play();
+    }
+
+    private AudioSource GetAudioSourceFromAudioClip(AudioClip audioClip)
+    {
+        AudioSource audioSource;
+
+        if(!m_audioClipsToAudioSource.TryGetValue(audioClip, out audioSource))
         {
-            m_audioSource.clip = audioClip;
-            m_audioSource.Play();
+            audioSource = m_audioClipsToAudioSource[audioClip] = gameObject.AddComponent<AudioSource>();
+            audioSource.clip = audioClip;
         }
+
+        return audioSource;
     }
 
     private void CheckMenuButtonPress()

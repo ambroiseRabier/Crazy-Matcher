@@ -135,6 +135,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4933187822582622}
+  - component: {fileID: 114814501399973286}
+  - component: {fileID: 65916919177906050}
   m_Layer: 0
   m_Name: Sprinkler
   m_TagString: Untagged
@@ -259,7 +261,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1509363894249710}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -93.5, y: 76.5, z: 0}
+  m_LocalPosition: {x: -58.4375, y: 47.8125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4505465133586580}
@@ -352,7 +354,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1152770317077618}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7, y: -0.5, z: 1}
+  m_LocalPosition: {x: 4.375, y: -0.3125, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4505465133586580}
@@ -385,7 +387,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1512098494888944}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 350, y: 103, z: 0}
+  m_LocalPosition: {x: -448, y: 64, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4894289407966192}
@@ -835,6 +837,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1825536803770996}
   m_Mesh: {fileID: 0}
+--- !u!65 &65916919177906050
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1512098494888944}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 71.9, y: 88.6, z: 5}
+  m_Center: {x: 3.4, y: -4, z: 0}
 --- !u!114 &114011138353877342
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1001,7 +1015,7 @@ MonoBehaviour:
   m_Settings:
     m_Scale: 1
     m_CSF: 1
-    m_PixelsPerUnit: 1
+    m_PixelsPerUnit: 1.6
     m_PlayAutomatically: 1
     m_IgnoreTimeScale: 0
     m_PerfectTiming: 1
@@ -1509,6 +1523,22 @@ MonoBehaviour:
       y: 2
       width: 201
       height: 201
+--- !u!114 &114814501399973286
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1512098494888944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d00d0fd66850e644974bf839c843c1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_sprinklerWaterPrefab: {fileID: 1870356769502820, guid: b435135bc4d9d6243906bfc73b742703,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_fillSpeed: 0.1
+  m_emptyingSpeed: 0.1
 --- !u!114 &114874778003856012
 MonoBehaviour:
   m_ObjectHideFlags: 1

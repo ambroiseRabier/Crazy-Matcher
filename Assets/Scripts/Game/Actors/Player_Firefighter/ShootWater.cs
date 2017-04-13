@@ -61,16 +61,35 @@ namespace Assets.Scripts.Game.Actors.Player_Firefighter {
             transform.position = new Vector3(transform.position.x, transform.position.y, -400);
         }
 
+        private float m_timeSinceLastShoot = 0;
+        [SerializeField] private int m_shootCadencyMS = 50;
+
         protected void Update () {
+            // is firing and has water
             if (m_VelocityFromController.Controller.Fire && m_waterResource > 0) {
-                m_waterResource -= 1;
-                UpdateWaterResource();
-                InstantiateWater();
-            } // else feedback plus d'eau !
-            if (WATER_GAIN_INSTANT)
+                // shoot cadency control
+                if (m_timeSinceLastShoot > m_shootCadencyMS) {
+                    int numberShoot = (int) Mathf.Floor(m_timeSinceLastShoot / m_shootCadencyMS);
+                    for (int i=0; i < numberShoot; i++) {
+                        Shoot();
+                    }
+                    
+                    m_timeSinceLastShoot -= m_shootCadencyMS * numberShoot; // not =0 or it won't be able to catch up
+                }
+                m_timeSinceLastShoot += Time.deltaTime * 1000;
+            } 
+            // else feedback plus d'eau !
+
+            if (WATER_GAIN_INSTANT && !m_VelocityFromController.Controller.Fire) // config bool
                 waterGainInstant();
-            else
+            else if (!m_VelocityFromController.Controller.Fire) // cannot fire and gain water at same time. Priority on fire.
                 waterGain();
+        }
+
+        protected void Shoot () {
+            m_waterResource -= 1;
+            UpdateWaterResource();
+            InstantiateWater();
         }
 
         protected void waterGain () {

@@ -16,11 +16,17 @@ public class Matches : Burnable
     [SerializeField] private Vector2 m_rangeNormal;
     [SerializeField] private Vector2 m_rangeBurning;
     [SerializeField] private float m_minDistToNavMeshDestination = 30f; // la distance à laquelle le navMesAgent décide qu'il a atteint sa destination
+    [SerializeField] private GameObject m_GFXContainer;
+    [SerializeField] private GameObject m_idleGFX;
+    [SerializeField] private GameObject m_walkGFX;
+    [SerializeField] private GameObject m_runGFX;
 
     private float m_speed;
     private NavMeshAgent m_NavMeshAgent;
     private VelocityFromControllerMatche m_VelocityFromController;
-    private AudioSource m_DeathFX;
+
+    [SerializeField] private AnimationCurve speedBurnCurve;
+    private float burnRatio;
     #endregion
 
     #region Properties
@@ -93,18 +99,34 @@ public class Matches : Burnable
 
     #region Fire
     private void Awake () {
-        m_DeathFX = GetComponent<AudioSource>();
         m_NavMeshAgent                 = GetComponent<NavMeshAgent>();
         m_VelocityFromController       = GetComponent<VelocityFromControllerMatche>();
         m_NavMeshAgent.updateRotation = false; 
         Speed                          = m_normalSpeed;
         AwakeMovement();
+        DisableAllGFX();
+    }
+    
+    private void DisableAllGFX()
+    {
+        m_idleGFX.SetActive(false);
+        m_walkGFX.SetActive(false);
+        m_runGFX.SetActive(false);
+    }
+
+    private void EnableGfx(GameObject gfx)
+    {
+        DisableAllGFX();
+        gfx.SetActive(true);
     }
 
     private void Start()
     {
         Controller = Controller; // (wtf), to call the setter one time
         StartMove();
+        OnBurnRatioProgress += BurnableComponent_OnBurnRatioProgress;
+
+        EnableGfx(m_idleGFX);
     }
     
 
@@ -118,6 +140,8 @@ public class Matches : Burnable
         if (base.TryStartBurn())
         {
             Speed = m_burnSpeed;
+
+            EnableGfx(m_runGFX);
 
             return true;
         }
@@ -142,7 +166,11 @@ public class Matches : Burnable
         base.InstantiateFire();
         m_fire.GetComponent<Burner>().fireOwner = this;
     }
-    
+
+    private void BurnableComponent_OnBurnRatioProgress(Burnable burnable, float newBurnRatio) {
+        burnRatio = newBurnRatio;
+    }
+
     #endregion
 
     public void Die()
@@ -172,6 +200,8 @@ public class Matches : Burnable
             Debug.Log("IsBurning " +IsBurning);
         if (IsBurned)
             Debug.Log("IsBurned " + IsBurned);*/
+
+        Speed = m_burnSpeed * speedBurnCurve.Evaluate(burnRatio); 
 
         if (!HasController) {
 
@@ -211,7 +241,10 @@ public class Matches : Burnable
         }
         
         if (lWait)
+        {
             m_NavMeshAgent.isStopped = true;
+            EnableGfx(m_idleGFX);
+        }
 
     }
 
@@ -223,6 +256,10 @@ public class Matches : Burnable
 
     private void Wait () {        
         if (waitCount >= currentPauseTime) {
+
+            if (!IsBurning)
+                EnableGfx(m_walkGFX);
+
             SetNextDesination();
             waitCount = 0f;
             AwakeMovement();

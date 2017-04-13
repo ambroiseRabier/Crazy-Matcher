@@ -86,7 +86,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: f080eadc1bd97e94ca488d9f25227a61, type: 2}
+  - {fileID: 2100000, guid: 0b79e57b5405f1543a19cf2ff76c17a7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: 7dfbc9131763bba4bb5687d69f9863ba, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: e817bcedd5f834f47a2ad26a7c1b790f, type: 2}
 --- !u!212 &212933122957174588
 SpriteRenderer:
   m_ObjectHideFlags: 1

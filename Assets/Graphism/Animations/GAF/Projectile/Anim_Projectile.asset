@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1730d0b8751ac9e44b6303c6b7703fa7, type: 3}
+  m_Name: Anim_Projectile
+  m_EditorClassIdentifier: 
+  m_EnableSequenceCaching: 0
+  m_AssetVersion: 4
+  m_AudioResourcesDirectory: Graphism/Animations/GAF/Projectile/
+  m_AssetData: 4341470005081104000078da75923d4b03411086df7ca8498c1a480a050511110411612522e8ed6d0c7e74b1512b2d424e14e357a2463424a5ad58c4a4b0b4f127680eb4b2d01f60a158898d22822028e85c2e919cba0bc3ddecce3c33fbeed860ac2cb795bf6eb8e93bf445eb129768c0830370d296b714f070ced8139916622c1e225f902f6c4d10cb0bf1b9c8faca622c9a5c588ab9b056011b649bff7740efeaf2bc716ca7d342fe5414f2ed84836a5a9603fde42f854ad9b0048543ff05192078d05cfe7556b6e0a810e80a7e877911936aee960250eed6b46a1ffcfaaa47d8a5099b190ada2d22b23e8c930dced80125740ab3aad941a9999f84b734c7de4711eae330d28bbc90bf216b13162e2d09d759dd88853bb5c331c375cc742b5899a504bf7a7d151035d58d583abfdbe2b8dfd5d13aa5e07692aaf591a85e61e1d292706ba58ab00447e448c77b46412e4c979b5035cd2eeaa48a3cc7395ecf7464f7150407a842941a79517f2b22e1baa48a04931c9f391d819482f131ae69a32a630ee1962ab2b6cde18bea381b5150334d095d54a1f18f2212ae47aa888b9edcd74c091e05173163a8d442be45d44b1519a4c7cf1e1691daa71949508563b28e3f3322e17aa58a48a6bb9af90d6728ac59
+  m_GUID: e4eae7ec6fb3ba24e9bbea30bfdcbadf
+  m_Path: Graphism/Animations/GAF/Projectile/
+  m_IsExternalDataCollected: 1
+  m_ExternalData:
+  - m_TimelineID: 4
+    m_ObjectTypeFlags: 0000000000000000
+  m_HasNesting: 0
+  m_KeyFrames: []
+  m_AudioResources: []
