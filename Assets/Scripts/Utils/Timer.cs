@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public delegate void TimerUpdatedEventHandler(Timer sender, float remainingSeconds);
@@ -25,7 +26,10 @@ public class Timer : MonoBehaviour
     private float m_LastEmitUpdateRemainingSeconds;
 
 
-
+    private void Start()
+    {
+        StartCoroutine(CustomUpdate());
+    }
 
 
     public static Timer CreateInstance(float remainingSeconds)
@@ -87,25 +91,36 @@ public class Timer : MonoBehaviour
 
     private void Update()
     {
-        if (IsPlaying)
+    }
+
+    IEnumerator CustomUpdate()
+    {
+        while(true)
         {
-            RemainingSeconds -= Time.deltaTime;
-
-            if (m_LastEmitUpdateRemainingSeconds - RemainingSeconds >= MinIntervalForTimeUpdate)
+            if (IsPlaying)
             {
-                EmitTimeUpdate();
-            }
+                RemainingSeconds -= Time.unscaledDeltaTime;
 
-            if (IsEnded)
-            {
-                Stop();
 
-                if (OnEnded != null)
+                if (m_LastEmitUpdateRemainingSeconds - RemainingSeconds >= MinIntervalForTimeUpdate)
                 {
-                    OnEnded(this);
+                    EmitTimeUpdate();
+                }
+
+                if (IsEnded)
+                {
+                    Stop();
+
+                    if (OnEnded != null)
+                    {
+                        OnEnded(this);
+                    }
                 }
             }
+
+            yield return null;
         }
+
     }
 
     private void EmitTimeUpdate()

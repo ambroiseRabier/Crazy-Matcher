@@ -1874,8 +1874,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 27.05, y: 22.11, z: 1}
+  m_Center: {x: -2.71, y: -1.17, z: 0}
 --- !u!114 &114003819480442622
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2872,16 +2872,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
-      time: 0.0011291504
-      value: 0.4979248
-      inSlope: 0.50264275
-      outSlope: 0.50264275
+      time: 0.0013504028
+      value: 1.9953003
+      inSlope: -0.99888116
+      outSlope: -0.99888116
       tangentMode: 34
     - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 0.50264275
-      outSlope: 0.50264275
+      time: 0.99694824
+      value: 1.0008163
+      inSlope: -0.99888116
+      outSlope: -0.99888116
       tangentMode: 34
     m_PreInfinity: 2
     m_PostInfinity: 2

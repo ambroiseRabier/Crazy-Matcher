@@ -22,6 +22,9 @@ public class Matches : Burnable
     [SerializeField] private GameObject m_runGFX;
     [SerializeField] private GameObject m_dieFX;
 
+    [SerializeField] private GameObject m_gfxExplosionFlame;
+    [SerializeField] private GameObject m_positionGfxFlame;
+
     private float m_speed;
     private NavMeshAgent m_NavMeshAgent;
     private VelocityFromControllerMatche m_VelocityFromController;
@@ -129,6 +132,15 @@ public class Matches : Burnable
 
         EnableGfx(m_idleGFX);
     }
+
+    private void InstantiateGfxFlame()
+    {
+        GameObject gfx = Instantiate(m_gfxExplosionFlame);
+        gfx.SetActive(true);
+        gfx.transform.SetParent(m_positionGfxFlame.transform, false);
+        gfx.transform.localPosition = Vector2.zero;
+
+    }
     
 
     /// <summary>
@@ -142,6 +154,7 @@ public class Matches : Burnable
         {
             Speed = m_burnSpeed;
 
+            InstantiateGfxFlame();
             EnableGfx(m_runGFX);
 
             return true;
@@ -155,7 +168,6 @@ public class Matches : Burnable
     {
         if (base.TryExtinguish())
         {
-            print("EXTINGUISH");
             Die();
             return true;
         }
@@ -218,13 +230,28 @@ public class Matches : Burnable
 
         }
 
+        checkFlipX();
+
+    }
+
+    private void checkFlipX () {
+        bool goingRight = HasController ? gameObject.GetComponent<VelocityFromControllerMatche>().Controller.Joystick.x > 0 : m_NavMeshAgent.velocity.x > 0;
+        Transform animContainer = transform.Find("GFX").transform;
+        float newScale = goingRight ? 1 : -1;
+
+        if (newScale != animContainer.localScale.x)
+            animContainer.localScale = new Vector3(
+                newScale,
+                animContainer.localScale.y,
+                animContainer.localScale.z
+            );
     }
 
     private void checkIfDestinationReached () {
         // make sure next destination is m_minDistToNavMeshDestination distance far away from last destination
         if (m_NavMeshAgent.remainingDistance < m_minDistToNavMeshDestination) {
             //print("checkIfDestinationReached");
-
+            
             if (!IsBurning)
                 CheckIfWait();
 

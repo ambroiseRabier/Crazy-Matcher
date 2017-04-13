@@ -24,7 +24,7 @@ public class Starter : Singleton<Starter> {
         m_anim.gotoAndStop(m_anim.getFramesCount() - 1);
     }
 
-    public void StartStarterThenPerform(Action action)
+    public void StartStarterThenPerformOnEnd(Action action)
     {
         StartCoroutine(PlayAnimThenPerformOnEnd(action));
     }

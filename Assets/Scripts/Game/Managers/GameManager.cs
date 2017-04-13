@@ -75,6 +75,7 @@ public class GameManager : Singleton<GameManager>
         InitEvent();
 
         InitCurrentScene();
+        StartCoroutine(ControllerUpdate());
 
     }
 
@@ -145,22 +146,29 @@ public class GameManager : Singleton<GameManager>
         base.Awake();
     }
 
+    IEnumerator ControllerUpdate()
+    {
+        while (true)
+        {
+            // DEGUEULASSE NE PAS REPRODUIRE
+            if (m_currentGameState == GameState.TITLE_SCREEN)
+            {
+                CheckPressStart();
+            }
+            else if (m_currentGameState == GameState.MENU)
+            {
+                CheckMenuButtonPress();
+            }
+            else if (m_currentGameState == GameState.WIN_SCREEN)
+            {
+                CheckWinScreenButtonPress();
+            }
+            yield return null;
+        }
+    }
+
     void Update()
     {
-        // DEGUEULASSE NE PAS REPRODUIRE
-        if (m_currentGameState == GameState.TITLE_SCREEN)
-        {
-            CheckPressStart();
-        }
-        else if (m_currentGameState == GameState.MENU)
-        {
-            CheckMenuButtonPress();
-        }
-        else if (m_currentGameState == GameState.WIN_SCREEN)
-        {
-            CheckWinScreenButtonPress();
-
-        }
     }
 
     private void CheckPressStart()
@@ -271,7 +279,6 @@ public class GameManager : Singleton<GameManager>
 
     private void ChangePlayer(Matches matches)
     {
-        print("ChangePlayer");
         m_currentPlayerMatches.Controller = null;
         m_currentPlayerMatches.Die();
         m_currentPlayerMatches = matches;
@@ -355,7 +362,6 @@ public class GameManager : Singleton<GameManager>
     private void AddPotentialPlayers(Matches matches)
     {
         m_potentialPlayers.Add(matches);
-        print(m_potentialPlayers.Count);
         if (m_potentialPlayers.Count == 1)
         {
             StartCoroutine(StartTimerPotentialPlayers());
@@ -443,9 +449,12 @@ public class GameManager : Singleton<GameManager>
         UpdateUIScore();
 
         m_currentGameState = GameState.IN_GAME;
+        Time.timeScale = 0;
+
         Timer.DelayThenPerform(1, () => {
-            VSIntroductionScreen.instance.Close();
-            GlobalEventBus.onStartLevel.Invoke();
+            VSIntroductionScreen.instance.Close(()=>{
+                Starter.instance.StartStarterThenPerformOnEnd(GlobalEventBus.onStartLevel.Invoke);
+            });
         });
     }
 
@@ -488,6 +497,7 @@ public class GameManager : Singleton<GameManager>
 
     private void OnTeamWin(Team teamWin)
     {
+        Time.timeScale = 0;
         if (teamWin == Team.FIRE_FIGHTER)
         {
             if (m_p1IsMatches)

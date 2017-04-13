@@ -180,10 +180,10 @@ public abstract class CanvasScreen<T> : Singleton<T> where T : Component
 
                 onStatedCompletedCallback = (T canvasScreen) => {
                     actionOnClosed();
-                    OnOpened -= onStatedCompletedCallback;
+                    OnClosed -= onStatedCompletedCallback;
                 };
 
-                OnOpened += onStatedCompletedCallback;
+                OnClosed += onStatedCompletedCallback;
             }
         }
 
