@@ -23,18 +23,21 @@ namespace Assets.Scripts.Game.Camera {
         private int m_currentShakeParamIndex;
         private Vector3 originalPos;
 
+        private bool inGame;
+
         protected void Start() {
             originalPos = transform.position;
+            Events.GlobalEventBus.onTeamWin.AddListener(OnTeamWin);
+            inGame = true; // this work because the scene is reloaded when the level end.
         }
 
         protected void Update() {
             ScreenShakeParams program = m_shakeParamsPerObjectivOnFire[m_currentShakeParamIndex];
             if (program.m_amplitude != 0 &&
                 program.m_amplitudeCompensator != 0 &&
-                program.m_frequency != 0) {
+                program.m_frequency != 0 &&
+                inGame) {
                 Shake(program);
-            } else {
-                transform.position = originalPos; // todo: re-initialize position on event win.
             }
 
 
@@ -55,6 +58,11 @@ namespace Assets.Scripts.Game.Camera {
             }*/
 
             transform.position = newPos;
+        }
+
+        protected void OnTeamWin (GameManager.Team team) {
+            inGame = false;
+            originalPos = transform.position;
         }
 
         protected void UpdateCurrentShakeIndex () {
