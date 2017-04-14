@@ -1,2 +1,1 @@
-﻿public class InputScreen : TempScreen<InputScreen> {
-}
+﻿public class InputScreen : CanvasScreen<InputScreen> {}
