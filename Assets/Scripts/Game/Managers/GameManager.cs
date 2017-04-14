@@ -634,19 +634,25 @@ public class GameManager : Singleton<GameManager>
 
     #region Music
 
+    private string m_currentSoundName = "";
     private void PlayMusic(AudioClip music)
     {
         if (m_MusicAudioSource.isPlaying)
         {
-            StartCoroutine(Fade(m_MusicAudioSource, 1, 0, 0.5f, () =>
+            if (m_currentSoundName != music.name)
             {
-                m_MusicAudioSource.clip = music;
-                m_MusicAudioSource.Play();
-                StartCoroutine(Fade(m_MusicAudioSource, 0, 1, 0.5f));
-            }));
+                m_currentSoundName = music.name;
+                StartCoroutine(Fade(m_MusicAudioSource, 1, 0, 0.5f, () =>
+                {
+                    m_MusicAudioSource.clip = music;
+                    m_MusicAudioSource.Play();
+                    StartCoroutine(Fade(m_MusicAudioSource, 0, 1, 0.5f));
+                }));
+            }
         }
         else
         {
+            m_currentSoundName = music.name;
             m_MusicAudioSource.PlayOneShot(music);
         }
     }
