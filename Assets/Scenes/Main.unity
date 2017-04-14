@@ -1959,7 +1959,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4023861592175606, guid: 9de65e697a20bc748942f4dff3764067, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -630
       objectReference: {fileID: 0}
     - target: {fileID: 4023861592175606, guid: 9de65e697a20bc748942f4dff3764067, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1986,10 +1986,6 @@ Prefab:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 104380096}
-    - target: {fileID: 1069690811115884, guid: 9de65e697a20bc748942f4dff3764067, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9de65e697a20bc748942f4dff3764067, type: 2}
   m_IsPrefabParent: 0

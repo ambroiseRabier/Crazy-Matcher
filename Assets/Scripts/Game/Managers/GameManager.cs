@@ -540,12 +540,12 @@ public class GameManager : Singleton<GameManager>
 
     private void OnTitleScreen()
     {
-        PlayMusic(titleAudioClip);
         m_currentGameState = GameState.TITLE_SCREEN;
     }
 
     private void OnMenu()
     {
+        PlayMusic(titleAudioClip);
         InitGame();
         m_currentGameState = GameState.MENU;
     }
