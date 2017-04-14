@@ -55,7 +55,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1364742906984592}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -138, z: -624}
+  m_LocalPosition: {x: -3, y: 63, z: -624}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4757352689767830}
@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd1761d6de996f24e8b5e9f3b9348bc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Speed: 300
+  m_Speed: 350
   m_Controller: {fileID: 0}
 --- !u!114 &114488819972318814
 MonoBehaviour:
@@ -199,9 +199,9 @@ MonoBehaviour:
   DISPERSION_FACTOR: 30
   m_WaterPrefab: {fileID: 1085542151676000, guid: 0aed26aae035cd54ab1f4af9f51a1dc1,
     type: 2}
-  m_waterResourceMAX: 75
+  m_waterResourceMAX: 60
   m_waterResource: 0
-  WATER_GAIN_FACTOR: 5
+  WATER_GAIN_FACTOR: 3
   WATER_GAIN_INSTANT: 0
   m_shootCadencyMS: 200
 --- !u!114 &114622229930473746
