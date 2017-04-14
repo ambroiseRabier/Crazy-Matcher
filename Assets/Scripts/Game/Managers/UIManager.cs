@@ -162,7 +162,7 @@ public class UIManager : MultiScreenManager<UIManager>
 
     private void OnCreditScreen()
     {
-        CloseAllScreens();
+        //CloseAllScreens();
         CreditsScreen.instance.Open();
     }
 

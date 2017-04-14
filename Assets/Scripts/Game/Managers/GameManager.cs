@@ -23,7 +23,16 @@ public class GameManager : Singleton<GameManager>
     private Matches m_currentPlayerMatches;
     
     [SerializeField] private Controller m_controllerP1; 
-    [SerializeField] private Controller m_controllerP2; 
+    [SerializeField] private Controller m_controllerP2;
+
+    private AudioSource m_MusicAudioSource;
+
+    [SerializeField] private AudioClip titleAudioClip;
+    [SerializeField] private AudioClip BGMAudioClip;
+    [SerializeField] private AudioClip matchesVictoryAudioClip;
+    [SerializeField] private AudioClip grammyVictoryAudioClip;
+
+
 
     private const float DEFAULT_GAME_TIME_SCALE = 1;
 
@@ -44,7 +53,8 @@ public class GameManager : Singleton<GameManager>
         MENU,
         IN_GAME,
         WIN_SCREEN,
-        OTHER_MENU
+        CREDIT_MENU,
+        INPUT_SCREEN
     }
 
     private GameState m_currentGameState;
@@ -96,8 +106,8 @@ public class GameManager : Singleton<GameManager>
         GlobalEventBus.onResume.AddListener(OnResume);
         GlobalEventBus.onInitLevel.AddListener(OnInitLevel);
 
-        GlobalEventBus.onInputScreen.AddListener(OnOtherMenu);
-        GlobalEventBus.onCreditScreen.AddListener(OnOtherMenu);
+        GlobalEventBus.onInputScreen.AddListener(OnInputScreen);
+        GlobalEventBus.onCreditScreen.AddListener(OnCreditMenu);
 
         GlobalEventBus.onStartLevel.AddListener(OnStartLevel);
         GlobalEventBus.onTeamWin.AddListener(OnTeamWin);
@@ -111,7 +121,7 @@ public class GameManager : Singleton<GameManager>
 
     private void InitVariables()
     {
-
+        m_MusicAudioSource = GetComponent<AudioSource>(); 
         m_potentialPlayers = new List<Matches>();
         m_gameTimeScale = DEFAULT_GAME_TIME_SCALE;
     }
@@ -167,20 +177,33 @@ public class GameManager : Singleton<GameManager>
             {
                 CheckWinScreenButtonPress();
             }
-            else if (m_currentGameState == GameState.OTHER_MENU)
+            else if (m_currentGameState == GameState.INPUT_SCREEN)
             {
-                CheckOtherMenuPress();
+                CheckInputScreenPress();
+            }
+            else if (m_currentGameState == GameState.CREDIT_MENU)
+            {
+                CheckCreditMenuPress();
             }
 
             yield return null;
         }
     }
 
-    private void CheckOtherMenuPress()
+    private void CheckInputScreenPress()
     {
         if (Input.GetButtonDown("Fire2_P1") || Input.GetButtonDown("Fire2_P2"))
         {
-            GlobalEventBus.onMenu.Invoke();
+            InputScreen.instance.Close(GlobalEventBus.onMenu.Invoke);
+            
+        }
+    }
+
+    private void CheckCreditMenuPress()
+    {
+        if (Input.GetButtonDown("Fire2_P1") || Input.GetButtonDown("Fire2_P2"))
+        {
+            CreditsScreen.instance.Close(GlobalEventBus.onMenu.Invoke);
         }
     }
 
@@ -192,7 +215,8 @@ public class GameManager : Singleton<GameManager>
     {
         if (Input.GetButtonDown("Submit") || Input.GetButtonDown("Fire1_P1"))
         {
-            GlobalEventBus.onMenu.Invoke();
+            CinematicIntroduction.instance.Close(GlobalEventBus.onMenu.Invoke);
+            
         }
         else if (Input.GetButtonDown("Fire2_P1"))
         {
@@ -347,7 +371,7 @@ public class GameManager : Singleton<GameManager>
     private void OnMatchesBurn(Burnable burnable)
     {
         Matches matches = (Matches)burnable;
-        if (matches != m_currentPlayerMatches && matches.matchesBurnMe.IsControlByPlayer)
+        if (matches.matchesBurnMe && matches != m_currentPlayerMatches && matches.matchesBurnMe.IsControlByPlayer)
         {
             AddPotentialPlayers(matches);
         }
@@ -484,10 +508,15 @@ public class GameManager : Singleton<GameManager>
             });
         });
     }
-
-    private void OnOtherMenu()
+    
+    private void OnInputScreen()
     {
-        m_currentGameState = GameState.OTHER_MENU;
+        m_currentGameState = GameState.INPUT_SCREEN;
+    }
+
+    private void OnCreditMenu()
+    {
+        m_currentGameState = GameState.CREDIT_MENU;
     }
 
     private void OnLoadingScene(int sceneNumber = -1)
@@ -505,6 +534,7 @@ public class GameManager : Singleton<GameManager>
 
     private void OnTitleScreen()
     {
+        PlayMusic(titleAudioClip);
         m_currentGameState = GameState.TITLE_SCREEN;
     }
 
@@ -523,6 +553,7 @@ public class GameManager : Singleton<GameManager>
 
     private void OnStartLevel()
     {
+        PlayMusic(BGMAudioClip);
         Time.timeScale = 1;
         StartLevel();
     }
@@ -532,6 +563,8 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 0;
         if (teamWin == Team.FIRE_FIGHTER)
         {
+            PlayMusic(matchesVictoryAudioClip);
+
             if (m_p1IsMatches)
                 m_scoreFireFightP2++;
             else
@@ -539,6 +572,8 @@ public class GameManager : Singleton<GameManager>
         }
         else
         {
+            PlayMusic(grammyVictoryAudioClip);
+
             if (m_p1IsMatches)
                 m_scoreMatchesP1++;
             else
@@ -586,6 +621,49 @@ public class GameManager : Singleton<GameManager>
     private void Unpause()
     {
         Time.timeScale = m_gameTimeScale;
+    }
+
+    #endregion
+
+    #region Music
+
+    private void PlayMusic(AudioClip music)
+    {
+        if (m_MusicAudioSource.isPlaying)
+        {
+            StartCoroutine(Fade(m_MusicAudioSource, 1, 0, 0.5f, () =>
+            {
+                m_MusicAudioSource.clip = music;
+                m_MusicAudioSource.Play();
+                StartCoroutine(Fade(m_MusicAudioSource, 0, 1, 0.5f));
+            }));
+        }
+        else
+        {
+            m_MusicAudioSource.PlayOneShot(music);
+        }
+    }
+
+    private IEnumerator Fade(AudioSource audioSource, float startVolume, float endVolume, float FadeTime, Action callback = null)
+    {
+        audioSource.volume = startVolume;
+
+        float endTime = Time.unscaledTime + FadeTime;
+
+        while (Time.unscaledTime < endTime)
+        {
+            float percent = (FadeTime - (endTime - Time.unscaledTime)) / FadeTime;
+            audioSource.volume = Mathf.Lerp(startVolume, endVolume, percent);
+
+            yield return null;
+        }
+
+        audioSource.volume = endVolume;
+
+        if (callback != null)
+        {
+            callback();
+        }
     }
 
     #endregion

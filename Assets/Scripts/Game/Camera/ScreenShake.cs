@@ -33,6 +33,8 @@ namespace Assets.Scripts.Game.Camera {
                 program.m_amplitudeCompensator != 0 &&
                 program.m_frequency != 0) {
                 Shake(program);
+            } else {
+                transform.position = originalPos; // todo: re-initialize position on event win.
             }
 
 
@@ -61,11 +63,13 @@ namespace Assets.Scripts.Game.Camera {
 
         protected int GetBurningObjectiveNumber () {
             Objectif[] list = GameObject.FindObjectsOfType<Objectif>();
+            
             int count = 0;
             foreach (Objectif element in list) {
-                if (element.IsBurning)
+                if (element.isBurning2)
                     count++;
             }
+
             return count;
         }
 
