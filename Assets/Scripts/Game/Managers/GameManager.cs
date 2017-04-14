@@ -132,7 +132,7 @@ public class GameManager : Singleton<GameManager>
         m_currentLevel = m_sceneName.IndexOf(SceneManager.GetActiveScene().name);
         if (m_currentLevel == 0)
         {
-            GlobalEventBus.onTitleScreen.Invoke();
+            GlobalEventBus.onMenu.Invoke();
         }
         else
         {
@@ -215,8 +215,11 @@ public class GameManager : Singleton<GameManager>
     {
         if (Input.GetButtonDown("Submit") || Input.GetButtonDown("Fire1_P1"))
         {
-            CinematicIntroduction.instance.Close(GlobalEventBus.onMenu.Invoke);
+
             
+            //CinematicIntroduction.instance.Close(GlobalEventBus.onMenu.Invoke);
+            CinematicIntroduction.instance.Close(() => { GlobalEventBus.onLoadingScene.Invoke(1); });
+
         }
         else if (Input.GetButtonDown("Fire2_P1"))
         {
@@ -246,11 +249,13 @@ public class GameManager : Singleton<GameManager>
     {
         if (Input.GetButtonDown("Submit") || Input.GetButtonDown("Fire1_P1"))
         {
-            GlobalEventBus.onLoadingScene.Invoke(1);
+            GlobalEventBus.onTitleScreen.Invoke();
+            //GlobalEventBus.onLoadingScene.Invoke(1);
         }
         else if (Input.GetButtonDown("Fire2_P1"))
         {
-            GlobalEventBus.onTitleScreen.Invoke();
+            QuitApplication();
+            //GlobalEventBus.onTitleScreen.Invoke();
         }
         else if (Input.GetButtonDown("Xbox_X"))
         {
