@@ -1,2 +1,1 @@
-﻿public class CinematicIntroduction : TempScreen<CinematicIntroduction> {
-}
+﻿public class CinematicIntroduction : CanvasScreen<CinematicIntroduction> {}
