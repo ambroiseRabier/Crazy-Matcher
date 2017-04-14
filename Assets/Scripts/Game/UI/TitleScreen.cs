@@ -1,3 +1,3 @@
-﻿public class TitleScreen : TempScreen<TitleScreen>
+﻿public class TitleScreen : CanvasScreen<TitleScreen>
 {
 }
