@@ -223,7 +223,8 @@ public class GameManager : Singleton<GameManager>
         }
         else if (Input.GetButtonDown("Fire2_P1"))
         {
-            QuitApplication();
+            CinematicIntroduction.instance.Close(GlobalEventBus.onMenu.Invoke);
+            //QuitApplication();
         }
     }
 
@@ -500,6 +501,7 @@ public class GameManager : Singleton<GameManager>
 
     private void OnInitLevel()
     {
+        PlayMusic(BGMAudioClip);
         UpdatePlayer();
         UpdateUIScore();
 
@@ -559,7 +561,6 @@ public class GameManager : Singleton<GameManager>
 
     private void OnStartLevel()
     {
-        PlayMusic(BGMAudioClip);
         Time.timeScale = 1;
         StartLevel();
     }
