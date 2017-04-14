@@ -249,7 +249,8 @@ public class GameManager : Singleton<GameManager>
     {
         if (Input.GetButtonDown("Submit") || Input.GetButtonDown("Fire1_P1"))
         {
-            GlobalEventBus.onTitleScreen.Invoke();
+            TitleScreen.instance.Close(GlobalEventBus.onTitleScreen.Invoke);
+            
             //GlobalEventBus.onLoadingScene.Invoke(1);
         }
         else if (Input.GetButtonDown("Fire2_P1"))
@@ -454,7 +455,7 @@ public class GameManager : Singleton<GameManager>
         GlobalEventBus.onMenu.Invoke();
     }
 
-    private void TitleScreen()
+    private void TitleScreen2()
     {
         GlobalEventBus.onTitleScreen.Invoke();
     }
