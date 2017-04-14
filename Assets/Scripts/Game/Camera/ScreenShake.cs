@@ -61,11 +61,13 @@ namespace Assets.Scripts.Game.Camera {
 
         protected int GetBurningObjectiveNumber () {
             Objectif[] list = GameObject.FindObjectsOfType<Objectif>();
+            
             int count = 0;
             foreach (Objectif element in list) {
-                if (element.IsBurning)
+                if (element.isBurning2)
                     count++;
             }
+
             return count;
         }
 
