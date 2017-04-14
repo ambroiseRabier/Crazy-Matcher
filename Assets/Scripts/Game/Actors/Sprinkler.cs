@@ -63,7 +63,6 @@ public class Sprinkler : MonoBehaviour {
             }
 
             m_fillRatio += m_fillSpeed * Time.deltaTime;
-            print(m_fillRatio);
             if (m_fillRatio >= 1)
             {
                 Full();

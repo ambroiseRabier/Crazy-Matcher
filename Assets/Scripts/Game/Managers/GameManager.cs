@@ -356,7 +356,7 @@ public class GameManager : Singleton<GameManager>
     private void OnMatchesBurn(Burnable burnable)
     {
         Matches matches = (Matches)burnable;
-        if (matches != m_currentPlayerMatches && matches.matchesBurnMe.IsControlByPlayer)
+        if (matches.matchesBurnMe && matches != m_currentPlayerMatches && matches.matchesBurnMe.IsControlByPlayer)
         {
             AddPotentialPlayers(matches);
         }
