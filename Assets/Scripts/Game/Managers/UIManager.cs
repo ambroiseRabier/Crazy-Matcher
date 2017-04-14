@@ -114,6 +114,11 @@ public class UIManager : MultiScreenManager<UIManager>
             InputScreen.instance.Close();
         }
 
+        if (CreditsScreen.instance.IsOpened)
+        {
+            CreditsScreen.instance.Close();
+        }
+
     }
 
     #region Events
@@ -158,7 +163,7 @@ public class UIManager : MultiScreenManager<UIManager>
     private void OnCreditScreen()
     {
         CloseAllScreens();
-        //CreditScreen.instance.Open();
+        CreditsScreen.instance.Open();
     }
 
     private void OnPause()
