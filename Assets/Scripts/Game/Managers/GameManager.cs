@@ -53,7 +53,8 @@ public class GameManager : Singleton<GameManager>
         MENU,
         IN_GAME,
         WIN_SCREEN,
-        OTHER_MENU
+        CREDIT_MENU,
+        INPUT_SCREEN
     }
 
     private GameState m_currentGameState;
@@ -105,8 +106,8 @@ public class GameManager : Singleton<GameManager>
         GlobalEventBus.onResume.AddListener(OnResume);
         GlobalEventBus.onInitLevel.AddListener(OnInitLevel);
 
-        GlobalEventBus.onInputScreen.AddListener(OnOtherMenu);
-        GlobalEventBus.onCreditScreen.AddListener(OnOtherMenu);
+        GlobalEventBus.onInputScreen.AddListener(OnInputScreen);
+        GlobalEventBus.onCreditScreen.AddListener(OnCreditMenu);
 
         GlobalEventBus.onStartLevel.AddListener(OnStartLevel);
         GlobalEventBus.onTeamWin.AddListener(OnTeamWin);
@@ -176,20 +177,33 @@ public class GameManager : Singleton<GameManager>
             {
                 CheckWinScreenButtonPress();
             }
-            else if (m_currentGameState == GameState.OTHER_MENU)
+            else if (m_currentGameState == GameState.INPUT_SCREEN)
             {
-                CheckOtherMenuPress();
+                CheckInputScreenPress();
+            }
+            else if (m_currentGameState == GameState.CREDIT_MENU)
+            {
+                CheckCreditMenuPress();
             }
 
             yield return null;
         }
     }
 
-    private void CheckOtherMenuPress()
+    private void CheckInputScreenPress()
     {
         if (Input.GetButtonDown("Fire2_P1") || Input.GetButtonDown("Fire2_P2"))
         {
-            GlobalEventBus.onMenu.Invoke();
+            InputScreen.instance.Close(GlobalEventBus.onMenu.Invoke);
+            
+        }
+    }
+
+    private void CheckCreditMenuPress()
+    {
+        if (Input.GetButtonDown("Fire2_P1") || Input.GetButtonDown("Fire2_P2"))
+        {
+            CreditsScreen.instance.Close(GlobalEventBus.onMenu.Invoke);
         }
     }
 
@@ -494,10 +508,15 @@ public class GameManager : Singleton<GameManager>
             });
         });
     }
-
-    private void OnOtherMenu()
+    
+    private void OnInputScreen()
     {
-        m_currentGameState = GameState.OTHER_MENU;
+        m_currentGameState = GameState.INPUT_SCREEN;
+    }
+
+    private void OnCreditMenu()
+    {
+        m_currentGameState = GameState.CREDIT_MENU;
     }
 
     private void OnLoadingScene(int sceneNumber = -1)
