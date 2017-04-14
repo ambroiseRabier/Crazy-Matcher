@@ -23,7 +23,9 @@ public class GameManager : Singleton<GameManager>
     private Matches m_currentPlayerMatches;
     
     [SerializeField] private Controller m_controllerP1; 
-    [SerializeField] private Controller m_controllerP2; 
+    [SerializeField] private Controller m_controllerP2;
+
+    private AudioSource m_MusicAudioSource;
 
     private const float DEFAULT_GAME_TIME_SCALE = 1;
 
@@ -586,6 +588,49 @@ public class GameManager : Singleton<GameManager>
     private void Unpause()
     {
         Time.timeScale = m_gameTimeScale;
+    }
+
+    #endregion
+
+    #region Music
+
+    private void PlayMusic(AudioClip music)
+    {
+        if (m_MusicAudioSource.isPlaying)
+        {
+            StartCoroutine(Fade(m_MusicAudioSource, 1, 0, 0.5f, () =>
+            {
+                m_MusicAudioSource.clip = music;
+                m_MusicAudioSource.Play();
+                StartCoroutine(Fade(m_MusicAudioSource, 0, 1, 0.5f));
+            }));
+        }
+        else
+        {
+            m_MusicAudioSource.PlayOneShot(music);
+        }
+    }
+
+    private IEnumerator Fade(AudioSource audioSource, float startVolume, float endVolume, float FadeTime, Action callback = null)
+    {
+        audioSource.volume = startVolume;
+
+        float endTime = Time.time + FadeTime;
+
+        while (Time.time < endTime)
+        {
+            float percent = (FadeTime - (endTime - Time.time)) / FadeTime;
+            audioSource.volume = Mathf.Lerp(startVolume, endVolume, percent);
+
+            yield return null;
+        }
+
+        audioSource.volume = endVolume;
+
+        if (callback != null)
+        {
+            callback();
+        }
     }
 
     #endregion
