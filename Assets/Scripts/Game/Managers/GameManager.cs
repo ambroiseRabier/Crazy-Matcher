@@ -27,6 +27,13 @@ public class GameManager : Singleton<GameManager>
 
     private AudioSource m_MusicAudioSource;
 
+    [SerializeField] private AudioClip titleAudioClip;
+    [SerializeField] private AudioClip BGMAudioClip;
+    [SerializeField] private AudioClip matchesVictoryAudioClip;
+    [SerializeField] private AudioClip grammyVictoryAudioClip;
+
+
+
     private const float DEFAULT_GAME_TIME_SCALE = 1;
 
     private float m_gameTimeScale;
@@ -507,6 +514,7 @@ public class GameManager : Singleton<GameManager>
 
     private void OnTitleScreen()
     {
+        PlayMusic(titleAudioClip);
         m_currentGameState = GameState.TITLE_SCREEN;
     }
 
@@ -525,6 +533,7 @@ public class GameManager : Singleton<GameManager>
 
     private void OnStartLevel()
     {
+        PlayMusic(BGMAudioClip);
         Time.timeScale = 1;
         StartLevel();
     }
@@ -534,6 +543,8 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 0;
         if (teamWin == Team.FIRE_FIGHTER)
         {
+            PlayMusic(matchesVictoryAudioClip);
+
             if (m_p1IsMatches)
                 m_scoreFireFightP2++;
             else
@@ -541,6 +552,8 @@ public class GameManager : Singleton<GameManager>
         }
         else
         {
+            PlayMusic(grammyVictoryAudioClip);
+
             if (m_p1IsMatches)
                 m_scoreMatchesP1++;
             else
