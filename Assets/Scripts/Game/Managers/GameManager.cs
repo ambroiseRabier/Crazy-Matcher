@@ -364,7 +364,7 @@ public class GameManager : Singleton<GameManager>
     private void OnObjectifBurn(Burnable burnable)
     {
         m_burnObjectifsCount++;
-        if (m_burnObjectifsCount >= m_objectifs.Length)
+        if (m_burnObjectifsCount >= m_objectifs.Length - 1)
             GlobalEventBus.onTeamWin.Invoke(Team.MATCHES);
     }
 

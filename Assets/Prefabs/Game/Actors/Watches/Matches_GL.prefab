@@ -544,7 +544,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1214032507161422}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: -273, y: -448, z: -10}
+  m_LocalPosition: {x: 91, y: -432, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4276840574208612}
@@ -1758,7 +1758,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 34.9, y: 50, z: 44.7}
+  m_Size: {x: 35.31, y: 50, z: 44.7}
   m_Center: {x: 0, y: 0, z: 19.7}
 --- !u!114 &114016041324063762
 MonoBehaviour:
@@ -3565,7 +3565,7 @@ MonoBehaviour:
   m_startFireSoundClip: {fileID: 8300000, guid: 0f4bf33b49d82e3419d1241fa27dbdc3,
     type: 3}
   m_startPlayer: 0
-  m_burnSpeed: 500
+  m_burnSpeed: 550
   m_normalSpeed: 100
   m_audioClip: {fileID: 8300000, guid: f619066f7efb6bf45afdd5cdb1326671, type: 3}
   m_rangeNormal: {x: 50, y: 50}
