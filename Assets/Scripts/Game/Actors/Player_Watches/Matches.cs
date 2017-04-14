@@ -254,7 +254,10 @@ public class Matches : Burnable
 
     private void checkFlipX () {
         // no instant comback to default looking left side if percuting obstacle. (only players take obstacle)
-        if (gameObject.GetComponent<Rigidbody>().velocity.x == 0)
+        if (gameObject.GetComponent<Rigidbody>().velocity.x == 0 && HasController)
+            return;
+        // same, but it is for when the matche is not moving. (waiting)
+        if (m_NavMeshAgent.velocity.x == 0 && !HasController)
             return;
 
         bool goingRight = HasController ? gameObject.GetComponent<Rigidbody>().velocity.x > 0 : m_NavMeshAgent.velocity.x > 0;
