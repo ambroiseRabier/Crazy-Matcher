@@ -34,7 +34,7 @@ namespace Assets.Scripts.Game.Camera {
                 program.m_frequency != 0) {
                 Shake(program);
             } else {
-                transform.position = originalPos;
+                transform.position = originalPos; // todo: re-initialize position on event win.
             }
 
 
