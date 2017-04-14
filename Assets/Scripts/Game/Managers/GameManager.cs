@@ -628,11 +628,11 @@ public class GameManager : Singleton<GameManager>
     {
         audioSource.volume = startVolume;
 
-        float endTime = Time.time + FadeTime;
+        float endTime = Time.unscaledTime + FadeTime;
 
-        while (Time.time < endTime)
+        while (Time.unscaledTime < endTime)
         {
-            float percent = (FadeTime - (endTime - Time.time)) / FadeTime;
+            float percent = (FadeTime - (endTime - Time.unscaledTime)) / FadeTime;
             audioSource.volume = Mathf.Lerp(startVolume, endVolume, percent);
 
             yield return null;
