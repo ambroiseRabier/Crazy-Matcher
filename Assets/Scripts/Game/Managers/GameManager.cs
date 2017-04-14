@@ -120,7 +120,7 @@ public class GameManager : Singleton<GameManager>
 
     private void InitVariables()
     {
-
+        m_MusicAudioSource = GetComponent<AudioSource>(); 
         m_potentialPlayers = new List<Matches>();
         m_gameTimeScale = DEFAULT_GAME_TIME_SCALE;
     }
