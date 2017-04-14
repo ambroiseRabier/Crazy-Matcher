@@ -201,7 +201,8 @@ public class GameManager : Singleton<GameManager>
     {
         if (Input.GetButtonDown("Submit") || Input.GetButtonDown("Fire1_P1"))
         {
-            GlobalEventBus.onMenu.Invoke();
+            CinematicIntroduction.instance.Close(GlobalEventBus.onMenu.Invoke);
+            
         }
         else if (Input.GetButtonDown("Fire2_P1"))
         {
