@@ -33,6 +33,8 @@ namespace Assets.Scripts.Game.Camera {
                 program.m_amplitudeCompensator != 0 &&
                 program.m_frequency != 0) {
                 Shake(program);
+            } else {
+                transform.position = originalPos;
             }
 
 
