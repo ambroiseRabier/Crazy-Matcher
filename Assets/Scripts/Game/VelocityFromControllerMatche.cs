@@ -17,19 +17,20 @@ namespace Assets.Scripts.Game {
         private Vector3 previousDirection = Vector3.zero;
         private bool firstInputSet = false;
 
-        [SerializeField] private string m_gafHeadName = "Matches_head_baked";
         [SerializeField] private Color m_ImLostColor = Color.blue;
         [SerializeField] private GAFBakedMovieClip m_gafHead;
 
 
         protected void Start () {
-            //print(m_gafHead);
-            //print(m_gafHead.settings.animationColorMultiplier);
-        }                
+
+        }
 
         protected void Update () {
 
             if (m_Controller) {
+                //print(m_gafHead.settings.animationColorMultiplier);
+                //print(m_gafHead.settings.animationColorOffset);
+
                 m_gafHead.setColorAndOffset(
                     m_Controller.Fire ? m_ImLostColor : Color.white, // bad for performance ? should i check the color before applying filter ?
                     new Vector4(0, 0, 0, 0)
@@ -45,7 +46,7 @@ namespace Assets.Scripts.Game {
 
                     //ThirdTest();
                     //FourthTest(); // choose one
-                    SeventhController(); // choosen one whit "speed growing whit death"
+                    SeventhController(); // choosen one whit "speed growing whit death" (speed increase is managed in Matches.cs, so it change pnj speed too)
                     //FirstTest();
                     //FifthTest();
                 } else {
