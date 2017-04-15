@@ -31,7 +31,7 @@ public class Matches : Burnable
     private NavMeshAgent m_NavMeshAgent;
     private VelocityFromControllerMatche m_VelocityFromController;
 
-    [SerializeField] private AnimationCurve speedBurnCurve;
+    [SerializeField] private AnimationCurve speedPerBurnRatioCurve;
     private float burnRatio;
     #endregion
 
@@ -236,7 +236,7 @@ public class Matches : Burnable
         if (IsBurned)
             Debug.Log("IsBurned " + IsBurned);*/
 
-        Speed = m_burnSpeed * speedBurnCurve.Evaluate(burnRatio); 
+        Speed = m_burnSpeed * speedPerBurnRatioCurve.Evaluate(burnRatio); 
 
         if (!HasController) {
 
