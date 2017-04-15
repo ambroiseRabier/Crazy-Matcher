@@ -335,8 +335,10 @@ public class GameManager : Singleton<GameManager>
 
     private void ChangePlayer(Matches matches)
     {
-        m_currentPlayerMatches.Controller = null;
-        m_currentPlayerMatches.Die();
+        if (m_currentPlayerMatches != null) {
+            m_currentPlayerMatches.Controller = null;
+            m_currentPlayerMatches.Die();
+        }
         m_currentPlayerMatches = matches;
         InitPlayerMatches();
     }
