@@ -558,6 +558,14 @@ public class GameManager : Singleton<GameManager>
     {
         m_p1IsMatches = !m_p1IsMatches;
         UpdatePlayer();
+        if (Application.isEditor)
+            WinScreen.instance.OnClosed += Instance_OnClosed;
+        else
+            GlobalEventBus.onLoadingScene.Invoke(1);
+    }
+
+    private void Instance_OnClosed(WinScreen sender) {
+        WinScreen.instance.OnClosed -= Instance_OnClosed;
         GlobalEventBus.onLoadingScene.Invoke(1);
     }
 
@@ -602,6 +610,11 @@ public class GameManager : Singleton<GameManager>
     {
         AsyncOperation async = SceneManager.LoadSceneAsync(nameScene);
         yield return async;
+
+        /*print(WinScreen.instance.IsOpened); // since async loading, doesn't work inside unity editor
+        while (WinScreen.instance.IsOpened)
+        yield return null;*/
+
         OnSceneReady();
     }
 
