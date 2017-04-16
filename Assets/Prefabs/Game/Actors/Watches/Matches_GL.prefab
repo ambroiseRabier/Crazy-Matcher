@@ -6173,6 +6173,10 @@ MonoBehaviour:
   m_Controller: {fileID: 0}
   m_ImLostColor: {r: 0.16176468, g: 0.79188627, b: 1, a: 1}
   m_gafHead: {fileID: 114536339662284794}
+  vibrationOnMatcheBurnMatche:
+    left: 1
+    right: 1
+    duration: 0.1
 --- !u!114 &114608550974177704
 MonoBehaviour:
   m_ObjectHideFlags: 1

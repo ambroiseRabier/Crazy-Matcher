@@ -30,15 +30,6 @@ namespace Assets.Scripts.Game.Actors.Player_Firefighter {
         private float totalTriggerLeftValue = 0;
         private float totalTriggerRightValue = 0;
 
-        public Controller Controller {
-            get {
-                return m_VelocityFromController.Controller;
-            }
-            set {
-                m_VelocityFromController.Controller = value;
-            }
-        }
-
         /// <summary>
         /// instance unique de la classe     
         /// </summary>
@@ -68,6 +59,14 @@ namespace Assets.Scripts.Game.Actors.Player_Firefighter {
 
         protected void Update () {
             // is firing and has water
+            if (m_VelocityFromController.Controller != null) {
+                CheckForShoot();
+                CheckForWaterGain();
+            }
+            
+        }
+
+        protected void CheckForShoot () {
             if (m_VelocityFromController.Controller.Fire && m_waterResource > 0) {
                 if (!pshitAudioSource.loop)
                     pshitAudioSource.loop = true;
@@ -77,20 +76,22 @@ namespace Assets.Scripts.Game.Actors.Player_Firefighter {
 
                 // shoot cadency control
                 if (m_timeSinceLastShoot > m_shootCadencyMS) {
-                    int numberShoot = (int) Mathf.Floor(m_timeSinceLastShoot / m_shootCadencyMS);
-                    for (int i=0; i < numberShoot; i++) {
+                    int numberShoot = (int)Mathf.Floor(m_timeSinceLastShoot / m_shootCadencyMS);
+                    for (int i = 0; i < numberShoot; i++) {
                         Shoot();
                     }
-                    
+
                     m_timeSinceLastShoot -= m_shootCadencyMS * numberShoot; // not =0 or it won't be able to catch up
                 }
                 m_timeSinceLastShoot += Time.deltaTime * 1000;
-            } else
-            {
+            }
+            else {
                 pshitAudioSource.loop = false;
             }
             // else feedback plus d'eau !
+        }
 
+        protected void CheckForWaterGain () {
             if (WATER_GAIN_INSTANT && !m_VelocityFromController.Controller.Fire) // config bool
                 waterGainInstant();
             else if (!m_VelocityFromController.Controller.Fire) // cannot fire and gain water at same time. Priority on fire.
@@ -171,8 +172,8 @@ namespace Assets.Scripts.Game.Actors.Player_Firefighter {
             water.transform.position = transform.position;
             water.GetComponent<Rigidbody>().AddForce(
                 new Vector3(
-                    Controller.Joystick.x * CONTROL_ROTATION_FACTOR + UnityEngine.Random.Range(-DISPERSION_FACTOR, DISPERSION_FACTOR),
-                    Controller.Joystick.y * CONTROL_ROTATION_FACTOR + UnityEngine.Random.Range(-DISPERSION_FACTOR, DISPERSION_FACTOR),
+                    m_VelocityFromController.Controller.Joystick.x * CONTROL_ROTATION_FACTOR + UnityEngine.Random.Range(-DISPERSION_FACTOR, DISPERSION_FACTOR),
+                    m_VelocityFromController.Controller.Joystick.y * CONTROL_ROTATION_FACTOR + UnityEngine.Random.Range(-DISPERSION_FACTOR, DISPERSION_FACTOR),
                     m_SHOOT_POWER
                 ) * 500
             ); //Controller.Joystick

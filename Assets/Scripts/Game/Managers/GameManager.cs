@@ -322,14 +322,14 @@ public class GameManager : Singleton<GameManager>
     private void InitPlayerFireFight()
     {
         ShootWater fireFight = FindObjectOfType<ShootWater>();
-
+        
         if (m_p1IsMatches)
         {
-            fireFight.Controller = m_controllerP2;
+            fireFight.gameObject.GetComponent<VelocityFromController>().Controller = m_controllerP2;
         }
         else
         {
-            fireFight.Controller = m_controllerP1;
+            fireFight.gameObject.GetComponent<VelocityFromController>().Controller = m_controllerP1;
         }
     }
 

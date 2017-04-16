@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using GAF.Core;
+using Events;
+using Assets.Scripts.Game.Actors;
 
 namespace Assets.Scripts.Game {
 
@@ -19,10 +21,11 @@ namespace Assets.Scripts.Game {
 
         [SerializeField] private Color m_ImLostColor = Color.blue;
         [SerializeField] private GAFBakedMovieClip m_gafHead;
+        [SerializeField] private VibrationSettings vibrationOnMatcheBurnMatche;
 
 
         protected void Start () {
-
+            GlobalEventBus.onLightningMatcheByPlayer.AddListener(OnLightningMatcheByPlayer);
         }
 
         protected void Update () {
@@ -35,6 +38,7 @@ namespace Assets.Scripts.Game {
                     m_Controller.Fire ? m_ImLostColor : Color.white, // bad for performance ? should i check the color before applying filter ?
                     new Vector4(0, 0, 0, 0)
                 );
+
             }
         }
 
@@ -57,6 +61,15 @@ namespace Assets.Scripts.Game {
                 }
 
             }
+        }
+
+        protected void OnLightningMatcheByPlayer() {
+            if (m_Controller != null)
+                m_Controller.rewiredController.SetVibration(
+                    vibrationOnMatcheBurnMatche.left,
+                    vibrationOnMatcheBurnMatche.right,
+                    vibrationOnMatcheBurnMatche.duration
+                );
         }
 
         void SeventhController() {
@@ -146,6 +159,10 @@ namespace Assets.Scripts.Game {
             return unitVectorRotated;
             /*Debug.Log("rotation -45: ");
             Debug.Log(Math.Atan2(unitVectorRotated.y, unitVectorRotated.x) / Mathf.PI * 180);*/
+        }
+
+        protected void OnDestroy () {
+            GlobalEventBus.onLightningMatcheByPlayer.RemoveListener(OnLightningMatcheByPlayer);
         }
     }
 }

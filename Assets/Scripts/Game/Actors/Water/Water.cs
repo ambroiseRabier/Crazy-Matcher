@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using GAF.Core;
+using Events;
 
 namespace Assets.Scripts.Game.Actors.Water {
 
@@ -73,9 +74,10 @@ namespace Assets.Scripts.Game.Actors.Water {
         private void OnTriggerEnter (Collider collision) {
             Matches matches = collision.gameObject.GetComponent<Matches>();
 
-            if (matches)
+            if (matches) {
                 matches.TryExtinguish(true);
-            else {
+                GlobalEventBus.onWaterKillMatcheByPlayer.Invoke();
+            } else {
                 Sprinkler sprinkler = collision.gameObject.GetComponent<Sprinkler>();
                 if (sprinkler) {
                     sprinkler.TryToFill();

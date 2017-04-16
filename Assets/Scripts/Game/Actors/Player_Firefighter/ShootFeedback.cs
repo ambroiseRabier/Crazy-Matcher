@@ -9,15 +9,11 @@ namespace Assets.Scripts.Game.Actors.Player_Firefighter {
 
         [SerializeField] private float m_defaultScale;
         [SerializeField] private float m_shootScale;
-        [SerializeField] private GameObject m_fireFigther;
-        private Controller m_myControl;
-
-        protected void Start() {
-            m_myControl = m_fireFigther.GetComponent<ShootWater>().Controller;
-        }
+        [SerializeField] private VelocityFromController m_fireFigtherVelocityFromController;
 
         protected void Update() {
-            if (m_myControl.Fire) {
+            if (m_fireFigtherVelocityFromController.Controller != null && 
+                m_fireFigtherVelocityFromController.Controller.Fire) {
                 transform.localScale = new Vector2(m_shootScale, m_shootScale);
             } else {
                 transform.localScale = new Vector2(m_defaultScale, m_defaultScale);

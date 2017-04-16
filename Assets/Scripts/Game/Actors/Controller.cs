@@ -16,7 +16,7 @@ public class Controller : MonoBehaviour {
     public bool Fire { get; private set; }
     public float m_triggerLeft { get; private set; }
     public float m_triggerRight { get; private set; }
-    private ControllerRewired rewiredController;
+    [HideInInspector] public ControllerRewired rewiredController;
 
     private void Start () {
         rewiredController = gameObject.GetComponent<ControllerRewired>();

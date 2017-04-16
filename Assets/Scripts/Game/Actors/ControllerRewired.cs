@@ -1,7 +1,17 @@
 ﻿using UnityEngine;
 using Rewired;
+using System.Collections;
+using Events;
+using System;
 
 namespace Assets.Scripts.Game.Actors {
+
+    [System.Serializable]
+    struct VibrationSettings {
+        [Tooltip("0 to 1")] public float left;
+        [Tooltip("0 to 1")] public float right;
+        [Tooltip("In seconds")] public float duration;
+    }
 
     /// <summary>
     /// 
@@ -14,6 +24,8 @@ namespace Assets.Scripts.Game.Actors {
         public float m_triggerLeft { get; private set; }
         public float m_triggerRight { get; private set; }
         private Player m_player;
+        protected float endTime;
+        protected bool vibrationEndIsRunning;
 
         protected void Awake () {
             m_player = ReInput.players.GetPlayer(playerId);
@@ -21,7 +33,7 @@ namespace Assets.Scripts.Game.Actors {
         }
 
         protected void Start () {
-
+            GlobalEventBus.onTeamWin.AddListener(StopVibration);
         }
 
         protected void Update () {
@@ -37,6 +49,56 @@ namespace Assets.Scripts.Game.Actors {
             m_fire = m_player.GetButton("Fire");
             m_triggerLeft = m_player.GetAxis("Press Trigger Left");
             m_triggerRight = m_player.GetAxis("Press Trigger Right");
+        }
+
+
+        public void SetVibration (float leftMotor = 0f, float rightMotor = 0f, float timeSeconds = 0.2f) {
+            foreach (Joystick j in m_player.controllers.Joysticks) {
+                if (!j.supportsVibration)
+                    continue;
+                j.SetVibration(
+                    Mathf.Clamp01(leftMotor), 
+                    Mathf.Clamp01(rightMotor)
+                );
+            }
+            // another way of doing this, but whitout spam vibration support
+            //StartCoroutine("StartVibration", time);
+            //Invoke(function, time)
+
+            endTime = Time.fixedTime + timeSeconds;
+            if (!vibrationEndIsRunning)
+                StartCoroutine("CheckVibrationEnd");
+        }
+
+        protected IEnumerator CheckVibrationEnd () {
+            vibrationEndIsRunning = true; ;
+            while(Time.fixedTime < endTime) {
+                yield return null;
+            }
+            StopVibration();
+            vibrationEndIsRunning = false;
+        }
+
+        // another way of doing this, but whitout spam vibration support
+        /*protected IEnumerator StartVibration (float duration) {
+            yield return new WaitForSecondsRealtime(duration);
+            StopVibration();
+        }*/
+
+
+        private void StopVibration(GameManager.Team arg0) {
+            StopVibration();
+        }
+
+        protected void StopVibration () {
+            foreach (Joystick j in m_player.controllers.Joysticks) {
+                j.StopVibration();
+            }
+        }
+
+        protected void OnDestroy () {
+            StopCoroutine("CheckVibrationEnd");
+            StopVibration();
         }
 
     }

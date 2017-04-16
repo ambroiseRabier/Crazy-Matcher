@@ -24,8 +24,24 @@ namespace Events
         public static GlobalEvents.BaseGameEvent onInitLevel   = new GlobalEvents.BaseGameEvent();
         public static GlobalEvents.SceneEvent onLoadingScene   = new GlobalEvents.SceneEvent();
         
+        /// <summary>
+        /// When water quantity stored change
+        /// </summary>
         public static GlobalEvents.WaterBar onWaterChange = new GlobalEvents.WaterBar();
-        
+
+        /// <summary>
+        /// When a matche die by water
+        /// </summary>
+        public static GlobalEvents.BaseGameEvent onWaterKillMatcheByPlayer = new GlobalEvents.BaseGameEvent();
+
+        /// <summary>
+        /// When player matche burn another matche
+        /// </summary>
+        public static GlobalEvents.BaseGameEvent onLightningMatcheByPlayer = new GlobalEvents.BaseGameEvent();
+
+
+
+
     }
 
 }
