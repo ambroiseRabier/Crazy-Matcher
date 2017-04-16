@@ -22,5 +22,9 @@ namespace Assets.Scripts.Game {
                 vibrationOnWaterKillMatche.duration
             );
         }
+
+        protected void OnDestroy () {
+            GlobalEventBus.onWaterKillMatcheByPlayer.RemoveListener(OnWaterKillMatcheByPlayer);
+        }
     }
 }
