@@ -26,6 +26,11 @@ namespace Assets.Scripts.Game.Actors {
         private Player m_player;
         protected float endTime;
         protected bool vibrationEndIsRunning;
+        /// <summary>
+        /// Had to add this because i get stuck on vibration on winscreen sometimes
+        /// seem like i change body after the winscreen event ?
+        /// </summary>
+        protected bool allowVibration;
 
         protected void Awake () {
             m_player = ReInput.players.GetPlayer(playerId);
@@ -33,7 +38,8 @@ namespace Assets.Scripts.Game.Actors {
         }
 
         protected void Start () {
-            GlobalEventBus.onTeamWin.AddListener(StopVibration);
+            GlobalEventBus.onTeamWin.AddListener(OnTeamWin);
+            GlobalEventBus.onRestartGame.AddListener(OnRestartGame);
         }
 
         protected void Update () {
@@ -51,9 +57,17 @@ namespace Assets.Scripts.Game.Actors {
             m_triggerRight = m_player.GetAxis("Press Trigger Right");
         }
 
+        private void OnRestartGame () {
+            allowVibration = true;
+        }
+
+        private void OnTeamWin (GameManager.Team arg0) {
+            allowVibration = false;
+            StopVibration();
+        }
 
         public void SetVibration (float leftMotor = 0f, float rightMotor = 0f, float timeSeconds = 0.2f) {
-            if (timeSeconds == 0)
+            if (timeSeconds == 0 || !allowVibration)
                 return;
 
 
@@ -77,7 +91,7 @@ namespace Assets.Scripts.Game.Actors {
         }
 
         protected IEnumerator CheckVibrationEnd () {
-            vibrationEndIsRunning = true; ;
+            vibrationEndIsRunning = true;
             while(Time.fixedTime < endTime) {
                 yield return null;
             }
@@ -90,11 +104,6 @@ namespace Assets.Scripts.Game.Actors {
             yield return new WaitForSecondsRealtime(duration);
             StopVibration();
         }*/
-
-
-        private void StopVibration(GameManager.Team arg0) {
-            StopVibration();
-        }
 
         protected void StopVibration () {
             foreach (Joystick j in m_player.controllers.Joysticks) {

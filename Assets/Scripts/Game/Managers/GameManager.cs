@@ -8,6 +8,7 @@ using Assets.Scripts.Game.Actors.Player_Firefighter;
 using Random = UnityEngine.Random;
 using Assets.Scripts.Game;
 using System;
+using Assets.Scripts.Game.Managers;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -218,7 +219,7 @@ public class GameManager : Singleton<GameManager>
 
             
             //CinematicIntroduction.instance.Close(GlobalEventBus.onMenu.Invoke);
-            CinematicIntroduction.instance.Close(() => { GlobalEventBus.onLoadingScene.Invoke(1); });
+            CinematicIntroduction.instance.Close(() => { GlobalEventBus.onLoadingScene.Invoke(LevelManager.desiredLevel); });
 
         }
         else if (Input.GetButtonDown("Fire2_P1"))
@@ -570,12 +571,13 @@ public class GameManager : Singleton<GameManager>
         if (Application.isEditor)
             WinScreen.instance.OnClosed += Instance_OnClosed;
         else
-            GlobalEventBus.onLoadingScene.Invoke(1);
+            GlobalEventBus.onLoadingScene.Invoke(LevelManager.desiredLevel);
     }
 
+    // only for editor
     private void Instance_OnClosed(WinScreen sender) {
         WinScreen.instance.OnClosed -= Instance_OnClosed;
-        GlobalEventBus.onLoadingScene.Invoke(1);
+        GlobalEventBus.onLoadingScene.Invoke(LevelManager.desiredLevel);
     }
 
     private void OnStartLevel()
@@ -617,6 +619,7 @@ public class GameManager : Singleton<GameManager>
 
     IEnumerator StartLoadingScene(string nameScene)
     {
+        print("sceneName: " + nameScene);
         AsyncOperation async = SceneManager.LoadSceneAsync(nameScene);
         yield return async;
 
