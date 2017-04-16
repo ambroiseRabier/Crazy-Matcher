@@ -19,5 +19,8 @@ namespace Events
         [System.Serializable]
         public class WaterBar : UnityEvent<float> { }
 
+        [System.Serializable]
+        public class BodyChangeDistance : UnityEvent<Vector2> { }
+
     }
 }

@@ -40,9 +40,9 @@ namespace Events
         public static GlobalEvents.BaseGameEvent onLightningMatcheByPlayer = new GlobalEvents.BaseGameEvent();
 
         /// <summary>
-        /// When player playing matche change body
+        /// When player playing matche change body, if distance == Vector2.zero then the distance is unknow.
         /// </summary>
-        public static GlobalEvents.BaseGameEvent onPlayerMatcheChangeBody = new GlobalEvents.BaseGameEvent();
+        public static GlobalEvents.BodyChangeDistance onPlayerMatcheChangeBody = new GlobalEvents.BodyChangeDistance();
 
 
 

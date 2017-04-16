@@ -53,6 +53,10 @@ namespace Assets.Scripts.Game.Actors {
 
 
         public void SetVibration (float leftMotor = 0f, float rightMotor = 0f, float timeSeconds = 0.2f) {
+            if (timeSeconds == 0)
+                return;
+
+
             foreach (Joystick j in m_player.controllers.Joysticks) {
                 if (!j.supportsVibration)
                     continue;
@@ -60,6 +64,8 @@ namespace Assets.Scripts.Game.Actors {
                     Mathf.Clamp01(leftMotor), 
                     Mathf.Clamp01(rightMotor)
                 );
+                // left and right motor and left and right, but are different type of motor :(, right is quick, left is slow vibration.
+                
             }
             // another way of doing this, but whitout spam vibration support
             //StartCoroutine("StartVibration", time);

@@ -335,14 +335,21 @@ public class GameManager : Singleton<GameManager>
 
     private void ChangePlayer(Matches matches)
     {
+        Vector3 l_PreviousPosition = Vector3.zero;
+
         // in rare case the previous controlled matche died of natural death. So we check if it's still alive.
         if (m_currentPlayerMatches != null) {
+            l_PreviousPosition = m_currentPlayerMatches.transform.position;
             m_currentPlayerMatches.Controller = null;
             m_currentPlayerMatches.Die();
         }
         m_currentPlayerMatches = matches;
         InitPlayerMatches();
-        GlobalEventBus.onPlayerMatcheChangeBody.Invoke();
+
+        if (l_PreviousPosition == Vector3.zero)
+            GlobalEventBus.onPlayerMatcheChangeBody.Invoke(Vector2.zero);
+        else
+            GlobalEventBus.onPlayerMatcheChangeBody.Invoke(matches.transform.position - l_PreviousPosition);
     }
 
     private void FindObjectifs()

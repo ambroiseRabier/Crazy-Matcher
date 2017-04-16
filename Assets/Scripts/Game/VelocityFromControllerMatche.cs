@@ -23,7 +23,12 @@ namespace Assets.Scripts.Game {
         [SerializeField] private GAFBakedMovieClip m_gafHead;
         [SerializeField] private VibrationSettings vibrationOnMatcheBurnMatche;
         [SerializeField] private VibrationSettings vibrationOnPlayerMatcheChangeBody;
-
+        [Tooltip("The vibration get highter whit the distance, ignore vibrationOnPlayerMatcheChangeBody left and right settings if checked. Duration is not ignored.")]
+        [SerializeField] private bool vibrationOnPlayerChangeMatcheAuto;
+        [Tooltip("Distance at wich the vibration is maximise to 1. Should be assigned depending on the stage width. (roughtly 1800+ px)")]
+        [SerializeField] private float maxVibrationAtDistance = 700;
+        [Tooltip("Give the force of vibration depending on the current distance / maxVibrationDistance. (you can set minVibration and maxVibration)")]
+        [SerializeField] private AnimationCurve vibrationForceCurve;
 
         protected void Start () {
             GlobalEventBus.onLightningMatcheByPlayer.AddListener(OnLightningMatcheByPlayer);
@@ -74,13 +79,45 @@ namespace Assets.Scripts.Game {
                 );
         }
 
-        protected void OnPlayerMatcheChangeBody() {
-            if (m_Controller != null)
-                m_Controller.rewiredController.SetVibration(
-                    vibrationOnPlayerMatcheChangeBody.left,
-                    vibrationOnPlayerMatcheChangeBody.right,
-                    vibrationOnPlayerMatcheChangeBody.duration
-                );
+        protected void OnPlayerMatcheChangeBody(Vector2 pDistance) {
+            if (m_Controller != null) {
+                if (vibrationOnPlayerChangeMatcheAuto) {
+                    float lRight = 0;
+                    float lLeft = 0;
+
+                    if (pDistance.x < 0) {
+                        lLeft = Mathf.Max(pDistance.x, -maxVibrationAtDistance) / -maxVibrationAtDistance; //max(-400, -700) / -700
+                        m_Controller.rewiredController.SetVibration(
+                            Mathf.Clamp01(vibrationForceCurve.Evaluate(lLeft)),
+                            0,
+                            vibrationOnPlayerMatcheChangeBody.duration
+                        );
+                    } else {
+                        lRight = Mathf.Min(pDistance.x, maxVibrationAtDistance) / maxVibrationAtDistance; //min(400, 700) / 700
+                        m_Controller.rewiredController.SetVibration(
+                            0,
+                            Mathf.Clamp01(vibrationForceCurve.Evaluate(lRight)),
+                            vibrationOnPlayerMatcheChangeBody.duration
+                        );
+                    }
+                        
+
+                    /*print("lLeft " + lLeft);
+                    print("lLeftC " + Mathf.Clamp01(vibrationForceCurve.Evaluate(lLeft)));
+                    print("lRight " + lRight);
+                    print("lRightC " + Mathf.Clamp01(vibrationForceCurve.Evaluate(lRight)));*/
+
+                    
+                    
+                }
+                else
+                    m_Controller.rewiredController.SetVibration(
+                        vibrationOnPlayerMatcheChangeBody.left,
+                        vibrationOnPlayerMatcheChangeBody.right,
+                        vibrationOnPlayerMatcheChangeBody.duration
+                    );
+            }
+                
         }
 
         void SeventhController() {
