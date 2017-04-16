@@ -22,10 +22,12 @@ namespace Assets.Scripts.Game {
         [SerializeField] private Color m_ImLostColor = Color.blue;
         [SerializeField] private GAFBakedMovieClip m_gafHead;
         [SerializeField] private VibrationSettings vibrationOnMatcheBurnMatche;
+        [SerializeField] private VibrationSettings vibrationOnPlayerMatcheChangeBody;
 
 
         protected void Start () {
             GlobalEventBus.onLightningMatcheByPlayer.AddListener(OnLightningMatcheByPlayer);
+            GlobalEventBus.onPlayerMatcheChangeBody.AddListener(OnPlayerMatcheChangeBody);
         }
 
         protected void Update () {
@@ -69,6 +71,15 @@ namespace Assets.Scripts.Game {
                     vibrationOnMatcheBurnMatche.left,
                     vibrationOnMatcheBurnMatche.right,
                     vibrationOnMatcheBurnMatche.duration
+                );
+        }
+
+        protected void OnPlayerMatcheChangeBody() {
+            if (m_Controller != null)
+                m_Controller.rewiredController.SetVibration(
+                    vibrationOnPlayerMatcheChangeBody.left,
+                    vibrationOnPlayerMatcheChangeBody.right,
+                    vibrationOnPlayerMatcheChangeBody.duration
                 );
         }
 
@@ -163,6 +174,7 @@ namespace Assets.Scripts.Game {
 
         protected void OnDestroy () {
             GlobalEventBus.onLightningMatcheByPlayer.RemoveListener(OnLightningMatcheByPlayer);
+            GlobalEventBus.onPlayerMatcheChangeBody.RemoveListener(OnPlayerMatcheChangeBody);
         }
     }
 }

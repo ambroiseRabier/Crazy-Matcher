@@ -335,12 +335,14 @@ public class GameManager : Singleton<GameManager>
 
     private void ChangePlayer(Matches matches)
     {
+        // in rare case the previous controlled matche died of natural death. So we check if it's still alive.
         if (m_currentPlayerMatches != null) {
             m_currentPlayerMatches.Controller = null;
             m_currentPlayerMatches.Die();
         }
         m_currentPlayerMatches = matches;
         InitPlayerMatches();
+        GlobalEventBus.onPlayerMatcheChangeBody.Invoke();
     }
 
     private void FindObjectifs()

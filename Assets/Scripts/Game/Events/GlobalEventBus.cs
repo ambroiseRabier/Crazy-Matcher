@@ -39,6 +39,11 @@ namespace Events
         /// </summary>
         public static GlobalEvents.BaseGameEvent onLightningMatcheByPlayer = new GlobalEvents.BaseGameEvent();
 
+        /// <summary>
+        /// When player playing matche change body
+        /// </summary>
+        public static GlobalEvents.BaseGameEvent onPlayerMatcheChangeBody = new GlobalEvents.BaseGameEvent();
+
 
 
 
