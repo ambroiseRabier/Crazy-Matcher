@@ -183,7 +183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SHOOT_POWER: 250
   CONTROL_ROTATION_FACTOR: 4.5
-  DISPERSION_FACTOR: 30
+  DISPERSION_FACTOR: 20
   m_WaterPrefab: {fileID: 1085542151676000, guid: 0aed26aae035cd54ab1f4af9f51a1dc1,
     type: 2}
   m_waterResourceMAX: 20
@@ -202,7 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17bb724bda5ebf3429682c236a888ccf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Speed: 350
+  m_Speed: 415
   m_Controller: {fileID: 0}
   vibrationOnWaterKillMatche:
     left: 1
