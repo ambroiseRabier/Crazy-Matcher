@@ -128,28 +128,28 @@ public class GameManager : Singleton<GameManager>
             playersPlayer.AddInputEventDelegate(
                 OnPressA, 
                 UpdateLoopType.Update, 
-                InputActionEventType.ButtonPressed,
+                InputActionEventType.ButtonJustPressed,
                 ui_A
             );
 
             playersPlayer.AddInputEventDelegate(
                 OnPressB, 
                 UpdateLoopType.Update,
-                InputActionEventType.ButtonPressed,
+                InputActionEventType.ButtonJustPressed,
                 ui_B
             );
 
             playersPlayer.AddInputEventDelegate(
                 OnPressX, 
                 UpdateLoopType.Update,
-                InputActionEventType.ButtonPressed,
+                InputActionEventType.ButtonJustPressed,
                 ui_X
             );
 
             playersPlayer.AddInputEventDelegate(
                 OnPressY, 
                 UpdateLoopType.Update,
-                InputActionEventType.ButtonPressed,
+                InputActionEventType.ButtonJustPressed,
                 ui_Y
             );
         }
