@@ -70,7 +70,7 @@ public class Matches : Burnable
             m_VelocityFromController.Controller = value;
 
 
-            if (value)
+            if (value != null)
             {
                 m_NavMeshAgent.enabled = false;
                 Vector3 position = transform.position;

@@ -188,9 +188,9 @@ MonoBehaviour:
     type: 2}
   m_waterResourceMAX: 20
   m_waterResource: 0
-  WATER_GAIN_FACTOR: 1
+  WATER_GAIN_FACTOR: 1.2
   WATER_GAIN_INSTANT: 0
-  m_shootCadencyMS: 200
+  m_shootCadencyMS: 180
 --- !u!114 &114585864696159222
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -202,7 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17bb724bda5ebf3429682c236a888ccf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Speed: 415
+  m_Speed: 450
   m_Controller: {fileID: 0}
   vibrationOnWaterKillMatche:
     left: 1

@@ -310,7 +310,7 @@ public class GameManager : Singleton<GameManager>
         if (m_currentPlayerMatches != null) {
             l_PreviousPosition = m_currentPlayerMatches.transform.position;
             m_currentPlayerMatches.Controller = null;
-            m_currentPlayerMatches.Die();
+            //m_currentPlayerMatches.Die(); 2018: if the player can transfer immediately then it is better that it doesn't die but keep moving
         }
         m_currentPlayerMatches = matches;
         InitPlayerMatches();

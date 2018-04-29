@@ -1539,7 +1539,7 @@ MonoBehaviour:
   m_gfxIdle: {fileID: 1310734453917304}
   m_gfxFill: {fileID: 1825536803770996}
   m_audioClip: {fileID: 8300000, guid: 1dc12d4c527d8734cb2e1adbafd3f798, type: 3}
-  m_fillSpeed: 6
+  m_fillSpeed: 9
   m_emptyingSpeed: 0.17
 --- !u!114 &114874778003856012
 MonoBehaviour:
