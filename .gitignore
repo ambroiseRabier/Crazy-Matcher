@@ -74,3 +74,6 @@ Assets/_Sounds/PlanHate/Metadata/Group.meta
 Assets/_Sounds/PlanHate/Metadata/MixerView.meta
 Assets/_Sounds/PlanHate/Metadata/Snapshot.meta
 Assets/_Sounds/PlanHate/Metadata/VCA.meta
+
+.idea/
+.vs/

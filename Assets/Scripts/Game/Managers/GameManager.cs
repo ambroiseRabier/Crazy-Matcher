@@ -6,9 +6,9 @@ using Utils;
 using System.Collections.Generic;
 using Assets.Scripts.Game.Actors.Player_Firefighter;
 using Random = UnityEngine.Random;
-using Assets.Scripts.Game;
 using System;
 using Assets.Scripts.Game.Managers;
+using Rewired;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -72,6 +72,12 @@ public class GameManager : Singleton<GameManager>
 
     private List<Matches> m_potentialPlayers;
 
+    [Header("ReInput")]
+    [SerializeField] private string ui_A = "A";
+    [SerializeField] private string ui_B = "B";
+    [SerializeField] private string ui_X = "X";
+    [SerializeField] private string ui_Y = "Y";
+
     #endregion
 
 
@@ -87,7 +93,6 @@ public class GameManager : Singleton<GameManager>
         InitEvent();
 
         InitCurrentScene();
-        StartCoroutine(ControllerUpdate());
 
     }
 
@@ -117,6 +122,80 @@ public class GameManager : Singleton<GameManager>
         GlobalEventBus.onTitleScreen.AddListener(OnTitleScreen);
         GlobalEventBus.onMenu.AddListener(OnMenu);
         GlobalEventBus.onRestartGame.AddListener(OnRestartGame);
+        foreach (var playersPlayer in ReInput.players.Players) {
+            // 29/04/2018: all this stuff bellow should be in their respective screen
+
+            playersPlayer.AddInputEventDelegate(
+                OnPressA, 
+                UpdateLoopType.Update, 
+                InputActionEventType.ButtonPressed,
+                ui_A
+            );
+
+            playersPlayer.AddInputEventDelegate(
+                OnPressB, 
+                UpdateLoopType.Update,
+                InputActionEventType.ButtonPressed,
+                ui_B
+            );
+
+            playersPlayer.AddInputEventDelegate(
+                OnPressX, 
+                UpdateLoopType.Update,
+                InputActionEventType.ButtonPressed,
+                ui_X
+            );
+
+            playersPlayer.AddInputEventDelegate(
+                OnPressY, 
+                UpdateLoopType.Update,
+                InputActionEventType.ButtonPressed,
+                ui_Y
+            );
+        }
+    }
+
+    // public function so it can be used by click events. (unity binding on inspector)
+    public void OnPressA(InputActionEventData inputActionEventData) {
+        if (m_currentGameState == GameState.CREDIT_MENU)
+            CreditsScreen.instance.Close(GlobalEventBus.onMenu.Invoke); 
+        else if (m_currentGameState == GameState.TITLE_SCREEN)
+            //CinematicIntroduction.instance.Close(GlobalEventBus.onMenu.Invoke);
+            CinematicIntroduction.instance.Close(() => { GlobalEventBus.onLoadingScene.Invoke(LevelManager.desiredLevel); });
+        else if (m_currentGameState == GameState.MENU)
+            TitleScreen.instance.Close(GlobalEventBus.onTitleScreen.Invoke);
+        //GlobalEventBus.onLoadingScene.Invoke(1);
+        else if (m_currentGameState == GameState.WIN_SCREEN) {
+            WinScreen.instance.Close();
+            GlobalEventBus.onRestartGame.Invoke();
+        }
+    }
+
+    public void OnPressB(InputActionEventData inputActionEventData) {
+        if (m_currentGameState == GameState.INPUT_SCREEN)
+            InputScreen.instance.Close(GlobalEventBus.onMenu.Invoke);
+        else if (m_currentGameState == GameState.TITLE_SCREEN)
+            //QuitApplication();
+            CinematicIntroduction.instance.Close(GlobalEventBus.onMenu.Invoke); 
+        else if (m_currentGameState == GameState.MENU)
+            QuitApplication();
+        //GlobalEventBus.onTitleScreen.Invoke();
+        else if (m_currentGameState == GameState.WIN_SCREEN) {
+            WinScreen.instance.Close();
+            GlobalEventBus.onLoadingScene.Invoke(0);
+        } 
+        else if (m_currentGameState == GameState.CREDIT_MENU)
+            CreditsScreen.instance.Close(GlobalEventBus.onMenu.Invoke);
+    }
+
+    public void OnPressX(InputActionEventData inputActionEventData) {
+        if (m_currentGameState == GameState.MENU)
+            GlobalEventBus.onInputScreen.Invoke();
+    }
+
+    public void OnPressY(InputActionEventData inputActionEventData) {
+        if (m_currentGameState == GameState.MENU)
+            GlobalEventBus.onCreditScreen.Invoke();
     }
 
 
@@ -156,79 +235,6 @@ public class GameManager : Singleton<GameManager>
 
     #region Game
 
-    protected override void Awake()
-    {
-        base.Awake();
-    }
-
-    IEnumerator ControllerUpdate()
-    {
-        while (true)
-        {
-            // DEGUEULASSE NE PAS REPRODUIRE
-            if (m_currentGameState == GameState.TITLE_SCREEN)
-            {
-                CheckPressStart();
-            }
-            else if (m_currentGameState == GameState.MENU)
-            {
-                CheckMenuButtonPress();
-            }
-            else if (m_currentGameState == GameState.WIN_SCREEN)
-            {
-                CheckWinScreenButtonPress();
-            }
-            else if (m_currentGameState == GameState.INPUT_SCREEN)
-            {
-                CheckInputScreenPress();
-            }
-            else if (m_currentGameState == GameState.CREDIT_MENU)
-            {
-                CheckCreditMenuPress();
-            }
-
-            yield return null;
-        }
-    }
-
-    private void CheckInputScreenPress()
-    {
-        if (Input.GetButtonDown("Fire2_P1") || Input.GetButtonDown("Fire2_P2"))
-        {
-            InputScreen.instance.Close(GlobalEventBus.onMenu.Invoke);
-            
-        }
-    }
-
-    private void CheckCreditMenuPress()
-    {
-        if (Input.GetButtonDown("Fire2_P1") || Input.GetButtonDown("Fire2_P2"))
-        {
-            CreditsScreen.instance.Close(GlobalEventBus.onMenu.Invoke);
-        }
-    }
-
-    void Update()
-    {
-    }
-
-    private void CheckPressStart()
-    {
-        if (Input.GetButtonDown("Submit") || Input.GetButtonDown("Fire1_P1"))
-        {
-
-            
-            //CinematicIntroduction.instance.Close(GlobalEventBus.onMenu.Invoke);
-            CinematicIntroduction.instance.Close(() => { GlobalEventBus.onLoadingScene.Invoke(LevelManager.desiredLevel); });
-
-        }
-        else if (Input.GetButtonDown("Fire2_P1"))
-        {
-            CinematicIntroduction.instance.Close(GlobalEventBus.onMenu.Invoke);
-            //QuitApplication();
-        }
-    }
-
     public void PlaySound(AudioClip audioClip)
     {
         GetAudioSourceFromAudioClip(audioClip).Play();
@@ -245,44 +251,6 @@ public class GameManager : Singleton<GameManager>
         }
 
         return audioSource;
-    }
-
-    private void CheckMenuButtonPress()
-    {
-        if (Input.GetButtonDown("Submit") || Input.GetButtonDown("Fire1_P1"))
-        {
-            TitleScreen.instance.Close(GlobalEventBus.onTitleScreen.Invoke);
-            
-            //GlobalEventBus.onLoadingScene.Invoke(1);
-        }
-        else if (Input.GetButtonDown("Fire2_P1"))
-        {
-            QuitApplication();
-            //GlobalEventBus.onTitleScreen.Invoke();
-        }
-        else if (Input.GetButtonDown("Xbox_X"))
-        {
-            GlobalEventBus.onInputScreen.Invoke();
-        }
-        else if (Input.GetButtonDown("Xbox_Y"))
-        {
-            GlobalEventBus.onCreditScreen.Invoke();
-        }
-
-    }
-
-    private void CheckWinScreenButtonPress()
-    {
-        if (Input.GetButtonDown("Submit") || Input.GetButtonDown("Fire1_P1"))
-        {
-            WinScreen.instance.Close();
-            GlobalEventBus.onRestartGame.Invoke();
-        }
-        else if (Input.GetButtonDown("Fire2_P1"))
-        {
-            WinScreen.instance.Close();
-            GlobalEventBus.onLoadingScene.Invoke(0);
-        }
     }
 
     private void QuitApplication()
